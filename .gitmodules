@@ -1,0 +1,3 @@
+[submodule "hase_iii/mips1"]
+	path = hase_iii/mips1
+	url = https://github.com/HASE-Group/mips1.git
