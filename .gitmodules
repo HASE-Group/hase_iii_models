@@ -1,3 +1,4 @@
-[submodule "hase_iii/mips1"]
-	path = hase_iii/mips1
-	url = ../mips1.git
+[submodule "hase_iii/atlas/V1.5"]
+	path = hase_iii/atlas/V1.5
+	url = https://github.com/HASE-Group/atlas.git
+	branch = V1.5
