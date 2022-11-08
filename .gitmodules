@@ -2,3 +2,7 @@
 	path = hase_iii/atlas/V1.5
 	url = https://github.com/HASE-Group/atlas.git
 	branch = V1.5
+[submodule "hase_iii/mips1/V1.3"]
+	path = hase_iii/mips1/V1.3
+	url = https://github.com/HASE-Group/mips1.git
+	branch = V1.3
