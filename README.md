@@ -59,7 +59,7 @@ Then create a new branch (and switch to it):
     
 Copy new files (ontop of old ones)
 
-    cp -r ../../supermodel/V1.1 ./ 
+    cp -r ../../supermodel/V1.1/* ./ 
     
 Add and new files with git add command
 
