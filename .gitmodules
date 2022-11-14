@@ -6,3 +6,7 @@
 	path = hase_iii/mips1/V1.3
 	url = https://github.com/HASE-Group/mips1.git
 	branch = V1.3
+[submodule "hase_iii/mips2/V2.3"]
+	path = hase_iii/mips2/V2.3
+	url = https://github.com/HASE-Group/mips2.git
+	branch = V2.3
