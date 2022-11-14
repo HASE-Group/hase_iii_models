@@ -14,3 +14,7 @@
 	path = hase_iii/atlas/V2.5
 	url = https://github.com/HASE-Group/atlas.git
 	branch = V2.5
+[submodule "hase_iii/atlas/V3.5"]
+	path = hase_iii/atlas/V3.5
+	url = https://github.com/HASE-Group/atlas.git
+	branch = V3.5
