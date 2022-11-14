@@ -68,3 +68,24 @@ Use 'git status' to check you have added and removed the right files before comm
     git commit -m "Added source for V1.1 of my super model!"
     git push -u origin V1.1
 
+
+# Notes on added a model to the models repo
+
+First clone the models reposoty onto your local system:
+
+    git clone https://github.com/HASE-Group/models.git --recurse-submodules
+
+Then add a submodule for each model you wish to add
+
+    git submodule add -b V3.5 https://github.com/HASE-Group/atlas.git hase_iii/atlas/V3.5
+    
+Commit the changes locally
+
+    git commit -m "Added Atlas V3.5"
+    
+ Push the change back to github
+ 
+    git push
+
+
+
