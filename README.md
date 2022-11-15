@@ -15,7 +15,7 @@ To checkout the model collection please use the following commands:
 
 Create a new repository for the model in https://github.com/orgs/HASE-Group/repositories
 
-On the local copy of the model you want to push to github:
+In the folder containing local copy of the model you want to push to github:
 
     git init
     git add *
@@ -34,13 +34,15 @@ Create the new branch:
     
 Copy new files (ontop of old ones):
 
-    cp -r ../../supermodel/V1.1 ./ 
+    cp -r ../../supermodel/V1.1/* ./ 
     
 Remove any files you don't want any more after the above copy
 
 Add and new files with git add command
 
-Use 'git status' to check you have added and removed the right files before committing.
+    git add *
+    
+Use 'git status' to check you have added and removed the right files before committing (then use git add and git rm to add remove any desired files).
 
     git commit -m "Added source for V1.1 of my super model!"
     git push -u origin V1.1
@@ -49,7 +51,7 @@ Use 'git status' to check you have added and removed the right files before comm
 
 Start by cloning the prevous version to the new folder:
 
-    gitclone -b V1.0 git@github.com:HASE-Group/mips1.git V1.1
+    gitclone -b V1.0 git@github.com:HASE-Group/supermodel.git supermodel
     
 This clones all branches locally, and checksout the V1.0 branch into the V1.1 folder.
 
@@ -63,7 +65,9 @@ Copy new files (ontop of old ones)
     
 Add and new files with git add command
 
-Use 'git status' to check you have added and removed the right files before committing.
+    git add *
+
+Use 'git status' to check you have added and removed the right files before committing (then use git add and git rm to add remove any desired files).
 
     git commit -m "Added source for V1.1 of my super model!"
     git push -u origin V1.1
@@ -77,11 +81,11 @@ First clone the models reposoty onto your local system:
 
 Then add a submodule for each model you wish to add
 
-    git submodule add -b V3.5 https://github.com/HASE-Group/atlas.git hase_iii/atlas/V3.5
+    git submodule add -b V3.5 https://github.com/HASE-Group/supermodel.git hase_iii/supermodel/V3.5
     
 Commit the changes locally
 
-    git commit -m "Added Atlas V3.5"
+    git commit -m "Added supermodel V3.5"
     
  Push the change back to github
  
