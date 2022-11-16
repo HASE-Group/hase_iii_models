@@ -469,34 +469,34 @@ loop forms the scalar products.
 <center>
 <table border bgcolor=white>
 <tr><td> <b>B127</b></td><td><b>Instruction</b></td><td><b>Purpose/Action</b></td><td><b>Result</b></td></tr>
-<tr><td> 0 </td><td>B121 1 24 0 </td><td> B1 = X row length / Y column length (x8) </td><td> B1 = 24 </td</tr>
-<tr><td> 1 </td><td>B121 2 32 0</td><td> B2 = X column length / Y row length (x8)</td><td> B2 = 32 </td</tr>
-<tr><td> 2 </td><td>B121 3 0 0</td><td> B3 = current X row number </td><td> B3 = 0</td</tr>
-<tr><td> 3 </td><td>B121 4 0 0</td><td> B4 = address of first column of current X row </td><td> B4 = 0</td</tr>
-<tr><td> 4 </td><td>B121 5 0 0</td><td> B5 = current X column number </td><td> B5  = 0</td</tr>
-<tr><td> 5 </td><td>B121 6 0 0</td><td> B6 = current Y column number </td><td> B6 = 0 </td</tr>
-<tr><td> 6 </td><td>B121 7 0 0</td><td> B7 = address of Y row element</td><td> B7 = 0</td</tr>
-<tr><td> 7 </td><td>B121 8 0 0</td><td> B8 = Z index number (x8) </td><td> B8 = 0 </td</tr>
-<tr><td> 8 </td><td>A314 4 5 12288</td><td> Start of Loop: Loads ACC with element of X  </td><td> ACC = X<sub><i>ji</i></sub> </td</tr>
-<tr><td> 9 </td><td>A362 6 7 12348</td><td> Multiplies ACC by element of Y </td><td> ACC * Y<sub><i>ij</i></sub></td</tr>
-<tr><td> 10 </td><td>A320 8 0 12480</td><td> Adds element of Z to ACC </td><td> </td</tr>
-<tr><td> 11 </td><td>A356 8 0 12480</td><td> Writes ACC to element of Z </td><td> </td</tr>
-<tr><td> 12 </td><td>B124 5 0 8</td><td> Increment word address of X column number </td><td> B5 + 8</td</tr>
-<tr><td> 13 </td><td>B124 7 2 0</td><td> Increment word address of Y row number </td><td> B7 + B2</td</tr>
-<tr><td> 14 </td><td>B172 5 1 0</td><td> Test B5 against B1 </td><td> Sets BT </td</tr>
-<tr><td> 15 </td><td>B225 127 0 8</td><td> If BT /=0, jump back to start of Loop </td><td> B127 = 8 </td</tr>
-<tr><td> 16 </td><td>B121 5 0 0</td><td> Resets X column number to 0 </td><td> B5  = 0 </td</tr>
-<tr><td> 17 </td><td>B124 6 0 8</td><td> Increments Y column number </td><td> B6 + 8</td</tr>
-<tr><td> 18 </td><td>B121 7 0 0</td><td> Resets Y row number to 0  </td><td> B7 = 0</td</tr>
-<tr><td> 19 </td><td>B124 8 0 8</td><td> Increments Z index </td><td> B8 + 8</td</tr>
-<tr><td> 20 </td><td>B172 6 2 0</td><td> Test B6 against B1  </td><td> Sets BT </td</tr>
-<tr><td> 21 </td><td>B225 127 0 8</td><td>  If BT /=0, jump back to start of Loop </td><td> B127 = 8</td</tr>
-<tr><td> 22 </td><td>B124 3 0 8</td><td> Increments X row number </td><td> B3 + 8</td</tr>
-<tr><td> 23 </td><td>B124 4 1 0</td><td> Increment X row address </td><td> B4 + B1</td</tr>
-<tr><td> 24 </td><td>B121 6 0 0</td><td> Resets Y column number </td><td> B6 = 0</td</tr>
-<tr><td> 25 </td><td>B172 3 2 0</td><td> Tests B3 against B2 </td><td> Sets BT </td</tr>
-<tr><td> 26 </td><td>B225 127 0 8</td><td> If BT /=0, jump back to start of Loop </td><td> B127 = 8 </td</tr>
-<tr><td> 27 </td><td>STOP</td><td>  </td><td> </td</tr>
+<tr><td> 0 </td><td>B121 1 24 0 </td><td> B1 = X row length / Y column length (x8) </td><td> B1 = 24 </td></tr>
+<tr><td> 1 </td><td>B121 2 32 0</td><td> B2 = X column length / Y row length (x8)</td><td> B2 = 32 </td></tr>
+<tr><td> 2 </td><td>B121 3 0 0</td><td> B3 = current X row number </td><td> B3 = 0</td></tr>
+<tr><td> 3 </td><td>B121 4 0 0</td><td> B4 = address of first column of current X row </td><td> B4 = 0</td></tr>
+<tr><td> 4 </td><td>B121 5 0 0</td><td> B5 = current X column number </td><td> B5  = 0</td></tr>
+<tr><td> 5 </td><td>B121 6 0 0</td><td> B6 = current Y column number </td><td> B6 = 0 </td></tr>
+<tr><td> 6 </td><td>B121 7 0 0</td><td> B7 = address of Y row element</td><td> B7 = 0</td></tr>
+<tr><td> 7 </td><td>B121 8 0 0</td><td> B8 = Z index number (x8) </td><td> B8 = 0 </td></tr>
+<tr><td> 8 </td><td>A314 4 5 12288</td><td> Start of Loop: Loads ACC with element of X  </td><td> ACC = X<sub><i>ji</i></sub> </td></tr>
+<tr><td> 9 </td><td>A362 6 7 12348</td><td> Multiplies ACC by element of Y </td><td> ACC * Y<sub><i>ij</i></sub></td></tr>
+<tr><td> 10 </td><td>A320 8 0 12480</td><td> Adds element of Z to ACC </td><td> </td></tr>
+<tr><td> 11 </td><td>A356 8 0 12480</td><td> Writes ACC to element of Z </td><td> </td></tr>
+<tr><td> 12 </td><td>B124 5 0 8</td><td> Increment word address of X column number </td><td> B5 + 8</td></tr>
+<tr><td> 13 </td><td>B124 7 2 0</td><td> Increment word address of Y row number </td><td> B7 + B2</td></tr>
+<tr><td> 14 </td><td>B172 5 1 0</td><td> Test B5 against B1 </td><td> Sets BT </td></tr>
+<tr><td> 15 </td><td>B225 127 0 8</td><td> If BT /=0, jump back to start of Loop </td><td> B127 = 8 </td></tr>
+<tr><td> 16 </td><td>B121 5 0 0</td><td> Resets X column number to 0 </td><td> B5  = 0 </td></tr>
+<tr><td> 17 </td><td>B124 6 0 8</td><td> Increments Y column number </td><td> B6 + 8</td></tr>
+<tr><td> 18 </td><td>B121 7 0 0</td><td> Resets Y row number to 0  </td><td> B7 = 0</td></tr>
+<tr><td> 19 </td><td>B124 8 0 8</td><td> Increments Z index </td><td> B8 + 8</td></tr>
+<tr><td> 20 </td><td>B172 6 2 0</td><td> Test B6 against B1  </td><td> Sets BT </td></tr>
+<tr><td> 21 </td><td>B225 127 0 8</td><td>  If BT /=0, jump back to start of Loop </td><td> B127 = 8</td></tr>
+<tr><td> 22 </td><td>B124 3 0 8</td><td> Increments X row number </td><td> B3 + 8</td></tr>
+<tr><td> 23 </td><td>B124 4 1 0</td><td> Increment X row address </td><td> B4 + B1</td></tr>
+<tr><td> 24 </td><td>B121 6 0 0</td><td> Resets Y column number </td><td> B6 = 0</td></tr>
+<tr><td> 25 </td><td>B172 3 2 0</td><td> Tests B3 against B2 </td><td> Sets BT </td></tr>
+<tr><td> 26 </td><td>B225 127 0 8</td><td> If BT /=0, jump back to start of Loop </td><td> B127 = 8 </td></tr>
+<tr><td> 27 </td><td>STOP</td><td>  </td><td> </td></tr>
 </table><p>
 <b>Table 2. The matrix multiplication program</b>
 </center>
@@ -531,33 +531,33 @@ taken for the model to run with values of k>8 is excessive.
 <tr><td> 1 </td><td></td><td> B121 1 0 0	 </td></tr>
 <tr><td> 2 </td><td>1)</td><td>	B124 1 0 1 </td></tr>
 <tr><td> 3 </td><td></td><td> B150 1 0 8192 </td></tr>
-<tr><td> 4 </td><td></td><td> B226 127 0 6</td<td> if bt>=0, skip next </td></tr>
-<tr><td> 5 </td><td></td><td>STOP</td<td></td></tr>
-<tr><td> 6 </td><td></td><td> B121 2 1 -1</td<td> b2=b1-1</td></tr>
-<tr><td> 7 </td><td>2)	</td><td> B124 2 0 1</td<td> b2=b2+1</td></tr>
-<tr><td> 8 </td><td></td><td> B150 2 0 8192</td<td> bt=k-b2</td></tr>
-<tr><td> 9 </td><td></td><td> B227 127 0 2 </td<td> if bt>=o, ->1)</td></tr>
-<tr><td> 10 </td><td></td><td> B121 3 2 0</td<td> b3 = b2</td></tr>
-<tr><td> 11 </td><td>3)</td><td> B124 3 0 1</td<td> b3=b3+1</td></tr>
-<tr><td> 12 </td><td></td><td> B150 3 0 8192</td<td> bt=k-b3</td></tr>
-<tr><td> 13 </td><td></td><td> B227 127 0 7 </td<td> if bt>=0, ->2)</td></tr>
-<tr><td> 14 </td><td></td><td> B121 4 1 0</td<td> b4=b1</td></tr>
-<tr><td> 15 </td><td></td><td> B121 5 2 0</td<td> b5=b2</td></tr>
-<tr><td> 16 </td><td></td><td> B121 6 3 0</td<td> b6=b3</td></tr>
-<tr><td> 17 </td><td></td><td> B1302 4 1 0 </td<td> b4=b4*b1</td></tr>
-<tr><td> 18 </td><td></td><td> B1302 5 2 0 </td<td> b5=b5*b2</td></tr>
-<tr><td> 19 </td><td></td><td> B1302 6 3 0 </td<td> b6=b6*b3</td></tr>
-<tr><td> 20 </td><td></td><td> B121 7 4 0 </td<td> b7=b4</td></tr>
-<tr><td> 21 </td><td></td><td> B124 7 5 0 </td<td> 	b7=b7+b5</td></tr>
-<tr><td> 22 </td><td></td><td> B122 7 6 0 </td<td> 	b7=b7-b6</td></tr>
-<tr><td> 23 </td><td></td><td> B214 127 7 26  </td<td> if b7=0, ->5)</td></tr>
-<tr><td> 24 </td><td></td><td> B217 127 7 7 </td<td> if b7<0, ->2)</td></tr>
-<tr><td> 25 </td><td></td><td> B121 127 0 11 </td<td> -> 3)</td></tr>
-<tr><td> 26 </td><td>5)	</td><td> B113 1 8 8200</td<td> write b1 to VS word 1025+B8 </td></tr>
-<tr><td> 27 </td><td>   </td><td> B113 2 8 8208</td<td> write b2 to VS word 1026+B8 </td></tr>
-<tr><td> 28 </td><td>   </td><td> B113 3 8 8216</td<td> write b3 to VS word 1027+B8 </td></tr>
-<tr><td> 29 </td><td></td><td> B124 8 0 24 </td<td> b8=b8+24 </td></tr>
-<tr><td> 30 </td><td></td><td> B121 127 0 7 </td<td>-> 2)</td></tr>
+<tr><td> 4 </td><td></td><td> B226 127 0 6</td><td> if bt>=0, skip next </td></tr>
+<tr><td> 5 </td><td></td><td>STOP</td><td></td></tr>
+<tr><td> 6 </td><td></td><td> B121 2 1 -1</td><td> b2=b1-1</td></tr>
+<tr><td> 7 </td><td>2)	</td><td> B124 2 0 1</td><td> b2=b2+1</td></tr>
+<tr><td> 8 </td><td></td><td> B150 2 0 8192</td><td> bt=k-b2</td></tr>
+<tr><td> 9 </td><td></td><td> B227 127 0 2 </td><td> if bt>=o, ->1)</td></tr>
+<tr><td> 10 </td><td></td><td> B121 3 2 0</td><td> b3 = b2</td></tr>
+<tr><td> 11 </td><td>3)</td><td> B124 3 0 1</td><td> b3=b3+1</td></tr>
+<tr><td> 12 </td><td></td><td> B150 3 0 8192</td><td> bt=k-b3</td></tr>
+<tr><td> 13 </td><td></td><td> B227 127 0 7 </td><td> if bt>=0, ->2)</td></tr>
+<tr><td> 14 </td><td></td><td> B121 4 1 0</td><td> b4=b1</td></tr>
+<tr><td> 15 </td><td></td><td> B121 5 2 0</td><td> b5=b2</td></tr>
+<tr><td> 16 </td><td></td><td> B121 6 3 0</td><td> b6=b3</td></tr>
+<tr><td> 17 </td><td></td><td> B1302 4 1 0 </td><td> b4=b4*b1</td></tr>
+<tr><td> 18 </td><td></td><td> B1302 5 2 0 </td><td> b5=b5*b2</td></tr>
+<tr><td> 19 </td><td></td><td> B1302 6 3 0 </td><td> b6=b6*b3</td></tr>
+<tr><td> 20 </td><td></td><td> B121 7 4 0 </td><td> b7=b4</td></tr>
+<tr><td> 21 </td><td></td><td> B124 7 5 0 </td><td> 	b7=b7+b5</td></tr>
+<tr><td> 22 </td><td></td><td> B122 7 6 0 </td><td> 	b7=b7-b6</td></tr>
+<tr><td> 23 </td><td></td><td> B214 127 7 26  </td><td> if b7=0, ->5)</td></tr>
+<tr><td> 24 </td><td></td><td> B217 127 7 7 </td><td> if b7&lt;0, ->2)</td></tr>
+<tr><td> 25 </td><td></td><td> B121 127 0 11 </td><td> -> 3)</td></tr>
+<tr><td> 26 </td><td>5)	</td><td> B113 1 8 8200</td><td> write b1 to VS word 1025+B8 </td></tr>
+<tr><td> 27 </td><td>   </td><td> B113 2 8 8208</td><td> write b2 to VS word 1026+B8 </td></tr>
+<tr><td> 28 </td><td>   </td><td> B113 3 8 8216</td><td> write b3 to VS word 1027+B8 </td></tr>
+<tr><td> 29 </td><td></td><td> B124 8 0 24 </td><td> b8=b8+24 </td></tr>
+<tr><td> 30 </td><td></td><td> B121 127 0 7 </td><td>-> 2)</td></tr>
 </table>
 </td>
 </tr>
@@ -572,7 +572,7 @@ taken for the model to run with values of k>8 is excessive.
 <em>IRE Trans., Vol EC-11, pp 223-234</em> 1962
 <a href="#ref1"> Return</a>
 </dl>
-<p>
+<p></p>
 
 
 </body>
