@@ -12,19 +12,16 @@ Instructions on how to use HASE models can be found at [Downloading, Installing 
 
 The HASE user interface contains three windows. Figure 1 shows an image of the HASE user interface with the simulation model of Atlas in the main (right hand) Project View pane, model parameters (_e.g._ register and store contents) in the (left hand) Project Inspector pane. The lower, Output pane shows information produced by HASE. The icons in the top row allow the user to load a model, compile it, run the simulation code thus created and to load the trace file produced by running a simulation back into the model for animation.
 
-<center>![Image of HASE Atlas simulation](HASE_Image1.png)
+![Image of HASE Atlas simulation](./HASE_Image1.png?raw=true "Image of HASE Atlas simulation")
 
 **Figure 1\. The Atlas simulation model loaded into HASE**
 
-</center>
 
 Once a trace file has been loaded, the animation control icons at the top of the Project View window become active (Figure 2). From left to right, these allow the animation to be rewound, stopped, paused, single stepped, run or fast forwarded to the end. As the animation proceeds, packets of information can be seen passing between entities while the entities themselves change colour to reflect their states (idle, busy, waiting).
 
-<center>![Image of HASE Atlas simulation](HASE_Image2.png)
+![Image of HASE Atlas simulation](HASE_Image2.png)
 
 **Figure 2\. The Atlas simulation model during animation**
-
-</center>
 
 As indicated in the Output pane, the model contains 11 entities, 10 of which are displayed in the Project View (the 11th is a cycle counter which contains a limit on the total number of simulation time steps, to prevent run-aways). These are the B-Arithmetic Unit, the B-Store, the Control unit, the Accumulator, the Distributer, the Page Address Registers (PARs) and the Drum, Core, Subsidiary and Fixed Stores. In Figure 2 the B-Store and the Accumulator are busy, the Control unit is waiting and the rest are idle.
 
@@ -32,11 +29,9 @@ As indicated in the Output pane, the model contains 11 entities, 10 of which are
 
 Atlas had a 48-bit instruction word made up of a 10-bit function code, two 7-bit index addresses (Ba and Bm) and a 24-bit store address (Figure 3). Functions that operated on the Accumulator (A-codes) were thus one-address with double B-modification. B-line 0 always returned a value of 0, thus allowing for singly modified or unmodified accesses. The most significant bit of the address field distinguished between user addresses and system addresses, while the three least significant bits were used to address one of eight 6-bit characters within a store word.
 
-<center>![Atlas instruction set](inst-format.png)
+![Atlas instruction set](inst-format.png)
 
 **Figure 3\. Atlas instruction format**
-
-</center>
 
 The B-codes involved operations on one of the 128 B-lines specified by the Ba field in the instruction, Bm being used to specify a single modifier. The B-store was implemented as a fast core store (0.7 microsecs cycle time) of 120 24-bit words, together with eight flip-flop registers which served special purposes. These included the floating-point accumulator exponent, for example, and the three control registers (or program counters) used for user programs, extracode and interrupt control. The existence of these three control registers allowed the machine to switch rapidly from one context to another, while their inclusion within the addressable B-store avoided the need for separate control transfer functions. Extracodes were a set of functions which gave access to some 250 built-in subroutines held in the high-speed (0.5 microsecs) read-only fixed store. These included the more complex mathematical functions such as sin, log, etc., peripheral control orders, input/output conversion routines, etc. The extracodes made use of 30 of the B-lines, leaving 90 for use as index registers or fixed-point accumulators in user programs.
 
@@ -1694,11 +1689,9 @@ The matrix multiplication program contained in Version 2 of the HASE Atlas simul
 
 Table 2 shows the program, which is in the form of a triple nested loop. The outer loop increments the X row at each iteration, the middle loop increments the Y column at each iteration while the inner loop forms the scalar products.
 
-<center>![Matrix Multiplication diagram](43mat_mult.gif)
+![Matrix Multiplication diagram](43mat_mult.gif)
 
 **Figure 4\. Matrix multiplication example**
-
-</center>
 
 <center>
 
@@ -2074,7 +2067,7 @@ Version 3 of the HASE Atlas model contains a program written by John Buckle in 1
 
 <tr>
 
-<td>![Sums of Squares code](ABL_code.png)</td>
+<td><img src="ABL_code.png" alt="Sums of Squares code"/></td>
 
 <td>
 
