@@ -1,4 +1,4 @@
-##HASE Atlas Simulation Model
+## HASE Atlas Simulation Model
 
 The first Ferranti Atlas computer was inaugurated at the University of Manchester in December 1962. Designed by Professor Tom Kilburn and a joint University/Ferranti team, it incorporated a number of novel features, the most influential of which was Virtual Memory.
 
@@ -15,7 +15,7 @@ Instructions on how to use HASE models can be found at
 <a href="http://www.icsa.inf.ed.ac.uk/research/groups/hase/models/use.html"
 target="_blank">Downloading, Installing and Using HASE</a>.
 
-###Overview
+### Overview
 
 The HASE user interface window contains three panes.  Figure 1 shows an image of the HASE user interface with the simulation model of Atlas in the main (right hand) Project View pane and model parameters (*e.g.* register and store contents) in the (left hand) Project Inspector pane. The lower, Output pane shows information produced by HASE. The icons in the top row allow the user to load a model, compile it, run the simulation code thus created and to load the trace file produced by running a simulation back into the model for animation.
 
@@ -30,7 +30,7 @@ Once a trace file has been loaded, the animation control icons at the top of the
 
 As indicated in the Output pane, the model contains 11 entities, 10 of which are displayed in the Project View (the 11th is a cycle counter which contains a limit on the total number of simulation time steps, to prevent run-aways). These are the B-Arithmetic Unit, the B-Store, the Control unit, the Accumulator, the Distributer, the Page Address Registers (PARs) and the Drum, Core, Subsidiary and Fixed Stores.  In Figure 2 the B-Store and the Accumulator are busy, the Control unit is waiting and the rest are idle.
 
-###The Atlas instruction set
+### The Atlas instruction set
 
 Atlas  had a 48-bit instruction word made up of a 10-bit function code, two 7-bit index addresses (Ba and Bm) and a 24-bit store address (Figure 3). Functions that operated on the Accumulator (A-codes) were thus one-address with double B-modification. B-register 0 always returned a value of 0, thus allowing for singly modified or unmodified accesses. The most significant bit of the address field distinguished between user addresses and system addresses, while the three least significant bits were used to address one of eight 6-bit characters within a store word. 
 
@@ -43,11 +43,11 @@ User addresses in Atlas (defined by a 0 in their most significant address bit) r
 
 Atlas addresses with a 1 in the most significant bit were system addresses rather than user virtual addresses, and referred to the fixed store (containing the extracodes), the subsidiary store (used as working space by the extracodes and operating system), or the V-store. The latter contained the various registers needed to control the tape decks, input/output devices, paging mechanism, *etc*., thus avoiding the need for special functions for this purpose.  This technique of incorporating peripherals into the address space was subsequently used in a number of computer systems, notably the DEC PDP-11, and is now in common use as 'memory-mapped I/O'.
 
-###The Simulation Model
+### The Simulation Model
 
 In any simulation modelling system there is a trade-off between accuracy and performance. HASE was designed primarily as a high-level visualisation tool for computer architecture students and therefore simulates systems at register/word level rather than bit level. This inevitably imposes some limitations on the way models can be constructed, *e.g.* registers are modelled using typed variables and stores are modelled as arrays of typed variables.  Thus the HASE Atlas simulation model is intended to provide a visual demonstration of the workings of the processor and memory system, rather than being designed to run real Atlas programs.
 
-####The Drum and Core Stores
+#### The Drum and Core Stores
 
 HASE models memories as arrays of elements which can be integers, floating-point numbers or instructions. Since these elements cannot be mixed together in a single array, the model takes advantage of the Atlas paging system by modelling the Drum Store as a set of pages and the Core Store as a set of blocks, each made up of 512 words, as in Atlas (though only 256 words are instantiated in the model for performace reasons), but with different blocks/pages containing different types of element.
 
@@ -55,23 +55,23 @@ At the start of each simulation the program and its data are contained in the Dr
 
 For completeness, the Fixed Store and Subsidiary Store are included as entities in the model, though the Fixed Store is not used in any of the example simulation programs and the Subsidiary Store is used only in Version 3 to store values that will be displayed in the Output Pane at the end of the simulation.
 
-####The Page Address Registers
+#### The Page Address Registers
 
 The PARs are modelled as a set of registers, each of which contains (from left to right in the Project Inspector pane) a use bit, a valid bit and an address.  The initiallsation file for the Page Address Registers (PARs) sets all the PARs to zero (and thus invalid) at the start of a simulation.  The first action in the simulation is an instruction access to word 0 of the virtual memory (because B127, the Program Counter, is initially set to 0).  This causes a page fault in the PARs. The PARs are coded to imitate the actions of the Atlas Supervisor (the Atlas operating system) by copying page 0 from the Drum Store to block 0 of the Core Store and setting the first PAR to point to it. The actual movement of data is not shown in the visualistion (it would be very tedious to watch) but the Core Store contents are shown being updated when the first store request reaches it.
 
 Subsequently, when accesses are made for data, similar actions occur on the first access. The first access to a fixed-point value causes a page transfer between block 2 of the Drum and page 1 of the Core, the first floating-point access a transfer between block 3 of the Drum and page 2 of the Core. A full demonstration of the paging system is beyond the scope of the current model.
 
-####Instruction Format
+#### Instruction Format
 
 Instructions are modelled as closely as possible to the Atlas format, with the Ba, Bm and Address fields being modelled as integers.  However, HASE models the function field of instructions as elements of an enumerated type and these elements cannot be integers. Functions in the model are therefore of the form A314, B121, *etc*, which actually aids legibility.
 
-####Floating-point Arithmetic
+#### Floating-point Arithmetic
 
 The model implements floating-point arithmetic using the floating-point operations provided by the underlying hardware of the computer on which the simulation runs, accessed via standard C++ operations. This is not an accurate representation of the way Atlas performed these operations, of course, but is adequate for the purposes of this demonstration.  To simulate the 48-bit floating-point arithmetic used in Atlas would require bit-level coding of the Accumulator unit and would not be especially instructive, except to floating-point arithmetic gurus.
 
 For the same reasons, the model does not implement the full set of Atlas floationg-point instructions, nor does it attempt to model the Accumulator as a double-length register. It just implements simple load, store, add, subtract, multiply and divide operations on AM, the most significant half of the Atlas double-length accumulator.  Also, B124, the floating-point exponent register in Atlas, is not implemented.
 
-###Demonstration Program
+### Demonstration Program
 
 Version 1 of the model contains the demonstration program shown in Table 1 (below), together with some appropriate data. The program is initially held in Page 0 of the Drum Store and is copied into Block 0 of the Core Store following the page fault caused by the first instruction access. The integers held initially in Page 2 of the Drum Store are copied into Block 1 of the Core Store when the first integer operand access causes a page fault and likewise the floating-point numbers initially held in Page 3 of the Drum Store are copied into Block 2 of the Core Store. The program is essentially a test program that executes each of the instructions implemented in the model. These include all the B functions and the A functions as described above. The table shows the actions performed for each instruction and the resulting outcome.
 
@@ -166,7 +166,7 @@ AM = Accumulator, VS = Virtual Store, CS B2W8 = Core Store Block 2, Word 8
 **Table 1. The demonstration program**
 
 
-###Matrix Multiplication Program
+### Matrix Multiplication Program
 
 The matrix multiplication program contained in Version 2 of the HASE Atlas simulation model multiplies together a 4x3 matrix X and a 3x4 matrix Y to produce a 4x4 matrix Z, as shown in Figure 4. The first element of the first row of Z is the scalar (dot) product of the first row of X and the first column of Y, the second is the scalar product of the first row of X with the second column of Y, *etc*.
 
@@ -208,7 +208,7 @@ Table 2 shows the program, which is in the form of a triple nested loop. The out
 
 **Table 2. The matrix multiplication program**
 
-###Sums of Squares
+### Sums of Squares
 
 Version 3 of the HASE Atlas model contains a program written by John Buckle in 1962 as a Ferranti training exercise. Figure 5 shows the original code with comments (which include one minor mistake) and the corresponding HASE Atlas simulation code. The value of k is in virtual store word 1024. The program uses three extracodes E1302, E1064 and E1067. E1302 is a B multiply instruction, implemented in the model simply as an instruction executed directly in the B Arithmetic unit. E1064 and E1067 are implemented by the Control Unit and write values into the Subsidiary Store which are printed at the end of the simulation run in the output pane of the HASE GUI. This is not how it would have worked in the real Atlas, of course, but simply a device to enable the sum of squares program to be demonstrated at the <a href="http://curation.cs.manchester.ac.uk/atlas/elearn.cs.man.ac.uk/_atlas/">Atlas 50th Anniversary Symposium</a>.
 
@@ -258,11 +258,8 @@ The value of k in the model is set at 15, so the model produces the results:
 
 **Table 3. HASE Atlas Sums of Squares Code**
 
-###Reference
+### Reference
 
 1. T. Kilburn, D.B.G. Edwards, M.J. Lanigan and F.H. Sumner  
  "One-level Storage System"  
 *IRE Trans., Vol EC-11, pp 223-234*, 1962.
-
-</body>
-</html>
