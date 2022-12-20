@@ -78,18 +78,31 @@ Use 'git status' to check you have added and removed the right files before comm
 First clone the models reposotry onto your local system:
 
     git clone git@github.com:HASE-Group/hase_iii_models.git --recurse-submodules
+    
+Switch working directory into the cloned model repostory.
+
+    cd hase_iii_models
 
 Then add a submodule for each model you wish to add
 
-    git submodule add -b V3.5 git@github.com:HASE-Group/supermodel.git hase_iii_models/supermodel/V3.5
+    git submodule add -b V3.5 git@github.com:HASE-Group/supermodel.git supermodel/V3.5
     
-Commit the changes locally
+General form of above example:    
+    
+    git submodule add -b ${branch_version} git@github.com:HASE-Group/${model_name}.git ${model_name}/${branch_version}
+    
+Commit the changes locally with a suitable comment
 
     git commit -m "Added supermodel V3.5"
     
- Push the change back to github
+Then push the change back to github
  
     git push
 
+To add documention put documentation files inside the ${model_name} folder above the different versions of the model.
 
+    git add supermodel/README.md
+    git add supermodel/images/*
+    git commit -m "Added documentation"
+    git push
 
