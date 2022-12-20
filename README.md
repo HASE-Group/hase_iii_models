@@ -2,11 +2,11 @@
 
 To checkout the model collection please use the following commands:
 
-    git clone https://github.com/HASE-Group/models.git --recurse-submodules
+    git clone git@github.com:HASE-Group/hase_iii_models.git --recurse-submodules
     
         or
     
-    git clone git@github.com:hase-group/models.git --recurse-submodules
+    git clone git@github.com:HASE-Group/hase_iii_models.git --recurse-submodules
 
 
 # Notes on importing exising models
@@ -75,13 +75,13 @@ Use 'git status' to check you have added and removed the right files before comm
 
 # Notes on added a model to the models repo
 
-First clone the models reposoty onto your local system:
+First clone the models reposotry onto your local system:
 
-    git clone https://github.com/HASE-Group/models.git --recurse-submodules
+    git clone git@github.com:HASE-Group/hase_iii_models.git --recurse-submodules
 
 Then add a submodule for each model you wish to add
 
-    git submodule add -b V3.5 https://github.com/HASE-Group/supermodel.git hase_iii/supermodel/V3.5
+    git submodule add -b V3.5 https://github.com/HASE-Group/supermodel.git hase_iii_models/supermodel/V3.5
     
 Commit the changes locally
 
