@@ -81,7 +81,7 @@ First clone the models reposotry onto your local system:
 
 Then add a submodule for each model you wish to add
 
-    git submodule add -b V3.5 https://github.com/HASE-Group/supermodel.git hase_iii_models/supermodel/V3.5
+    git submodule add -b V3.5 git@github.com:HASE-Group/supermodel.git hase_iii_models/supermodel/V3.5
     
 Commit the changes locally
 
