@@ -1,5 +1,13 @@
 # Models
 
+Simulation models of a variety of computer architectures and architectural components have been created using HASE, a Hierarchical Computer Architecture design and Simulation Environment. These models are intended for use as teaching and learning resources: in lectures, for student self-learning or for virtual laboratory experiments.
+
+Using the models requires use of HASE itself. The latest version of HASE is available for Linux, MAC OSX and Windows and can be downloaded from https://github.com/HASE-Group/hase_iii_releases
+
+Each model has its own supporting documentation describing the system being modelled as well as the model itself. These model files provide the input to HASE which has options to load a project, to compile a simulation executable and to run the simulation. Running a simulation produces a trace file which can be used to animate the on-screen display of the model so as to show data movements, parameter value updates, state changes, etc.
+
+This repository contains a collection of "official" supported HASE3 models. Each model and its documentation can be found in a folder of the model’s name. The model subfolder contains the documentation about each model and its versions. The sub folders in each model folder contain git submodules (references) to the model sources (each model is stored in its own repo with its own branches).
+
 To checkout the model collection please use the following commands:
 
     git clone git@github.com:HASE-Group/hase_iii_models.git --recurse-submodules
@@ -8,101 +16,14 @@ To checkout the model collection please use the following commands:
     
     git clone git@github.com:HASE-Group/hase_iii_models.git --recurse-submodules
 
+## Released Models
 
-# Notes on importing exising models
+The following computer architecture models are currently available inside this collection:
 
-## To add a new model
+- Manchester Small Scale Experimental Machine
+- Cray-1
+- CDC 6600
+- Atlas (the Manchester University / Ferranti Atlas computer, inaugurated December 1962)
+- MU5 (the fifth major computer system built at Manchester University)
 
-Create a new repository for the model in https://github.com/orgs/HASE-Group/repositories
-
-In the folder containing local copy of the model you want to push to github:
-
-    git init
-    git add *
-    git commit -m "Added source for my super model!"
-    git branch -M V1.0 
-    git remote add origin git@github.com:HASE-Group/supermodel.git
-    git push -u origin V1.0
-
-This will push the new model onto github into the V1.0 branch.
-
-## To add a new branch to an existing model continuing from the above
-
-Create the new branch:
-
-    git branch -M V1.1
-    
-Copy new files (ontop of old ones):
-
-    cp -r ../../supermodel/V1.1/* ./ 
-    
-Remove any files you don't want any more after the above copy
-
-Add and new files with git add command
-
-    git add *
-    
-Use 'git status' to check you have added and removed the right files before committing (then use git add and git rm to add remove any desired files).
-
-    git commit -m "Added source for V1.1 of my super model!"
-    git push -u origin V1.1
-
-## To add a new branch to an existing model using a new folder on your local machine
-
-Start by cloning the prevous version to the new folder:
-
-    gitclone -b V1.0 git@github.com:HASE-Group/supermodel.git supermodel
-    
-This clones all branches locally, and checksout the V1.0 branch into the V1.1 folder.
-
-Then create a new branch (and switch to it):
-
-    git branch -M V1.1
-    
-Copy new files (ontop of old ones)
-
-    cp -r ../../supermodel/V1.1/* ./ 
-    
-Add and new files with git add command
-
-    git add *
-
-Use 'git status' to check you have added and removed the right files before committing (then use git add and git rm to add remove any desired files).
-
-    git commit -m "Added source for V1.1 of my super model!"
-    git push -u origin V1.1
-
-
-# Notes on added a model to the models repo
-
-First clone the models reposotry onto your local system:
-
-    git clone git@github.com:HASE-Group/hase_iii_models.git --recurse-submodules
-    
-Switch working directory into the cloned model repostory.
-
-    cd hase_iii_models
-
-Then add a submodule for each model you wish to add
-
-    git submodule add -b V3.5 git@github.com:HASE-Group/supermodel.git supermodel/V3.5
-    
-General form of above example:    
-    
-    git submodule add -b ${branch_version} git@github.com:HASE-Group/${model_name}.git ${model_name}/${branch_version}
-    
-Commit the changes locally with a suitable comment
-
-    git commit -m "Added supermodel V3.5"
-    
-Then push the change back to github
- 
-    git push
-
-To add documention put documentation files inside the ${model_name} folder above the different versions of the model.
-
-    git add supermodel/README.md
-    git add supermodel/images/*
-    git commit -m "Added documentation"
-    git push
 
