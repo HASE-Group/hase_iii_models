@@ -24,7 +24,7 @@ The design of the CDC 6600 is comprehensively described in the book "Design of a
 The CDC 6600 was designed to solve problems substantially beyond contemporary computer capability and, in order to achieve this end, a high degree of functional parallelism was incorporated into the design of the central processor, as shown in Figure 1.  In order to exploit this parallelism, the instruction set uses a three-address format (Figure 2) that allows successive instructions to refer to totally independent input and result operands.  This would be quite impossible with a one-address instruction format, for example, where one of the inputs for an arithmetic operation is normally taken from, and the result returned to, a single implicit accumulator.  Despite the potential for instruction overlap, dependencies between instructions can still occur in a three-address system. For example, where one instruction requires as its input the result of an immediately preceding instruction, the hardware must ensure that this ordering is strictly maintained.  This would have been difficult if full store addresses were involved, since it would have made 6600 instructions prohibitively long, and it would in any case have been impossible to move operands in and out of Central Storage at a rate matching the execution rates of the functional units.  The use of a small number of Scratch Pad Registers overcame both these problems.
 
 <center>
-![6600 processor](images/cdc6600.gif)
+![6600 processor](./images/cdc6600.gif)
 **Figure 1. 6600 processor organisation**
 </center>
 
