@@ -21,11 +21,13 @@ target="_blank">Downloading, Installing and Using HASE</a>.
 Figure 1 shows an image of the HASE user interface with the simulation model of MU5 in the main (right hand) Project View pane and model parameters (*e.g.* register and store contents) in the (left hand) Project Inspector pane. The lower, Output pane shows information produced by HASE. The icons in the top row allow the user to load a model, compile it, run the simulation code thus created and to load the trace file produced by running a simulation back into the model for animation.
 
 ![HASE MU5 simulation model](images/HASE_MU5-1.png)
+
 **Figure 1. The MU5 simulation model loaded into HASE**
 
 Once a trace file has been loaded, the animation control icons at the top of the Project View window become active (Figure 2). From left to right, these allow the animation to be rewound, stopped, paused, single stepped, run or fast forwarded to the end.  As the animation proceeds, packets of information can be seen passing between entities while the entities themselves change colour to reflect their states (idle, busy, waiting).
 
 ![Animated MU5 simulation model](images/HASE_MU5-2.png)
+
 **Figure 2. The MU5 simulation model during animation**
 
 As indicated in the Output pane, the model contains 25 active units (entities in simulation terms).  These are the two parts of the Instruction Buffer Unit, the six stages of the Primary Operand Unit (PROP), plus one for PROP itself (containing the beat generation code), the Central Highway, the B-Arithmetic Unit, the Descriptor Addressing and the Descriptor Operand Processing Units, the three sections of the Operand Buffer System, the Accumulator Unit, the Store Access Control Unit (containing the Current Page Registers) and the Local Store. Although they are shown on-screen as parts of the model, the IBU, Name Store, SEOP and Operand Buffer System entities are simply icons, with no corresponding simulation code. The 25th entity is a time counter containing a limit on the total number of simulation time steps, to prevent run-aways; its icon is the key to the unit states.
@@ -72,6 +74,7 @@ The function &#8709; is *reverse divide* (*i.e.* ACC = STACK/ACC); if the operan
 The instruction set is summarised in Figure 3. There are two basic formats, one for computational functions and one for organisational functions (control transfers, base register manipulations, *etc*.). They are distinguished by the *type of function* bits and use four and six bits respectively to specify the function.  The remaining nine or seven bits specify the *primary* operand.  The **k** field indicates the kind of operand, and determines how the **n** field is interpreted.  Where the **k** field indicates the Extended Operand Specification, the instruction is extended by an additional 16 bits in the case of a name, or by 16, 32, or 64 bits in the case of a literal. 
 
 ![MU5 instruction set](images/InstSet.gif)
+
 **Figure 3. The MU5 instruction set**
 
 The virtual address space is formally segmented: the unique identity of store words belonging to different processes is maintained by splitting the address into three separate fields, a 4-bit Process Number, a 14-bit Segment Number, and a 16-bit address defining a 32-bit word within a segment. Segments 8192 to 16383 are common to all processes, allowing a single copy of a compiler, for example, to be shared by all active processes. Scalar variables are normally held in a single segment of a process (normally segment 0) at addresses formed by adding the 6 or 16-bit name in the instruction to the contents of the Name Base register (RNB).  The name segment number and the process number (both held in special registers in the processor) are concatenated with these addresses to form the full virtual addresses required for store accessing. The value held in RNB is unique to the name space associated with each procedure, and is altered at each procedure change.  Accesses to names of other procedures and to common variables are made using the Extra Name Base (RXNB), while using zero as base allows absolute addressing into the Name Segment (to access the Name Base values of different procedures, for example).  The Stack Front register (RSF) points to the area immediately beyond the name space of the current procedure, so that stacked variables are contained within the same address space as the names.  RSF is automatically incremented or decremented during the execution of a stacking function or a STACK operand access respectively.
@@ -105,6 +108,7 @@ The MU5 instruction set used in the model follows the spirit of the original, ra
 Figure 4 shows the instruction set used in the model. The additional *Type of Instruction* (T) character is included in instruction registers, and in packets containing instructions, to represent the extra function bits that were used in the hardware of MU5 to control the execution of instructions. Details are given below in the Primary Operand Unit section.
 
 ![HASE MU5 instruction set](images/SIM_Insts.png)
+
 **Figure 4. The HASE MU5 instruction set**
 
 The functions are shown in the tables below. Empty boxes correspond to functions that have not yet been implemented in the model (and in some cases may never be), or did not exist in the real MU5. "Op" means "operand".
@@ -117,9 +121,11 @@ The ACC (Accumulator) functions are implemented in the model in exactly the same
 The STS functions (SLGC, SMVB, SCMP, BLGC, BMVB, BMVE, SMVF, BSCN and BCMP) perform string processing operations. They were designed for use in record processing applications written in languages such as COBOL, PL/1 and Algol68. Their operation is explained in the description of the actions that take place during execution of the String Processing Program pre-loaded into Version 3 of the model.
 
 ![Computational functions](images/comp-inst.png)
+
 **Figure 5. Computational functions**
 
 ![Organisational functions](images/org-inst.png)
+
 **Figure 6. Organisational functions**
 
 ### The Address Space
@@ -162,6 +168,7 @@ The function registers in the real MU5 had extra function bits associated with t
  <tr><td> W </td><td> Write packet (from B or Acc or to memory) </td></tr>
  <tr><td> Z </td><td> STOP packet from ACC to PROP </td></tr>
 </table>
+ 
 **Table 1 Packet Types**
 </center>
 
