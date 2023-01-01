@@ -209,19 +209,16 @@ Dependency conflicts between successive instructions in the 6600 are classified 
 
 A first order conflict occurs whenever an instruction which is about to be issued requires the use of an arithmetic unit or a result register which is alreadyin use or has been reserved by a previously issued, but as yet uncompleted instruction.  Both instructions in the following pair, instructions 5 and 6 in the Demonstration Program, require the use of the Add Unit:
 
-<center>
 X6 =  X1 - X2  
 X5 = X3 + X4
-</center>
 
 The second instruction is therefore held up in the Scoreboard until the first has completed ("ADD" is displayed in the first order conflict display in the Scoreboard). In fact the first instruction itself has to wait until X2 has received its value from Central Storage and likewise the second has to wait for X4.
 
 Both instructions in the following pair instructions7 and 8 in the Demonstration Program) require X6 as their result register:
 
-<center>
 X6 = X1* X2  
 X6 = X4 + X5
-</center>
+
 Although this latter example is unlikely to arise in normal programming practice, it must nevertheless give the correct result. Without proper interlocks the add operation would complete first and the result in X6 would then be overwritten by that of the multiplication. This situation subsequently became known as the Write After Write problem.
 
 Both these conflicts are resolved by holding up the issue signal for the second instruction until the first has completed. Issuing an instruction involves a sequence of four separate actions. Firstly the functional unit required by the instruction is reserved by the setting of its *busy flag*, and the required operation, derived from the *F* and *m* fields of the instruction, is entered into it. No subsequent instruction can be sent to this unit until its busy flag has been re-set at the completion of the instruction which reserved it. Secondly register designators **F<sub>i</sub>**, **F<sub>j</sub>** and *F<sub>k</sub>*, derived from the **i**, **j** and **k** fields of the instruction, are copied into the functional unit in order to identify the operand and result registers which it will use. Thirdly the Scoreboard copies into the current unit two numbers, Q<sub>j</sub> and Q<sub>k</sub>, taken from the identifier registers associated with these operand registers, and finally the identifier register associated with the result register is loaded with the unit number of the current unit. Thus a subsequent instruction which requires the content of this result register as an input operand will receive this unit number as a Q number, and a subsequent instruction which also requires this register as a result register will not be issued until the identifier has been cleared. The importance of Q numbers becomes clear when second order conflicts are considered.
@@ -245,10 +242,8 @@ In the model, the Scoreboard displays in its bottom panel the unit or register t
 
 A second order conflict occurs whenever an instruction which is about to be issued requires the result of a previously issued but as yet uncompleted instruction. This situation subsequently became known as the Read After Write problem. An example of such a conflict is the following (instructions 8 and 9 in the Demonstration Program):
 
-<center>
 X6  =  X1 + X2  
 X7  = X5 / X6  
-</center>
 
 Here the second instruction can be issued, but must not be allowed to start until the result of the first instruction has been entered into X6. This is achieved by holding up the Go Read signal. The first action within a functional unit at the start of any operation is the simultaneous copying into the unit of the two input operands, and this can only occur when Go Read is set.  Go Read is the logical *AND* of the Read Flags associated with each of the two input operands.
 
@@ -261,11 +256,9 @@ In the model, the left hand panel shown as part of each unit displays the **F<su
 
 A third order conflict occurs when an instruction which has just completed its operation wishes to store its result in a register which is waiting to supply an input operand for a previously issued, but as yet unstarted instruction.  This situation subsequently became known as the Write After Read problem. Such a conflict occurs in the following sequence (instructions 9, 10 and 11 in the Demonstration Program):
 
-<center>
 X7 = X6 / X4  
 X5 = X4* X7  
 X4 = X1 + X6  
-</center>
 
 The third order conflict here is on register X4, and arises because of the second order conflict on X7. The second instruction can be issued immediately after the first, but is held up for its Go Read signal because both input register values must be read simultaneously and X4 cannot be read until the Divide Unit completes its operation and writes to X7. The third instruction can likewise be issued immediately after the second, and since there are no result reservations on its input operands, the Add Unit also receives Go Read immediately and starts its operation. The floating-point add operation completes in very much less time than division, however, and the Add Unit is therefore ready to store its result in X4 before the Multiply Unit has read the current value in X4. Thus the Add Unit sends its Request Release signal to the Scoreboard, but the Scoreboard holds up the Go Store response until after the multiplication has started.
 
