@@ -222,7 +222,7 @@ The value of k in the model is set at 15, so the model produces the results:
 6, 8, 10  
 9, 12, 15  
 
- ![Sums of Squares code](images/ABL_code.png)
+ ![Sums of Squares code](images/ABL_Code.png)
 
 **Figure 5. Sums of Squares Program**
 
