@@ -30,6 +30,7 @@ The CDC 6600 was designed to solve problems substantially beyond contemporary co
 During program execution, instructions are taken in sequence from the Instruction Stack and issued by the Scoreboard to the appropriate execution unit. Each unit takes its input operands from among the 24 scratch-pad registers (eight 60-bit X (operand) registers, eight 18-bit A (address) registers, and eight 18-bit B (index) registers) and returns its result to one of these registers.  The maximum rate of issue is one instruction per minor clock cycle (100 ns), while the units take typically 300 or 400 ns to complete their operations. Thus while the units can in principle all operate simultaneously, simultaneous operation of three or four units is more typical in practice. The issuing of instructions is not straightforward, since instruction dependencies can require that some instructions be held up until the completion of other, previously issued, instructions. In order to maximise the amount of concurrent processing, the Scoreboard is designed to issue each instruction as early as possible, within the limits set by these dependencies, so as to allow the following instruction to be issued, hopefully to a different unit. Dependency conflicts are resolved by the Scoreboard through control signals which link it to each unit and by the use of information buffered about the registers in respect of each unit and about the units in respect of each register.
 
  ![6600 instruction set](images/cdc6600_instr.gif)
+ 
 **Figure 2. 6600 instruction format**
 
 ### The Instruction Stack
@@ -37,6 +38,7 @@ During program execution, instructions are taken in sequence from the Instructio
 The Instruction Stack in the 6600 consists of eight 60-bit registers (I0-I7 in Figure 3) which operate as a push-up stack and which can contain instruction loops. Programs are initiated in by an * Exchange Jump* in which the contents of all addressable registers in the central processor are interchanged with the contents of a designated store area. Following such an Exchange Jump the new contents of the program address register are used to access the first instruction word. This word is received from Central Storage into an Input Register and then loaded into the bottom register of the Instruction Stack.
 
  ![6600 instruction stack](images/cdc6600_istack.gif)
+ 
 **Figure 3. 6600 instruction stack**
 
 Instruction words are made up of four 15-bit*parcels* and as the first instruction word enters the bottom register of the stack (I0), the first two parcels within the word (starting from the left) are transferred into a series of instruction registers within the Scoreboard control logic.  At the same time, a further instruction fetch is initiated. Two parcels are taken to allow for long format (30-bit) instructions. If the first parcel is a short format (15-bit) instruction, the second parcel is ignored and in the next processor minor cycle the second and third parcels are taken from I0. When a long instruction is encountered an extra minor cycle is spent skipping over the second half, so that dealing with one complete instruction word never takes less than four 100 ns minor cycles. This matches the rate at which instructions move into the stack. Whenever a new instruction fetch is initiated, the contents of the stack ripple upwards one register every half minor cycle, with the topmost location (I7) being overwritten first. At the end of four minor cycles the contents of I0 are moved up and I0 is then ready to receive a new instruction from the Input Register.
@@ -54,16 +56,19 @@ When a conditional branch is decoded, a test for*jump within stack* is made. Thi
 The HASE user interface window contains three panes, as shown in Figure 4, where the simulation model of the 6600 is displayed in the main (right hand) Project View pane. Parameters of the model (*e.g.* register and store contents) are displayed in the (left hand) Project Inspector pane while the lower, Output pane shows information produced by HASE when the model is compiled and run. The icons in the top row allow the user to load a model, compile it, run the simulation code thus created and to load the trace file produced by running a simulation back into the model for animation.
 
  ![Image of HASE CDC 6600 simulation](images/HASE-6600-1.png)
+ 
 **Figure 4. The CDC 6600 simulation model loaded into HASE**
 
 Once a trace file has been loaded, the animation control icons at the top of the Project View pane become active. From left to right, these allow the animation to be rewound, stopped, paused, single stepped, run or fast forwarded to the end.  As the animation proceeds, packets of information can be seen passing between entities while the entities themselves change colour to reflect their states (idle, busy, waiting).  The model does not include the Peripheral Processors and Peripheral Channels shown in Figure 1 but does include the D registers (not shown in Figure 1) which act as buffer registers between Central Storage and the XBA Registers.
 
- ![Image of HASE CDC 6600 simulation](images/HASE-6600-2.png) 
+ ![Image of HASE CDC 6600 simulation](images/HASE-6600-2.png)
+ 
 **Figure 5. The CDC 6600 simulation model during animation**
 
 Table 1 shows the full instruction set of the 6600, with the instructions grouped according to the functional unit that executes them. Not all of them are implemented in the HASE model; those that are implemented have their octal code shown in <font color=red>red</font>. Most of those that are not (shown in <font color=blue>blue</font>) have been omitted because they are specific to the implementation of floating-point numbers (somewhat unusually in 1's complement in the 6600). In the model, all numbers are implemented as integer (fixed-point) values. This is because memories in HASE are implemented as C++ arrays and the type-checking in C++ means that it is not possible to mix different types of element in a single array. This is not a major issue in terms of holding instructions and operands in different arrays, since in real computers they are normally stored in quite separate regions of memory. For floating-point variables the choice is between representing them as the integer equivalents of their floating-point bit patterns (as in version 2 of the HASE DLX model, for example), and implementing the appropriate conversions, or simply confining the model to fixed-point variables. The latter option was chosen for the 6600, as it was for the HASE MU5 model.
 
  ![6600 Instruction Set](images/6600-iset.png)
+ 
 <small>Left hand column of each table = Octal Code, <font color=blue> IMPLEMENTED</font>/<font color=red>NOT IMPLEMENTED</font> in the model</small> 
 
 **Table 1. 6600 instruction set**
@@ -197,6 +202,7 @@ The result register of the Branch Unit is the Program Address register, which is
 Dependency conflicts between successive instructions in the 6600 are classified by Thornton into three types: first order, second order and third order. The Scoreboard resolves these conflicts using the control signals which link it to each unit. The Scoreboard can send an Issue, Go Read and Go Store signal to each unit separately, and can receive from each unit a Request Release signal (Figure 6). The Issue signal enters information into the unit identifying the source of its input operands and the mode in which it is required to operate, while Go Read causes the operands themselves to be copied into the unit. When a unit completes its operation it sends a Request Release signal to the Scoreboard, which, when certain conditions are satisfied, responds with Go Store, a signal which allows the result of the operation to be copied out of the unit's Temporary Register and into the appropriate result register.
 
  ![6600 function unit](images/6600-unit.gif)
+ 
 **Figure 6. Control schematic for a 6600 functional unit**
 
 #### First Order Conflicts
@@ -274,6 +280,7 @@ In the model, the right hand panel shown as part of each unit displays the **F<s
 The matrix multiplication program contained in Version 2 of the HASE 6600 simulation model multiplies together a 4x3 matrix R and a 3x4 matrix S to produce a 3x3 matrix T, as shown in Figure 7. The first element of the first row of T is the scalar (dot) product of the first row of R and the first column of S, the second is the scalar product of the first row of R with the second column of S, *etc*. All three matrices are stored by row.
 
  ![Matrix Multiplication diagram](images/43mat_mult.gif)
+ 
 **Figure 7. Matrix multiplication example**
 
 A typical matrix multiplication program involves a triple nested loop in which the outer loop increments the R row number at each iteration, the middle loop increments the S column number at each iteration, while the inner loop forms the scalar products. In a computer with multiple registers, however, performance can be enhanced by fetching row elements of R from memory only once, keeping them in the registers and reusing them as each column of S is processed. The inner loop can then be unrolled, reducing the number of branches required and further enhancing performance. The 6600 has sufficient registers to accommodate a row of 4 elements. To accommodate larger matrices, the R rows would be broken down into sections.
