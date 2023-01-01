@@ -283,10 +283,8 @@ Table 4 shows the program contained in the model. It firsts sets up the required
 Instructions 12 - 27 contain the unrolled loop calculating the scalar product of a row of matrix R and a column of matrix S. Instruction 27 tests whether all the columns of S have been processed for the current R row and branches back to instruction 12 if not. If they have, the next three instructions increment the R row number, move the current R element address to the start of the next row and reset the current S column number to zero. Instruction 31 tests whether all the rows of R have been processed and branches back to instruction 8 if not. The effective inner loop of this program is thus between instructions 12 and 27, *i.e.* 16 instructions in total. These instructions can be contained within the Instruction Stack, so for each R row, no instruction accesses to Central Storage occur during the second, third and fourth executions of this loop, as can be observed during animation of the model.
 
 | PA | Instruction | Action | Comment | Result |
-|--:|:-------|:-------|:--|-------|:--|
+|--:|:-------|:-------|:--|:-------|:--|
 | 0 | 6 1 1 0 12 | B1 = B0 + 12 | B1 = address of first element of R | B1 = 12 |
-
-
 | 1 | 6 1 2 0 4 | B2 = B0 + 4  | B2 = R row length   |  B2 = 4|
 | 2 | 6 6 3 0 0 | B3 = B0 + B0  | B3 = current R row  | B3 = 0 | 
 | 3 | 6 1 4 0 24 | B4 = B0 + 24  | B4 = address of first element of S   | B4 = 24 |
