@@ -69,7 +69,7 @@ Table 1 shows the full instruction set of the 6600, with the instructions groupe
 
  ![6600 Instruction Set](images/6600-iset.png)
  
-<small>Left hand column of each table = Octal Code, <font color=blue> IMPLEMENTED</font>/<font color=red>NOT IMPLEMENTED</font> in the model</small> 
+<small>Left hand column of each table = Octal Code, blue = IMPLEMENTED, red = NOT IMPLEMENTED in the model</small> 
 
 **Table 1. 6600 instruction set**
 
