@@ -285,6 +285,8 @@ Instructions 12 - 27 contain the unrolled loop calculating the scalar product of
 | PA | Instruction | Action | Comment | Result |
 |--:|:-------|:-------|:--|-------|:--|
 | 0 | 6 1 1 0 12 | B1 = B0 + 12  |  B1 = address of first element of R   |  B1 = 12 |
+
+
 | 1 | 6 1 2 0 4 | B2 = B0 + 4  | B2 = R row length   |  B2 = 4|
 | 2 | 6 6 3 0 0 | B3 = B0 + B0  | B3 = current R row  | B3 = 0 | 
 | 3 | 6 1 4 0 24 | B4 = B0 + 24  | B4 = address of first element of S   | B4 = 24 |
