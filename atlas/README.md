@@ -215,13 +215,6 @@ Table 2 shows the program, which is in the form of a triple nested loop. The out
 
 Version 3 of the HASE Atlas model contains a program written by John Buckle in 1962 as a Ferranti training exercise. Figure 5 shows the original code with comments (which include one minor mistake) and the corresponding HASE Atlas simulation code. The value of k is in virtual store word 1024. The program uses three extracodes E1302, E1064 and E1067. E1302 is a B multiply instruction, implemented in the model simply as an instruction executed directly in the B Arithmetic unit. E1064 and E1067 are implemented by the Control Unit and write values into the Subsidiary Store which are printed at the end of the simulation run in the output pane of the HASE GUI. This is not how it would have worked in the real Atlas, of course, but simply a device to enable the sum of squares program to be demonstrated at the <a href="http://curation.cs.manchester.ac.uk/atlas/elearn.cs.man.ac.uk/_atlas/">Atlas 50th Anniversary Symposium</a>.
 
-The value of k in the model is set at 15, so the model produces the results:
-
-3, 4, 5  
-5, 12, 13  
-6, 8, 10  
-9, 12, 15  
-
  ![Sums of Squares code](images/ABL_Code.png)
 
 **Figure 5. Sums of Squares Program**
@@ -261,6 +254,13 @@ The value of k in the model is set at 15, so the model produces the results:
 |  30  |  |  B121 127 0 7 |-> 2) |
 
 **Table 3. HASE Atlas Sums of Squares Code**
+
+The value of k in the model is set at 15, so the model produces the results:
+
+3, 4, 5  
+5, 12, 13  
+6, 8, 10  
+9, 12, 15  
 
 ### Reference
 
