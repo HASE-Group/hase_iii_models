@@ -217,10 +217,10 @@ Version 3 of the HASE Atlas model contains a program written by John Buckle in 1
 
 The value of k in the model is set at 15, so the model produces the results:
 
-3, 4, 5
-5, 12, 13
-6, 8, 10
-9, 12, 15
+3, 4, 5  
+5, 12, 13  
+6, 8, 10  
+9, 12, 15  
 
  ![Sums of Squares code](images/ABL_code.png)
 
