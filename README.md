@@ -10,7 +10,7 @@ This repository contains a collection of "official" supported HASE3 models. Each
 
 To checkout the model collection please use the following commands:
 
-    git clone git@github.com:HASE-Group/hase_iii_models.git --recurse-submodules
+    git clone https://github.com/HASE-Group/hase_iii_models.git --recurse-submodules
     
         or
     
