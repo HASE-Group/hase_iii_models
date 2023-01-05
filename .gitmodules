@@ -1,52 +1,52 @@
 [submodule "atlas/V1.5"]
 	path = atlas/V1.5
-	url = https://github.com/HASE-Group/atlas.git
+	url = ../atlas.git
 	branch = V1.5
 [submodule "mips1/V1.3"]
 	path = mips1/V1.3
-	url = https://github.com/HASE-Group/mips1.git
+	url = ../mips1.git
 	branch = V1.3
 [submodule "mips2/V2.3"]
 	path = mips2/V2.3
-	url = https://github.com/HASE-Group/mips2.git
+	url = ../mips2.git
 	branch = V2.3
 [submodule "atlas/V2.5"]
 	path = atlas/V2.5
-	url = https://github.com/HASE-Group/atlas.git
+	url = ../atlas.git
 	branch = V2.5
 [submodule "atlas/V3.5"]
 	path = atlas/V3.5
-	url = https://github.com/HASE-Group/atlas.git
+	url = ../atlas.git
 	branch = V3.5
 [submodule "mu_baby/V1.1"]
 	path = mu_baby/V1.1
-	url = https://github.com/HASE-Group/mu_baby.git
+	url = ../mu_baby.git
 	branch = V1.1
 [submodule "mu_baby/V2.1"]
 	path = mu_baby/V2.1
-	url = https://github.com/HASE-Group/mu_baby.git
+	url = ../mu_baby.git
 	branch = V2.1
 [submodule "mu_baby/V3.1"]
 	path = mu_baby/V3.1
-	url = https://github.com/HASE-Group/mu_baby.git
+	url = ../mu_baby.git
 	branch = V3.1
 [submodule "mu5/V1.10"]
 	path = mu5/V1.10
-	url = https://github.com/HASE-Group/mu5.git
+	url = ../mu5.git
 	branch = V1.10
 [submodule "mu5/V2.10"]
 	path = mu5/V2.10
-	url = https://github.com/HASE-Group/mu5.git
+	url = ../mu5.git
 	branch = V2.10
 [submodule "mu5/V3.10"]
 	path = mu5/V3.10
-	url = https://github.com/HASE-Group/mu5.git
+	url = ../mu5.git
 	branch = V3.10
 [submodule "cdc6600/V1.2"]
 	path = cdc6600/V1.2
-	url = https://github.com/HASE-Group/cdc6600.git
+	url = ..p/cdc6600.git
 	branch = V1.2
 [submodule "cdc6600/V2.2"]
 	path = cdc6600/V2.2
-	url = https://github.com/HASE-Group/cdc6600.git
+	url = ../cdc6600.git
 	branch = V2.2
