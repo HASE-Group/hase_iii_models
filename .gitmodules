@@ -44,7 +44,7 @@
 	branch = V3.10
 [submodule "cdc6600/V1.2"]
 	path = cdc6600/V1.2
-	url = ..p/cdc6600.git
+	url = ../cdc6600.git
 	branch = V1.2
 [submodule "cdc6600/V2.2"]
 	path = cdc6600/V2.2
