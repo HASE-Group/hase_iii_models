@@ -50,3 +50,7 @@
 	path = cdc6600/V2.2
 	url = ../cdc6600.git
 	branch = V2.2
+[submodule "dashclus/V2.8"]
+	path = dashclus/V2.8
+	url = git@github.com:HASE-Group/dashclus.git
+	branch = V2.8
