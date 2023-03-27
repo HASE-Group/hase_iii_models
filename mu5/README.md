@@ -1,36 +1,30 @@
-## HASE MU5 Simulation Model
+
+
+## MU5
 
 MU5 was the fifth computer system to be designed and built at the University of Manchester, in succession to a series of innovative projects dating back to the late 1940s. MU5 introduced a number of new ideas, particularly in terms of its instruction set, which was designed with high-level language compilation in mind, and novel uses for associative stores. The technical aspects of the project have been well documented in numerous papers and a book. Many of the design ideas developed in MU5 were used in the ICL 2900 series of computers.
 
-This document describes the design of the MU5 computer, explains how the HASE simulation model works and includes a list of relevant publications. Three versions of the model are available, differing only in terms of the program and data pre-loaded into their memories. Version 1 contains a program in its memory that demonstrates the operation of the MU5 Name Store. Version 2 contains a program that executes a scalar product program. Version 3 contains a program that demonstrates the use of string processing instructions.
+This document describes the design of the MU5 computer, explains how the HASE simulation model works and includes a list of relevant publications. The most recent version of the model (V4.1) includes a Console entity containing a **Prog_No** parameter that can be edited after the model has been loaded into HASE. **Prog_No** can take values of 0, 1. 2 allowing the user to select one of three programs contained in the model.  Program 0 demonstrates the operation of the MU5 Name Store, Program 1 executes a scalar product program, Program 2 demonstrates the use of string processing instructions.
 
-The files for version 1 can be downloaded as a zip file
-from <a href="http://www.icsa.inf.ed.ac.uk/research/groups/hase/models/mu5/mu5_v1.10.zip">mu5_v1.10.zip</a>.
+The files for version 4 can be downloaded from <a href="http://www.icsa.inf.ed.ac.uk/research/groups/hase/models/mu5/MU5_V4.1.zip">MU5_V4.1.zip</a>.
 
-The files for version 2 can be downloaded as a zip file
-from <a href="http://www.icsa.inf.ed.ac.uk/research/groups/hase/models/mu5/mu5_v2.10.zip">mu5_v2.10.zip</a>.
+Instructions on how to use HASE models can be found at <a href="http://www.icsa.inf.ed.ac.uk/research/groups/hase/models/use.html" target="_blank">Downloading, Installing and Using HASE</a>.
 
-The files for version 3 can be downloaded as a zip file
-from <a href="http://www.icsa.inf.ed.ac.uk/research/groups/hase/models/mu5/mu5_v3.10.zip">mu5_v3.10.zip</a>.
+### Overview
 
-Instructions on how to use HASE models can be found at
-<a href="http://www.icsa.inf.ed.ac.uk/research/groups/hase/models/use.html"
-target="_blank">Downloading, Installing and Using HASE</a>.
-<h2 id="overview">Overview</h2>
+Figure 1 shows an image of the HASE user interface with the simulation model of MU5 in the main (right hand) Project View pane and model parameters *e.g. register and store contents) in the (left hand) Project Inspector pane. The lower, Output pane shows information produced by HASE. The icons in the top row allow the user to load a model, compile it, run the simulation code thus created and to load the trace file produced by running a simulation back into the model for animation.
 
-Figure 1 shows an image of the HASE user interface with the simulation model of MU5 in the main (right hand) Project View pane and model parameters (*e.g.* register and store contents) in the (left hand) Project Inspector pane. The lower, Output pane shows information produced by HASE. The icons in the top row allow the user to load a model, compile it, run the simulation code thus created and to load the trace file produced by running a simulation back into the model for animation.
-
-![HASE MU5 simulation model](images/HASE_MU5-1.png)
+![HASE MU5 simulation model](images/HASE_MU5V4-1.png)
 
 **Figure 1. The MU5 simulation model loaded into HASE**
 
 Once a trace file has been loaded, the animation control icons at the top of the Project View window become active (Figure 2). From left to right, these allow the animation to be rewound, stopped, paused, single stepped, run or fast forwarded to the end.  As the animation proceeds, packets of information can be seen passing between entities while the entities themselves change colour to reflect their states (idle, busy, waiting).
 
-![Animated MU5 simulation model](images/HASE_MU5-2.png)
+![Animated MU5 simulation model](images/HASE_MU5V4-2.png)
 
 **Figure 2. The MU5 simulation model during animation**
 
-As indicated in the Output pane, the model contains 25 active units (entities in simulation terms).  These are the two parts of the Instruction Buffer Unit, the six stages of the Primary Operand Unit (PROP), plus one for PROP itself (containing the beat generation code), the Central Highway, the B-Arithmetic Unit, the Descriptor Addressing and the Descriptor Operand Processing Units, the three sections of the Operand Buffer System, the Accumulator Unit, the Store Access Control Unit (containing the Current Page Registers) and the Local Store. Although they are shown on-screen as parts of the model, the IBU, Name Store, SEOP and Operand Buffer System entities are simply icons, with no corresponding simulation code. The 25th entity is a time counter containing a limit on the total number of simulation time steps, to prevent run-aways; its icon is the key to the unit states.
+The model contains 23 active units (entities in simulation terms). These are the Console, the two parts of the Instruction Buffer Unit, the six stages of the Primary Operand Unit (PROP), plus one for PROP itself (containing the beat generation code), the Central Highway, the B-Arithmetic Unit, the Descriptor Addressing and the Descriptor Operand Processing Units, the three sections of the Operand Buffer System, the Accumulator Unit, the Store Access Control Unit (containing the Current Page Registers), the Local Store and the Disc Store. Although they are shown on-screen as parts of the model, the IBU, Name Store, SEOP and Operand Buffer System entities are simply icons, with no corresponding simulation code. The 23rd entity is a time counter containing a limit on the total number of simulation time steps, to prevent run-aways; its icon is the key to the unit states.
 
 ### MU5 Design Considerations
 
@@ -41,7 +35,7 @@ During the design of MU5 the prime target was fast, efficient processing of high
 3. The instruction set must allow a pipeline organisation of the processor leading to a fast execution rate.
 4. Information on the nature of operands should be available to allow optimal buffering of operands.
 
-Algol and FORTRAN were taken as being typical of two major classes of programming languages in common use at the time, distinguished by the use of recursive routines (or procedures) and dynamic storage allocation in the former, and non-recursive routines and compile time storage allocation in the latter, but having the following features in common: 
+Algol and FORTRAN were taken as being typical of two major classes of programming languages in common use at the time, distinguished by the use of recursive routines (or procedures) and dynamic storage allocation in the former, and non-recursive routines and compile time storage allocation in the latter, but having the following features in common:
 
 1. Each routine has local working space consisting of named variables of integer (fixed-point) and real (floating-point) types, and structured data sets (arrays, for example) which are also named.
 2. A routine may refer to non-local names either of an enclosing routine or in a workspace common to all routines.
@@ -55,7 +49,9 @@ In order to reconcile feature 3 with condition 1 and 4, it was decided that ther
 
 The instruction format chosen for MU5 represents a merger of single address and stacking machine concepts.  All the arithmetic and logical operations involve the use of an accumulator and an operand specified in the instruction, but there is a variant of the load order (*=) which causes the accumulator to be stacked before being re-loaded.  In addition, there is an address form (STACK) which unstacks the last stacked quantity.  Thus the expression
 
+<center>
 RESULT := (A + B) * ((C + D)/(E + F))
+</center>
 
 can be compiled into
 
@@ -65,15 +61,16 @@ ACC *= C
 ACC +  D  
 ACC *= E  
 ACC +  F  
-ACC &#8709; STACK  
+ACC &#8709; STACK
 ACC *  STACK  
-ACC => RESULT  
+ACC => RESULT 
 
-The function &#8709; is *reverse divide* (*i.e.* ACC = STACK/ACC); if the operand to the left of an operator is stacked, it subsequently appears as the right hand side of a machine function (as the dividend in this case).  Thus, for the non-commutative operations **-** and **/**, the corresponding reverse operations have to be provided. In pure stacking machines, all subtractions and divisions are implicitly reverse operations.
+The function <tt> &#8709;</tt> is *reverse divide*
+(*i.e.* ACC = STACK/ACC); if the operand to the left of an operator is stacked, it subsequently appears as the right hand side of a machine function (as the dividend in this case).  Thus, for the non-commutative operations <tt> -</tt> and <tt> /</tt>, the corresponding reverse operations have to be provided. In pure stacking machines, all subtractions and divisions are implicitly reverse operations.
 
-The instruction set is summarised in Figure 3. There are two basic formats, one for computational functions and one for organisational functions (control transfers, base register manipulations, *etc*.). They are distinguished by the *type of function* bits and use four and six bits respectively to specify the function.  The remaining nine or seven bits specify the *primary* operand.  The **k** field indicates the kind of operand, and determines how the **n** field is interpreted.  Where the **k** field indicates the Extended Operand Specification, the instruction is extended by an additional 16 bits in the case of a name, or by 16, 32, or 64 bits in the case of a literal. 
+The instruction set is summarised in Figure 3. There are two basic formats, one for computational functions and one for organisational functions (control transfers, base register manipulations, *etc*.). They are distinguished by the *type of function* bits and use four and six bits respectively to specify the function.  The remaining nine or seven bits specify the *primary* operand.  The *k* field indicates the kind of operand, and determines how the *n* field is interpreted.  Where the *k* field indicates the Extended Operand Specification, the instruction is extended by an additional 16 bits in the case of a name, or by 16, 32, or 64 bits in the case of a literal.
 
-![MU5 instruction set](images/InstSet.gif)
+![MU5 instruction set](images/MU5InstSet.jpg)
 
 **Figure 3. The MU5 instruction set**
 
@@ -86,20 +83,20 @@ Access to array elements is achieved through a descriptor mechanism. When a data
 There are two main types of descriptor:
 
 <center>
-<table>
-<tr><td> String descriptor: </td><td> Ts </td><td> Length </td><td> Origin </td></tr>
+<table no border>
 <tr><td> Vector descriptor: </td><td> Tv </td><td> Bound </td><td> Origin</td></tr>
+<tr><td> String descriptor: </td><td> Ts </td><td> Length </td><td> Origin </td></tr>
 <tr align=center><td> </td><td>  8 </td><td>  24 </td><td>  32 </td></tr>
 </table>
 </center>
 
-String descriptors describe strings of bytes.  The length field specifies the number of bytes, and the origin specifies the byte address of the first byte.  Strings are normally used in conjunction with string processing orders (which may be two-address operations involving the use of two descriptors).  These orders provide facilities for the manipulations of data records in languages such as COBOL, PL/1 and Algol 68 (move, compare, logically combine, *etc*.).
-
 The size of the elements in a vector is specified within the type bits (Tv) and may be between 1 and 64 bits.  If the operand access is modified, the modifier must be greater than or equal to zero and less than the bound.  This check is carried out automatically by hardware with virtually no time penalty, and removes the need for the costly software bound check which is often required, particularly during program development.
+
+String descriptors describe strings of bytes.  The length field specifies the number of bytes, and the origin specifies the byte address of the first byte.  Strings are normally used in conjunction with string processing orders (which may be two-address operations involving the use of two descriptors).  These orders provide facilities for the manipulations of data records in languages such as COBOL, PL/1 and Algol 68 (move, compare, logically combine, *etc*.).
 
 ### The Simulation Model
 
-In any simulation modelling system there is a trade-off between accuracy and performance. HASE was designed primarily as a high-level visualisation tool for computer architecture students and therefore simulates systems at register/word level rather than bit level. This inevitably imposes some limitations on the way models can be constructed, *e.g.* registers are modelled using typed variables and stores are modelled as arrays of typed variables. Thus the HASE MU5 simulation model is intended to provide a visual demonstration of the workings of the processor and memory system, rather than being designed to run real MU5 programs. There are also constraints on nomenclature. The type field, function field, etc in instructions are modelled using the C++ enum construct, the elements of which can only contain alphanumeric characters. Thus the MU5 function '**NB&nbsp;=**', for example, is represented in the model as '**NBld**' and the base registers are given the names used in the hardware design diagrams (RNB, RXNB, RSF) to avoid clashes with NB, XNB, SF in instructions.
+In any simulation modelling system there is a trade-off between accuracy and performance. HASE was designed primarily as a high-level visualisation tool for computer architecture students and therefore simulates systems at register/word level rather than bit level. This inevitably imposes some limitations on the way models can be constructed, *e.g.* registers are modelled using typed variables and stores are modelled as arrays of typed variables. Thus the HASE MU5 simulation model is intended to provide a visual demonstration of the workings of the processor and memory system, rather than being designed to run real MU5 programs. There are also constraints on nomenclature. The type field, function field, etc in instructions are modelled using the C++ enum construct, the elements of which can only contain alphanumeric characters. Thus the MU5 function '<tt>NB&nbsp;=</tt>', for example, is represented in the model as '<tt>NBld</tt>' and the base registers are given the names used in the hardware design diagrams (RNB, RXNB, RSF) to avoid clashes with NB, XNB, SF in instructions.
 
 ### The Instruction Set
 
@@ -107,36 +104,90 @@ The MU5 instruction set used in the model follows the spirit of the original, ra
 
 Figure 4 shows the instruction set used in the model. The additional *Type of Instruction* (T) character is included in instruction registers, and in packets containing instructions, to represent the extra function bits that were used in the hardware of MU5 to control the execution of instructions. Details are given below in the Primary Operand Unit section.
 
-![HASE MU5 instruction set](images/SIM_Insts.png)
+![HASE MU5 instruction set](images/MU5_SIM_Insts.png)
 
 **Figure 4. The HASE MU5 instruction set**
 
-The functions are shown in the tables below. Empty boxes correspond to functions that have not yet been implemented in the model (and in some cases may never be), or did not exist in the real MU5. "Op" means "operand".
+The functions are shown in the table below. Empty boxes correspond to functions that have not yet been implemented in the model (and in some cases may never be), or did not exist in the real MU5. "Op" means "operand".
 
-The B functions correspond exactly to those implemented in MU5. COMP (*compare*) sets the two test bits T1 (=&nbsp;0 / &#8800;&nbsp;0) and T2 (&#8805;&nbsp;0 / <&nbsp;0) according to the result of **B - operand**; B itself remains unaltered. In the real MU5, a third test bit (T0) was set to 1 if the comparison produced an overflow; in the model, an arithmetic overflow would be caught by the underlying runtime system, so T0 is not implemented.  CINC (*compare & increment*) acts similarly but increments B after the comparison.  CINC was intended for use with a subsequent conditional branch instruction in the implementation of *for* loops.
-
+The B functions correspond exactly to those mplemented in MU5. COMP (*compare*) sets the two test bits T1 (=&nbsp;0 / &#8800;&nbsp;0) and T2 (&#8805;&nbsp;0 / <&nbsp;0) according to the result of <tt>B - operand</tt>; B itself remains unaltered. In the real MU5, a third test bit (T0) was set to 1 if the comparison produced an overflow; in the model, an arithmetic overflow would be caught by the underlying runtime system, so T0 is not implemented.  CINC (*compare & increment*) acts similarly but increments B after the comparison. CINC was intended for use with a subsequent conditional branch instruction in the implementation of *for* loops.
 
 The ACC (Accumulator) functions are implemented in the model in exactly the same way as the corresponding B functions, *i.e.* as 32-bit integer operations, rather than as floating-point operations. The reason for this is explained below in the Address Space section.
 
-The STS functions (SLGC, SMVB, SCMP, BLGC, BMVB, BMVE, SMVF, BSCN and BCMP) perform string processing operations. They were designed for use in record processing applications written in languages such as COBOL, PL/1 and Algol68. Their operation is explained in the description of the actions that take place during execution of the String Processing Program pre-loaded into Version 3 of the model.
+The STS functions (SLGC, SMVB, SCMP, BLGC, BMVB, BMVE, SMVF, BSCN and BCMP) perform string processing operations. They were designed for use in record processing applications written in languages such as COBOL, PL/1 and Algol68. Their operation is explained in the description of the actions that take place during execution of the String Processing Program (Progam 2 in the model,
 
-![Computational functions](images/comp-inst.png)
 
-**Figure 5. Computational functions**
+<center>
+<table border bgcolor="#ffffff">
+<tr><td colspan=8 align=center> **Organisational** </td></tr>
+<tr><td> **Function** </td><td> **Action** </td><td> **Function** </td><td>** Action **</td><td> **Function** </td><td> **Action** </td><td> **Function** </td><td>** Action **</td></tr>
+<tr><td> BR </td><td> -> <br> (CO = CO + Op) </td><td>EXIT</td><td>  </td><td>  </td><td> </td><td> </td><td>   </td></tr>
+<tr><td> JUMP </td><td>CO = Op </td><td>RETURN</td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+<tr><td> XC0 </td><td> eXecutive Call<br>not implemented  </td><td> XC1  </td><td> </td><td> XC2 </td><td>  </td><td> XC3  </td><td>   </td></tr>
+<tr><td> XC4 </td><td>  </td><td>XC5</td><td> </td><td> XC6 </td><td>  </td><td> STACK LINK  </td><td> </td></tr>
+<tr><td> MS = </td><td>  </td><td> </td><td> </td><td> </td><td> </td><td> SET LINK  </td><td>  </td></tr>
+<tr><td> XNB_LD </td><td> RXNB = Op </td><td>  </td><td>  </td><td> XNB_PL</td><td> RXNB = RXNB + Op </td><td> XNB_ST</td><td> RXNB => Op  </td></tr>
+<tr><td> SF_LD </td><td> RSF = Op </td><td> SF_PL </td><td> RSF = RSF + Op </td><td> SFNB_PL </td><td> RSF = RNB + Op </td><td> SF_ST </td><td> RSF => Op  </td></tr>
+<tr><td> NB_LD </td><td> RNB = Op </td><td> NBSF_PL </td><td> RNB = RSF + Op </td><td> NB_PL </td><td> RNB = RNB + Op </td><td> NB_ST </td><td> RNB => Op  </td></tr>
+<tr>
+<td> BReq </td><td> -> if = 0</td>
+<td> BRne </td><td> -> if /= 0  </td>
+<td> BRge </td><td> -> if >= 0 </td>
+<td> BRlt </td><td> -> if < 0 </td></tr>
+<tr>
+<td> BRle </td><td> -> if =< 0</td>
+<td> BRgr </td><td> -> if > 0  </td>
+<td> OVERFLOW </td><td> -> if overflow <BR>(not implemented) </td>
+<td> BRBn </td><td> -> if Bn = 1 </td></tr>
+<tr>
+<td> Bneq </td><td> Set Bn if = 0</td>
+<td> Bnne </td><td> Set Bn if /= 0  </td>
+<td> Bnge </td><td> Set Bn if >= 0 </td>
+<td> Bnlt </td><td> Set Bn if < 0 </td></tr>
+<tr>
+<td> Bnle </td><td> Set Bn if =< 0</td>
+<td> Bngr </td><td> Set Bn if > 0  </td>
+<td> OVERFLOW </td><td> Set Bn if overflow <BR>(not implemented) </td>
+<td> BnBn </td><td> Set Bn if Bn = 1 </td></tr>
+<tr><td>  </td><td>  </td><td>   </td><td>   </td><td>  </td><td>  </td><td>   </td><td>   </td></tr>
+<tr><td>  </td><td>  </td><td>   </td><td>   </td><td>  </td><td>  </td><td>   </td><td>   </td></tr>
+<tr><td>  </td><td>  </td><td>   </td><td>   </td><td>  </td><td>  </td><td>   </td><td>   </td></tr>
+<tr><td>  </td><td>  </td><td>   </td><td>   </td><td>  </td><td>  </td><td>   </td><td>   </td></tr>
+</table>
+</center>
 
-![Organisational functions](images/org-inst.png)
+<center>
+<table border bgcolor="#ffffff">
+<tr><td colspan=2 align=center> **B**</td> <td colspan=4 align=center> **STS/D**</td> <td colspan=2 align=center> **ACC** </td></tr>
+<tr><td> **Function** </td><td> **Action** </td><td> **Function** </td><td> **Action** </td><td> **Function** </td><td> **Action** </td><td> **Function** </td><td> **Action** </td></tr>
+<tr><td> LD  </td><td> B = Op  </td><td>XDO_LD</td><td>XDO = Op</td><td>DO_LD</td><td>DO = Op</td><td> LD  </td><td> ACC = Op  </td></tr>
+<tr><td> LDD </td><td> B = Op - 1 </td><td>XD_LD</td><td>XD = Op</td><td>D_LD</td><td>D = Op</td><td> nop </td><td>  </td></tr>
+<tr><td> SLD </td><td> Stack B<br> B = Op </td><td>STACK </td><td>Stack Op </td><td>D_SLD</td><td>Stack D<br>D = Op</td><td> SLD </td><td> Stack ACC<br> ACC = Op </td></tr>
+<tr><td> ST </td><td>  B => Op</td><td>XD_ST</td><td>XD => Op</td><td>D_ST</td><td>D => Op</td><td> ST </td><td>  ACC => Op</td></tr>
+<tr><td> ADD </td><td> B = B + Op </td><td>XDB_LD</td><td>XDB = Op</td><td>DB_LD</td><td>DB = Op</td><td> ADD </td><td> ACC = ACC + Op </td></tr>
+<tr><td> SUB </td><td> B = B - Op </td><td> </td><td> </td><td> </td><td> </td><td> SUB </td><td> ACC = ACC - Op </td></tr>
+<tr><td> MUL </td><td> B = B * Op </td><td> </td><td> </td><td>MOD</td><td>DO = DO + Op<br>DB = DB - Op</td><td> MUL </td><td> ACC = ACC * Op </td></tr>
+<tr><td> DIV </td><td> DUMMY  </td><td>XMOD</td><td>XDO = XDO + Op<br>XDB = XDB - Op </td><td> </td><td> </td><td> DIV </td><td> ACC = ACC / Op </td></tr>
+<tr><td> XOR </td><td> B = B xor Op </td><td> SLGC </td><td> </td><td> BLGC </td><td> </td><td> XOR </td><td> ACC = ACC xor Op </td></tr>
+<tr><td> OR  </td><td> B = B v Op </td><td> SMVB </td><td> </td><td> BMVB </td><td> </td><td> OR  </td><td> ACC = ACC v Op </td></tr>
+<tr><td> SHL </td><td> B = B &#8592; Op </td><td> </td><td> </td><td> BMVE </td><td> </td><td> SHL </td><td> ACC = ACC &#8592; Op </td></tr>
+<tr><td> AND  </td><td> B = B & Op </td><td>  </td><td> </td><td> SMVF </td><td> </td><td> AND </td><td> ACC = ACC & Op </td></tr>
+<tr><td> RSUB </td><td> B = Op - B </td><td> </td><td> </td><td> </td><td> </td><td> RSUB </td><td> ACC = Op - ACC </td></tr>
+<tr><td> COMP </td><td> set T1 &amp; T2 acc.<br>B - Op </td><td> </td><td> </td><td> BSCN</td><td> </td><td> COMP </td><td> set T1 &amp; T2 acc.<br>ACC - Op </td></tr>
+<tr><td> CINC </td><td> set T1 &amp; T2 acc.<br>B - Op; B = B + 1 </td><td> SCMP </td><td> </td><td> BCMP </td><td> </td><td> nop </td><td> </td></tr>
+<tr><td> RDIV </td><td> DUMMY </td><td> </td><td> </td><td> </td><td> </td><td> RDIV </td><td> ACC = Op / B </td></tr>
+</table>
+</center>
 
-**Figure 6. Organisational functions**
-
-### The Address Space
+#### The Address Space
 
 Because each memory is modelled as an array of elements of a particular HASE types, it is not possible to mix instructions, integers (fixed-point numbers) and reals (floating-point numbers) in one array. However, in a paged machine it is possible to allocate separate blocks of memory to different types. This works well in the HASE Atlas model because the fixed-point and floating-point numbers and code can be in separate areas of the virtual address space. In MU5, however, the address space is formally segmented into a segment for named variables (the Name Segment), segments for code and segments for array elements.  In the Name Segment, fixed-point variables, floating-point variables and descriptors are intimately mixed together. Descriptors can be represented fairly simply as a pair of 32-bit variables, but for floating-point variables the choice is between representing them as the integer equivalents of their floating-point bit patterns (as in version 2 of the HASE DLX model), and implementing the appropriate conversions, or simply confining the model to fixed-point variables.  The latter option was chosen for MU5.
 
-The translation of virtual to real addresses in MU5 used a more complex paging mechanism than that used in Atlas (the first virtual memory computer).  In the intervening years, main memory sizes had expanded enormously, requiring the use of many more paging registers. However, the nature of associative technology made this infeasible, so in most large computers with virtual memory, only a subset of the full virtual-to-real mapping table is held in hardware, as Current Page Registers (CPRs). CPRs differ from PARs in that they require a Real Address Field as well as an associative Virtual Address Field.  Using CPRs means that on many occasions when a page fault occurs, the operating system just needs to update a Current Page Register without the need for any transfer of memory contents between the main store and the backing store.
+The translation of virtual to real addresses in MU5 used a more complex paging mechanism than that used in Atlas (the first virtual m emory computer).  In the intervening years, main memory sizes had expanded enormously, requiring the use of many more paging registers. However, the nature of associative technology made this infeasible, so in most large computers with virtual memory, only a subset of the full virtual-to-real mapping table is held in hardware, as Current Page Registers (CPRs). CPRs differ from PARs in that they require a Real Address Field as well as an associative Virtual Address Field.  Using CPRs means that on many occasions when a page fault occurs, the operating system just needs to update a Current Page Register without the need for any transfer of memory contents between the main store and the backing store.
 
-MU5 had 32 CPRs, implemented in such a way that the page size could be varied. For user programs the page size was 256 32-bit words, meaning that the page table for any one segment (of 65536 words) could itself be contained in a single page. For system programs, the page size was equal to the segment size. In the HASE model of MU5, the page size is 256 words and there are just four CPRs, preloaded such that the first page of Segment 0 (the Name Segment) is mapped to Block 0 of the Local Store, Segment 1 is used for instructions and is mapped to Block 1, while Segment 2 is used for array elements and is mapped to Block 2. Segment 3, mapped to Block 3, is used to contain strings of bytes. Implementing software to manipulate the CPRs is beyond the scope of this model.  Users are of course at liberty to re-code the model to change this arrangement or to add more pages.
+MU5 had 32 CPRs, implemented in such a way that the page size could be varied. For user programs the page size was 256 32-bit words, meaning that the page table for any one segment (of 65536 words) could itself be contained in a single page. For system programs, the page size was equal to the segment size. In the HASE model of MU5, the page size is 256 words and there are just four CPRs. At the start of a simulation the CPRs all have their Valid bits set to 0, so the first request for an instruction, integer variable or character causes a page fault. In the real MU5 a page fault would have caused an interupt and the operating system would have organised the updating of a CPR and the transfer, if necessary, of the required page from the Disc or Mass Store to the Local Store via the Exchange (*c.f.* [15]). The model simply includes the Disc Store, containing the three programs and connected directly to the Local Store. The allocation of CPRs and blocks in the Local Store is built into the Hase++ code of the CPRs and Disc Store. The occurence of a page fault is indicated by the Store Access Control Unit entering its Held state.
 
-### The Primary Operand Unit
+#### The Primary Operand Unit
 
 The design of the Primary Operand Unit in the model follows as closely as possible the design of the Primary Operand Unit (PROP) in the real MU5. It consists of six pipeline stages, each modelled as a separate entity and designated Decode, Add Associate, Read, Assemble and Execute. The Decode stage receives instructions from the Instruction Buffer Unit and decodes them to determine the source and/or sink of the operand(s) and whether the instruction is to be executed by PROP itself or sent to another unit. The Add stage forms the sum of name+base for appropriate instructions. The result is presented to the associatively accessed virtual address field of the Name Store in the Associate stage and, if the address is present, the value is read from the value field of the Name Store in the Read stage. (The Name Store in MU5 contained 32 lines, 28 for user programs and 4 for the operating system; the Name Store in the model just contains 8 user lines, making it easier to demonstrate the actions involved in managing the Name Store.) The Assemble Stage selects the appropriate parts of this value (*e.g.* all 64 bits or the upper or lower 32 bits). The Execute stage determines the unit to which the instruction should be sent (the B-arithmetic unit, the Secondary Operand Unit (SEOP) or PROP itself in the case of Organisational orders) and increments the Control Register (program counter) once the instruction has been sent via the Central Highway to B or SEOP or has been completed by PROP.
 
@@ -168,13 +219,12 @@ The function registers in the real MU5 had extra function bits associated with t
  <tr><td> W </td><td> Write packet (from B or Acc or to memory) </td></tr>
  <tr><td> Z </td><td> STOP packet from ACC to PROP </td></tr>
 </table>
- 
 **Table 1 Packet Types**
 </center>
 
 The influence of these Types on the various actions that occur in the processor as different instructions are executed is explained below with reference to the execution of the demonstration programs pre-loaded into the three different versions of the model.
 
-###  Instruction Buffer Unit
+#### The Instruction Buffer Unit
 
 The Instruction Buffer Unit (IBU) is implemented in the model as two entities corresponding to the two main sections of the IBU in the real MU5, the Store Request System (SRS) and Data Flow. As in the real MU5, the SRS contains a Jump Trace, an associatively addressed store that keeps track of the *jump-from* and *jump-to* addresses of branch instructions.
 
@@ -184,28 +234,33 @@ If a new value in AC matches an entry in the jump-from field of the Jump Trace, 
 
 The Data Flow section receives instructions in pairs from SAC, unpacks them according to the entry in the appropriate entry in the Unpack Record and enters them into the instruction buffers. These are implemented in the model as a drop-down stack, *i.e.* an instruction is taken off the bottom of the stack whenever PROP requests one and each new instruction is entered into the lowest free position in the stack.
 
-### The Secondary Operand Unit
+#### The Secondary Operand Unit
 
 The Secondary Operand Unit is mainly concerned with accessing data structure elements (typically array elements) specified as secondary operands by means of descriptors. It consists of three major sections, the Descriptor Addressing Unit (Dr), the Operand Buffer System (OBS) and the Descriptor Operand Processing Unit (Dop). An instruction that specifies an array element picks up its descriptor from the Name Store as it passes through PROP. PROP sends the instruction to Dr, where it is loaded into the D (Descriptor) Register (DR). If the operand kind field specifies a modified access, PROP also sends a command to the B-Arith Unit telling it to send the value in the B register to Dr. If the Base specified in the instruction is D (not a real base register), the existing descriptor in DR is used.
 
-Dr actually contains two descriptor registers, DR and XDR; XDR is used by string processing orders, as described below in the String Processing Progam section. In the model, each 64-bit descriptor is held as two successive 32-bit integers in memory, the most significant word containing the Type, Size and Bound/Length fields and the least significant word the Origin. In the Dr registers, the more significant half is displayed in a more readable, disaggregated form. Thus DR_TSB contains three fields, the descriptor Type, the operand Size and the Bound (or length in the case of a Type 1 descriptor). The demonstration program in Version 1 of the model involves two descriptors, both of Type 1, Size 3 (*i.e*. 2<sup>3</sup> bits, = 1 byte, mandatory with Type 1 descriptors) and a Length of 10. In memory these values appear as 1476395018.
+Dr actually contains two descriptor registers, DR and XDR; XDR is used by string processing orders, as described below in the String Processing Progam section. In the model, each 64-bit descriptor is held as two successive 32-bit integers in memory, the most significant word containing the Type, Size and Bound/Length fields and the least significant word the Origin. In the Dr registers, the more significant half is displayed in a more readable, disaggregated form. Thus DR_TSB contains three fields, the descriptor Type, the operand Size and the Bound (or length in the case of a Type 1 descriptor). Program 0 in the model involves two descriptors, both of Type 1, Size 3 (*i.e*. 2^3 bits, = 1 byte, mandatory with Type 1 descriptors) and a Length of 10. In memory these values appear as 1476395018.
 
-In the Scalar Product program in Version 2 of the model, the descriptors are Type 0, Vector descriptors.  The Dr Unit adds the modifier to the Origin to form the address of the required element and performs a bound check by subtracting the modifier from the Bound. In the real MU5, hardware space constraints meant that the adder used to form the address was also used as the subtractor. This was less than ideal, so the model assumes that there is a separate subtractor. If the Modifier exceeded the Bound in MU5, an interrupt was generated; in the model, the simulation is stopped and a report displayed in the Output pane.
 
-The address created by Dr is sent to OBS, which, like the Name Store in PROP, is invisible to the programmer and exists only to improve the instruction execution rate. OBS makes the necessary store request and sends the 64-bit word it receives from SAC to Dop, which contains masking and shifting circuitry to select the array element from the appropriate position in the word. It does this using the Dop Bits, generated by Dr at the same time as the address, and carried through OBS with the instruction. The Dop Bits identify the Most Significant Byte Address (MSBA), the Most Significant bit Address (MSbA) and the Least Significant Byte Address (LSBA). These bits allow any 1, 4, 8, 16 or 32-bit element, or the whole word, to be selected from the 64-bit word sent to Dop.
+In the Scalar Product program the descriptors are Type 0, Vector descriptors.  The Dr Unit adds the modifier to the Origin to form the address of the required element and performs a bound check by subtracting the modifier from the Bound. In the real MU5, hardware space constraints meant that the adder used to form the address was also used as the subtractor. This was less than ideal, so the model assumes that there is a separate subtractor. If the Modifier exceeded the Bound in MU5, an interrupt was generated; in the model, the simulation is stopped and a report displayed in the Output pane.
+
+The address created by Dr is sent to OBS, which, like the Name Store in PROP, is invisible to the programmer and exists only to improve the instruction execution rate. OBS makes the necessary store request and sends the 64-bit word it receives from SAC to Dop, which contains masking and shifting circuitry to select the array element from the appropriate position in the word. It does this using the Dop Bits, generated by Dr at the same time as the address, and carried through OBS with the instruction.  The Dop Bits identify the Most Significant Byte Address (MSBA), the Most Significant bit Address (MSbA) and the Least Significant Byte Address (LSBA). These bits allow any 1, 4, 8, 16 or 32-bit element, or the whole word, to be selected from the 64-bit word sent to Dop.
 
 In the model, OBS is made up of three entities that correspond closely to the sub-units of OBS in MU5 itself. These are the Input Process, the Queue and the Output Process. The Input Process contains the associatively accessed Virtual Address field of the operand buffers, 8 lines for named 64-bit variable words and 8 lines for 64-bit array element words. (In MU5 itself there were 24 lines for 64-bit named variable words and 8 addressable lines for 128-bit array element words, though these were implemented in hardware as 16 lines x 64-bits.) If the address field of an incoming instruction finds a match in one of these lines, the line number is encoded as a Tag and carried through the OBS Queue with the instruction. If there is no match, a new line is allocated and its Tag is carried through SAC, the CPRs and the Local Store, so that when the store word arrives at the OBS Output Process, the Output Process can write the value into the appropriate line in the Value Field and can set the Full bit in that line. When an instruction is at the Head of the Queue, its Tag is used to access the appropriate line in the Value Field.
 
 The Queue has space for up to 8 instructions and is controlled by two counters, the Head and Tail counters. Initially both are set to zero. When the first instruction arrives it is written into location 0 and the Tail counter is incremented. Subsequent instructions are written into successive locations, modulo 8, unless the Tail counter becomes equal to the Head counter, in which case the Queue is full and the Input Process is held up. The Output Process continually checks for a Queue Ready signal, which is set when there is a valid instruction at the Head of the Queue and for which the corresponding Full bit is set. When the Queue Ready signal is true, the Output Process copies the instruction from the Head of the Queue, reads its operand store word from the OBS Value Field and sends both to Dop. It then sets the Type field of that instruction in the Queue to Invalid.
 
-### Demonstration Program
+#### The Local and Disc Stores
 
-The demonstration program contained in Version 1 of the model is shown in Table 2.  During its execution it demonstrates the way in which many of the MU5 instructions were implemented by the MU5 hardware, particularly the way in which the Name Store worked. Table 2 lists the instructions in the program, showing their virtual addresses (CO value), their actions and the results they produce. Below the table is a detailed explanation of what happens in the model as each instruction is executed.
+The Local Store is modelled as four blocks of 256 words with blocks 0 and 2 being arrays of pairs of integers, block 1 an array of instructions and block 3 an array of 8-character strings.  The Disc Store is similarly modelled as nine blocks, with one instruction block and two data blocks for each program plus a character block for program 2.
+
+### Demonstration Program (Program 1)
+
+The demonstration program contained in the model is shown in Table 2. During its execution it demonstrates the way in which many of the MU5 instructions were implemented by the MU5 hardware, particularly the way in which the Name Store worked. Table 2 lists the instructions in the program, showing their virtual addresses (CO value), their actions and the results they produce. Below the table is a detailed explanation of what happens in the model as each instruction is executed.
 
 Variables used by B, Dr and PROP instructions are normally held in the PROP Name Store, while variables used by ACC instructions are normally held in the OBS Name Store. However, because Name Store lines hold 64-bit store words, a 32-bit variable used by a B instruction can sometimes be part of the same 64-bit store word as an adjacent 32-bit variable used by an ACC instruction, and because the Name Store protocol is copy-back rather than write-through, variables can sometimes be in the "*wrong*" Name store.  To avoid "*sloshing*", *i.e.* variables being transferred back and forth between Name Stores, a variable is only moved between Name Stores when it is the target of a write instruction. The demonstration program shows what happens in the Name Stores:
 
 - as the PROP and OBS Name Stores fill up
--  when a line currently in use but unaltered is re-allocated
+- when a line currently in use but unaltered is re-allocated
 - when a line currently in use and altered is re-allocated
 - when a read access has to wait for a write order to complete
 - when two write orders occur in close succession
@@ -213,7 +268,6 @@ Variables used by B, Dr and PROP instructions are normally held in the PROP Name
 - when an ACC instruction writes to a variable in the PROP Name Store
 - when a B instruction reads a variable in the OBS Name Store
 - when a B instruction writes to a variable in the OBS Name Store
-
 
 <center>
 <table border bgcolor=white>
@@ -291,7 +345,7 @@ A hold-up is set (in the PROP entity) such that the Decode, Add, Associate and R
 
 Once PROP know that the required store word will come from SAC, it selects a Name Store line to contain the required virtual address and 64-bit store word using the Line Pointer (LP) register. LP contains one bit per line, with the first initially set to 1 and the rest to 0, *i.e.* it points to the first of the 8 lines (line 0). After each NSNE the single bit in LP is shifted one place, modulo 8, to select the line to be used at the next NSNE.
 
-The value read from the Local Store is returned to SAC and thence to  ROP, which updates its Name Store Address Field and Value Field (with values 528 and 529 in this case), releases the hold-up and allows the instruction to proceed along the pipeline, marked as a V Type. The Assemble stage selects the m.s.  half of the 64-bit word from the Value Field and when the instruction reaches the Execute stage, it is sent to the Central Highway and thence to the B-arithmetic Unit which loads the value (528) into the B register.
+The value read from the Local Store is returned to SAC and thence to PROP, which updates its Name Store Address Field and Value Field (with values 528 and 529 in this case), releases the hold-up and allows the instruction to proceed along the pipeline, marked as a V Type. The Assemble stage selects the m.s.  half of the 64-bit word from the Value Field and when the instruction reaches the Execute stage, it is sent to the Central Highway and thence to the B-arithmetic Unit which loads the value (528) into the B register.
 
 #### B ADD V32 NB 1
 
@@ -303,7 +357,7 @@ This instruction multiplies the value in the B register by the value held in the
 
 #### B ST V32 NB 3
 
-This instruction writes the value in B into the l.s. half of the word at the virtual address formed by adding 3 to the value in RNB. It does not cause an NSNE since the virtual address of the corresponding 64-bit quantity (9) is already in line 1 of the virtual address field of the Name Store. However, the value to be stored is not available at this point because the instruction still has to progress through the pipeline to the B-Arithmetic unit. It would be possible simply to hold up the pipeline in a similar manner to the hold-up used for base manipulation orders but B store orders are more frequent, so a different technique was used in MU5 and is replicated here. The content of the Line Register is copied into a B Write register (BW). BW also contains bits that indicate whether the value from B is being written to a 64-bit operand (in which case zero is written to the m.s. half) or (more likely) to a 32-bit operand and if the latter, to which half of the Name Store word. The instruction proceeds through the pipeline as for a non-store order. When it reaches the B-Arithmetic Unit, and when all preceding instructions have completed, the value is sent back to the Execute stage of PROP marked as Type W. When the Execute stage completes its current action, it enters a hold state while the new value is written into the Name Store line addressed by BW. BW is then cleared and the Execute stage initiates the next PROP beat.  If a second B store order were to reach the Name  tore before the first had completed, or if a subsequent order were to try to read the value which has not yet been written, a hold-up would occur. This latter is the well known *Read-After-Write* situation.
+This instruction writes the value in B into the l.s. half of the word at the virtual address formed by adding 3 to the value in RNB. It does not cause an NSNE since the virtual address of the corresponding 64-bit quantity (9) is already in line 1 of the virtual address field of the Name Store. However, the value to be stored is not available at this point because the instruction still has to progress through the pipeline to the B-Arithmetic unit. It would be possible simply to hold up the pipeline in a similar manner to the hold-up used for base manipulation orders but B store orders are more frequent, so a different technique was used in MU5 and is replicated here. The content of the Line Register is copied into a B Write register (BW). BW also contains bits that indicate whether the value from B is being written to a 64-bit operand (in which case zero is written to the m.s. half) or (more likely) to a 32-bit operand and if the latter, to which half of the Name Store word. The instruction proceeds through the pipeline as for a non-store order. When it reaches the B-Arithmetic Unit, and when all preceding instructions have completed, the value is sent back to the Execute stage of PROP marked as Type W. When the Execute stage completes its current action, it enters a hold state while the new value is written into the Name Store line addressed by BW. BW is then cleared and the Execute stage initiates the next PROP beat.  If a second B store order were to reach the Name Store before the first had completed, or if a subsequent order were to try to read the value which has not yet been written, a hold-up would occur. This latter is the well known *Read-After-Write* situation.
 
 #### B SUB V32 NB 4 
 
@@ -323,7 +377,7 @@ This instruction forms the logical OR of B with the value held in the m.s. half 
 
 #### B SHL lit Z 3 
 
-This instruction shifts the value in B three (binary) places to the left. The result in B is 12496, *i.e.* 1562 * 2^8. 
+This instruction shifts the value in B three (binary) places to the left. The result in B is 12496, *i.e.* 1562 * 2^8.
 
 #### B AND V32 NB 12 
 
@@ -392,7 +446,12 @@ The operand address for this instruction (64-bit address 22) does not find a mat
 
 The operand to be written to by this instruction is in the PROP Name Store but because this is an ACC store order, the operand has to be in the OBS Name Store. Being part of the variable stacked by the earlier B&nbsp;SLD instruction, it is in the Altered state and must therefore be written back to the Local Store before it can be deleted from the PROP Name Store. An Acc Write Equivalence (AWE) hold-up occurs while this request is being sent and then the instruction proceeds through the pipeline in an A Type packet. When it reaches OBS, it causes an OBSNE that creates an entry in line O1 of the OBS Name Store. As in the case of a B&nbsp;ST order in the PROP pipeline, an ACC&nbsp;ST order is not held up at this stage. Instead, a copy of OLR is stored in register AW. When the instruction reaches Dop, the store word is copied into register WR and the order proceeds to the Accumulator Unit. When the preceding order has completed in the Accumulator Unit, the result is sent to Dop via the Central Highway. Dop copies this result into the appropriate part of WR and returns the content of WR to OBS, where the Output Process updates the line in its Name Store addressed by AW. (There was not space in the hardware of the real MU5 to include register WR; instead the value was re-read from the OBS Names Store, updated in Dop and returned to OBS.)
 
-####  ACC SUB V32 NB 6<br> ACC DIV V32 NB 8 <br> ACC XOR V32 NB 11 <br> ACC OR V32 NB 12 <br> ACC SHL lit Z 0 <br> ACC AND V32 NB 15 <br> ACC RDIV V32 NB 16
+####  ACC SUB V32 NB 6 <br> ACC DIV V32 NB 8 <br> ACC XOR V32 NB 11 <br>
+
+ACC OR V32 NB 12  
+ACC SHL lit Z 0  
+ACC AND V32 NB 15  
+ACC RDIV V32 NB 16
 
 These instructions are executed in the Accumulator Unit in an analogous manner to the corresponding B-Arith instructions, except that they cause lines in the OBS Name Store to be filled.
 
@@ -432,7 +491,6 @@ Instructions destined for the B-Arith Unit (or PROP or Dr) pass through the Queu
 
 The store word required by this instruction is also in the OBS Name Store, so OBS supplies PROP with the store word, but because this is a store order, OBS effectively deletes its entry (by resetting the Valid bit in the Address Field and the Full bit in the Value Field) and PROP creates one.
 
-
 #### Org NB_LD V32 Z 0 
 
 This instruction is an example of the Name Base register being loaded with a value accessed using the Zero base option, in this case in virtual address 0. This causes a NSNE which requires the current contents of line 5 of the PROP Name Store to be read out and sent to the Local Store before the new address and value can be loaded.
@@ -451,25 +509,27 @@ Similarly, the two halves of the XD Register are loaded with 1-3-10 and 524328. 
 
 #### STS MOD lit Z 5 <br> STS XMOD lit Z 3 
 
-The **MOD** and **XMOD** orders operate on D and XD respectively by adding the operand value to the Origin and subtracting the operand value from the Bound/Length.
+The <tt>MOD</tt> and <tt>XMOD</tt> orders operate on D and XD respectively by adding the operand value to the Origin and subtracting the operand value from the Bound/Length.
 
 #### STS D_ST V64 NB 2 <br>STS XD_ST V64 NB 3 
 
-These **D_ST** and **XD_ST** orders write the current values in D and XD respectively to 64-bit virtual address locations 6 and 7 in Name Store lines 0 and 1 respectively. The contents of D/XD are sent to OBS via the Bypass Register, then to Dop and from there to the Central Highway and onwards to PROP. PROP is held up at the Name Store Read stage until the value has returned and been written into the Name Store.
+These <tt>D_ST</tt> and <tt>XD_ST</tt> orders write the current values in D and XD respectively to 64-bit virtual address locations 6 and 7 in Name Store lines 0 and 1 respectively. The contents of D/XD are sent to OBS via the Bypass Register, then to Dop and from there to the Central Highway and onwards to PROP. PROP is held up at the Name Store Read stage until the value has returned and been written into the Name Store.
 
 #### STS D_SLD V64 NB 1 
 
-The **D SLD** order is split into two phases at the PROP Decode stage, similarly to a **B SLD** or **ACC SLD** order.  The first phase proceeds as for the **D ST** order, *i.e.* it is held up at the Name Store Read stage until the value in D has been returned to PROP and written into the Name Store. The second phase loads D with the descriptor previously loaded into XD.
+The <tt>D SLD</tt> order is split into two phases at the PROP Decode stage, similarly to a <tt>B SLD</tt> or <tt>ACC SLD</tt> order.  The first phase proceeds as for the <tt>D ST</tt> order, *i.e.* it is held up at the Name Store Read stage until the value in D has been returned to PROP and written into the Name Store. The second phase loads D with the descriptor previously loaded into XD.
+
  
 #### ACC STOP lit Z 0 
 
 The STOP instruction is a feature of the HASE simulation model, not MU5 itself. It stops the simulation once it has reached the Accumulator Unit and sent a reply back to PROP; at this point all other instructions in the pipeline have been completed. As it passes through the processor, STOP causes the contents of those Name Store words and OBS buffers that have been updated to be written back to Local Store.
 
-### Scalar Product Program
+### Scalar Product Program (Program 1)
 
-The scalar (or *dot*) product program contained in Version 2 of the HASE MU5 simulation model forms the sum of the products of corresponding pairs of elements of two 10-element vectors **X** and **Y** as shown in Figure 5.
+The scalar (or *dot*) product program (Program 1) forms the sum of the products of corresponding pairs of elements of two 10-element vectors **X** and **Y** as shown in Figure 5.
 
 ![Scalar Product diagram](images/scal_prod.gif)
+
 **Figure 5. Scalar Product example**
 
 Table 3 lists the program instructions, showing their virtual addresses (CO values) and their actions. The explanation below the table of what happens in the model as the program is executed assumes familiarity with the explanations given above of the actions of the instructions in the Name Store demonstration program.
@@ -494,23 +554,23 @@ B - 9 <br> B = B + 1 </td></tr>
 **Table 3 Scalar Product Program**
 </center>
 
-The first two instructions set up the base registers NB and SF. The first (**Org NBld V32 Z 0**) loads RNB with name 0 (= 16). This is an example of how, in compiled code in MU5, Name Base values for each of the procedures in a program were held in the name segment starting at location 0, and accessed using Base 0.  The second instruction (**Org SFNBpl lit Z 6**) adds the literal operand 6 to the value in NB and writes it into SF, thus setting the top-of-stack location to 22, above the named variables that are about to be used for the ACC instructions. It sets S6 invalid.  The next two instructions (**B LD lit Z 0** and **ACC LD lit Z 0**) initialises B and ACC to 0. B holds the index and loop count variable (*i*) and ACC the running total of the scalar product.
+The first two instructions set up the base registers NB and SF. The first (<tt>Org NBld V32 Z 0</tt>) loads RNB with name 0 (= 16). This is an example of how, in compiled code in MU5, Name Base values for each of the procedures in a program were held in the name segment starting at location 0, and accessed using Base 0.  The second instruction (<tt>Org SFNBpl lit Z 6</tt>) adds the literal operand 6 to the value in NB and writes it into SF, thus setting the top-of-stack location to 22, above the named variables that are about to be used for the ACC instructions. It sets S6 invalid.  The next two instructions (<tt>B LD lit Z 0</tt> and <tt>ACC LD lit Z 0</tt>) initialises B and ACC to 0. B holds the index and loop count variable (*i*) and ACC the running total of the scalar product.
 
-The first instruction of the scalar product loop (**ACC SLD SB NB 0**) increments SF and writes the current content of the Accumulator to the top-of-stack location. It then loads DR with the descriptor of the X vector (0-5-10, 524288), instructs the B-Arith unit to send the value in B to DR, forms the address of the i^th element of X and loads ACC with the corresponding value. The first time this instruction is executed, it causes a Vector Store non-equivalence in OBS, which writes the failing address into the Address Field and sends a request to SAC. When the store word arrives back from SAC it is written into the OBS Value Field and the Full bit is set for that line. During the second iteration of the loop, the address of the second element does not cause a non-equivalence because the store word received as a result of the first non-equivalence contains the first and second elements of the vector.
+The first instruction of the scalar product loop (<tt>ACC SLD SB NB 0</tt>) increments SF and writes the current content of the Accumulator to the top-of-stack location. It then loads DR with the descriptor of the X vector (0-5-10, 524288), instructs the B-Arith unit to send the value in B to DR, forms the address of the *i*<sup>th</sup> element of X and loads ACC with the corresponding value. The first time this instruction is executed, it causes a Vector Store non-equivalence in OBS, which writes the failing address into the Address Field and sends a request to SAC. When the store word arrives back from SAC it is written into the OBS Value Field and the Full bit is set for that line. During the second iteration of the loop, the address of the second element does not cause a non-equivalence because the store word received as a result of the first non-equivalence contains the first and second elements of the vector.
 
 Likewise, a non-equivalence occurs during the third iteration but not in the fourth, and so on. During the ninth iteration, the Vector Store is full, so the first entry is overwritten. At the same time as writing in the new address in this cycle, the Full bit is reset for this line in the Value Field, so that if the instruction emerges from the Queue before the store word is returned (as it does in this case), the instruction does not pick up the previous value.
 
-The multiply instruction (**ACC MUL SB NB 1**) multiplies the element of vector X, loaded into ACC by the preceding instruction, by the corresponding element of the second vector (Y). Similar to the execution of the second phase of the SLD instruction, this instruction loads DR with the descriptor of Vector Y (0-5-10, 524328, and forms the required address by adding the modifier from B to the Origin address. Likewise a non-equivalence occurs in the OBS Vector Store in odd numbered iterations of the loop but not in even numbered iterations.
+The multiply instruction (<tt>ACC MUL SB NB 1</tt>) multiplies the element of vector X, loaded into ACC by the preceding instruction, by the corresponding element of the second vector (Y). Similar to the execution of the second phase of the SLD instruction, this instruction loads DR with the descriptor of Vector Y (0-5-10, 524328, and forms the required address by adding the modifier from B to the Origin address. Likewise a non-equivalence occurs in the OBS Vector Store in odd numbered iterations of the loop but not in even numbered iterations.
 
-The Compare &amp; INCrement instruction (**B CINC lit Z 9**) is executed as a two-part instruction in the B-Arith Unit. The first part subtracts the incoming operand (9 in this case) from B, and sets the test bits T1 and T2 accordingly, but without altering the value in B. The second part increments B by 1. The **B CINC** comes before the **ACC ADD stack Z 0** instruction that adds the running total of products back into the Accumulator because the branch instruction that closes the loop (**Org BRne lit Z -4**) has to wait for the comparison result to be returned to PROP before it can be executed, *i.e.* the code has been re-ordered to optimize performance.
+The Compare &amp; INCrement instruction (<tt>B CINC lit Z 9</tt>) is executed as a two-part instruction in the B-Arith Unit. The first part subtracts the incoming operand (9 in this case) from B, and sets the test bits T1 and T2 accordingly, but without altering the value in B. The second part increments B by 1. The <tt>B CINC</tt> comes before the <tt>ACC ADD stack Z 0</tt> instruction that adds the running total of products back into the Accumulator because the branch instruction that closes the loop (<tt>Org BRne lit Z -4</tt>) has to wait for the comparison result to be returned to PROP before it can be executed, *i.e.* the code has been re-ordered to optimize performance.
 
-The first 10 times that the Branch-if-not-equal instruction (**Org BRne lit Z -4**) is executed, T1 is set to /= 0 so the Branch is taken. The first time this happens, the pipeline is cleared and the jump-from Control address (65544) and the jump-to Control address (65540) are both sent to the IBU to set up an entry in the Jump Trace. Prefetching is restarted from 65539 but when the AC register next gets to 65544, there is a match in the Jump Trace, so instead of fetching the next instruction from address 65545, the ACC SLD instruction and its successors are prefetched instead. When this happens, the BRne instruction is passed to PROP marked as Type S. When it reaches the Execution stage, and the Branch is taken again, the pipeline is not cleared, since this time the predicted (out-of-sequence) instructions are already in the pipeline. On the 10th execution of the BRne instruction, however, the Branch is not taken, so once again the pipeline is cleared and prefetching is restarted at Control address 65545.
+The first 10 times that the Branch-if-not-equal instruction (<tt>Org BRne lit Z -4</tt>) is executed, T1 is set to /= 0 so the Branch is taken. The first time this happens, the pipeline is cleared and the jump-from Control address (65544) and the jump-to Control address (65540) are both sent to the IBU to set up an entry in the Jump Trace. Prefetching is restarted from 65539 but when the AC register next gets to 65544, there is a match in the Jump Trace, so instead of fetching the next instruction from address 65545, the ACC SLD instruction and its successors are prefetched instead. When this happens, the BRne instruction is passed to PROP marked as Type S. When it reaches the Execution stage, and the Branch is taken again, the pipeline is not cleared, since this time the predicted (out-of-sequence) instructions are already in the pipeline. On the 10th execution of the BRne instruction, however, the Branch is not taken, so once again the pipeline is cleared and prefetching is restarted at Control address 65545.
 
-On leaving the loop, the result of the scalar product operation is written to name 4 by the **ACC ST V32 NB 4** instruction.
+On leaving the loop, the result of the scalar product operation is written to name 4 by the <tt>ACC ST V32 NB 4</tt> instruction.
 
-### String Processing Program
+### String Processing Program (Program 2)
 
-The string processing program contained in Version 3 of the HASE MU5 simulation model performs three tasks. The first creates the composite string *"Hello world"* from individual strings containing its component parts. The second finds the first non-zero digit in the digit string 00083576 and places the ASCII representation of its value in the B register. The third searches for the word *light* in the sentence '*Let there be light.*'. Once it has been found, the B register indicates its position in the sentence.
+The string processing program (Program 2) performs three tasks. The first creates the composite string *"Hello world"* from individual strings containing its component parts. The second finds the first non-zero digit in the digit string 00083576 and places the ASCII representation of its value in the B register. The third searches for the word *light* in the sentence '*Let there be light.*'. Once it has been found, the B register indicates its position in the sentence.
 
 The strings are held in Block 3 of the Local Store. Each word in this block contains 8 characters. Because the simulation code is written in Hase++ (a superset of C++), it is strongly type-checked. Thus in order to process these characters using the same simulated hardware as that used for integer values, characters are converted to their ASCII integer values and packed into a pair of 32-bit integer words whenever they are read out of memory and, correspondingly, returning integer words are unpacked during a write-to-store operation. Similarly in the Descriptor Operand Processing Unit (Dop), each character is manipulated as an integer value, so for visualisation purposes, an extra register FRc is used to show the integer values in register FR, converted to character format. The SSA_SSB register shown in the Project Inspector frame is also a character display register, corresponding to the actual register ssa_ssb used internally within the code.
 
@@ -520,14 +580,14 @@ Table 4 lists the program instructions and their actions.
 
 <center>
 <table border bgcolor=white>
-<tr><td width='25%'>**Instruction**</td><td>**Action**</td></tr>
+<tr><td width='18%'>**Instruction**</td><td>**Action**</td></tr>
 <tr><td>**Org NB_LD V32 Z 0**</td>
 <td>Loads the value in virtual address 0 into the Name Store and thence into NB, so that NB points to VA 16.
 </td></tr>
 
 <tr><td>**STS D_LD V64 NB 3**</td>
 
-<td>Loads the DR register with the descriptor held in VA 19. This is a Type 1 descriptor with size 8 (mandatory for a Type 1 descriptor), length 16 and an origin field that points to the starting byte location in Block 3 of the Local Store where the composite string will be stored. Since descriptors are stored in Block 0, they must be stored as pairs of 32-bit integers; the table below shows how the integer value of the most sigificant word, containing the Type, Size and Length, is constructed.<p>
+<td>Loads the DR register with the descriptor held in VA 19. This is a Type 1 descriptor with size 8 (mandatory for a Type 1 descriptor), length 16 and an origin field that points to the starting byte location in Block 3 of the Local Store where the composite string will be stored. Since descriptors are stored in Block 0, they must be stored as pairs of 32-bit integers; the table below shows how the integer value of the most sigificant word, containing the Type, Size and Length, is constructed.
 
 <center>
 <table border>
@@ -538,6 +598,7 @@ Table 4 lists the program instructions and their actions.
 <tr><td colspan=3>32-bit word value </td><td align=right> 1476395024</td></tr>
 </table>
 </center></td></tr>
+
 <tr><td>**STS XD_LD V64 NB 0**</td>
 <td> Loads the XDR register with the descriptor held in VA 16; the origin of this descriptor points to the first source string which contains just one element, &#168;.
 </td></tr>
@@ -556,9 +617,7 @@ Table 4 lists the program instructions and their actions.
 <tr><td>**STS XD_LD V64 NB 2**</td>
 <td>Loads the XDR register with the descriptor held in VA 18; the origin of this descriptor points to the third source string; this contains the word *world*. </td></tr>
 <tr><td>**STS SMVE lit Z 34**</td>
-<td>At the end of this SMVE instruction the first destination word contains
-'&#168;hello w' while the second, the word currently shown in FRc,
-contains 'orld----'.
+<td>At the end of this SMVE instruction the first destination word contains '&#168;hello w' while the second, the word currently shown in FRc, contains 'orld----'.
 </td></tr>
 <tr><td>**STS XD_LD V64 NB 0**</td>
 <td>Re-loads the XDR register with the descriptor of the first source string.
@@ -588,8 +647,8 @@ contains 'orld----'.
 <td>Resets B to 0.
  </td></tr>
 <tr><td>**STS XD_LD V64 NB 5**</td>
-<td> Loads XDR with the descriptor in VA21; this descriptor points to the start of the string 'Let&#95;there&#95;be&#95;light.'
- </td></tr>
+<td> Loads XDR with the descriptor in VA21; this descriptor points to the start of the string 'Let&#95;there&#95;be&#95;light.'  
+</td></tr>
 <tr><td>**STS D_LD V64 NB 6**</td>
   <td> Loads DR with the descriptor in VA22; this descriptor points to the start of the string 'light.'
  </td></tr>
@@ -625,48 +684,62 @@ contains 'orld----'.
 
 ### Bibliography
 
-1. T. Kilburn, D. Morris, J.S. Rohl &amp; F.H. Sumner,  
- "A System Design Proposal"  
-*Information Processing 1968*, Vol 2, pp 806-811, North Holland, 1969.
-2. D. Aspinall, D.J. Kinniment and D.B.G. Edwards,  
-"Associative Memories in Large Computer Systems"  
-*Information Processing 68*, Vol 2, pp 796-800, North Holland, Amsterdam, 1969.
-3. J.B. Gosling,  
-"Review of High-speed Addition Techniques"  
-*IEE Proceedings, Vol 118*, pp 29-35, 1971.
-4. R.N. Ibbett,
-"The MU5 Instruction Pipeline",  
-*Computer Journal*, Vol 15, pp 43-50, 1972.
-5. J. Standeven, S. Lanyado, &amp; D. B.G. Edwards,  
-"The MU5 Secondary Operand Unit"  
-*IERE Conference Proceedings*, Vol. 25, pp 429-440, 1972.
-6. H.J. Kahn &amp; J.W.R. May,  
-"The Use of Logic Simulation in the Design of a Large Computer System"  
-*IERE Conference Proceedings*. Vol. 25, pp. 19-30, 1972.
-7. P.C. Capon, R.N. Ibbett &amp; C.R.C.B Parker,  
-"The Implementation of Record Processing in MU5"  
-*IEE Conference Proceedings*, Vol.121, pp 226-235, 1974.
-8. J.V. Woods &amp; F.H. Sumner,  
-"Operand Accessing in a Pipelined Computer System"  
-*IEE Conference Proceedings*, Vol.121, pp 326-43, 1974.
-9. F.H. Sumner,  
-"MU5 - An Assessment of the Design"  
-*Information Processing 74* North-Holland, Amsterdam, pp 133-136, 1974.
-10. N.A. Yannacopoulos, R.N. Ibbett &amp; R.W. Holgate,  
-"Performance Measurements of the MU5 Primary Instruction Pipeline"  
-*Information Processing 77*, North Holland, Amsterdam, pp 471-476, 1977.
-11. R.N. Ibbett &amp; P.C. Capon,  
-"The Development of the MU5 Computer System"  
-*Communications of the ACM*, pp 13-24, 1978.
-12. John K. Buckle,  
-*"The ICL 2900 Series"* The Macmillan Press, London, 1978.
-13. Derrick Morris &amp; Roland N. Ibbett,  
-*"The MU5 Computer System"*  
-The Macmillan Press, London, 1979.
-13. R.N. Ibbett,  
- "The University of Manchester MU5 Project"  
-*IEEE Annals of the History of Computing*, Vol. 21, No1, pp 24-33, 1999.
-14. R.N. Ibbett
-''The University of Manchester MU5 Computer System"  
-<http://ethw.org/The_University_of_Manchester_MU5_Computer_System>
+1. T. Kilburn, D. Morris, J.S. Rohl &amp; F.H.  Sumner,  
+ "A System Design Proposal"
+ *Information Processing 1968*, Vol 2, pp 806-811, North Holland, 1969.  
 
+2. D. Aspinall, D.J. Kinniment and D.B.G. Edwards,  
+"Associative Memories in Large Computer Systems"
+*Information Processing 68*, Vol 2, pp 796-800, North Holland, Amsterdam, 1969.  
+
+3. J.B. Gosling,  
+"Review of High-speed Addition Techniques"
+*IEE Proceedings, Vol 118*, pp 29-35, 1971.  
+
+4. R.N. Ibbett,  
+"The MU5 Instruction Pipeline"
+*Computer Journal*, Vol 15, pp 43-50, 1972.  
+
+5. J. Standeven, S. Lanyado, &amp; D. B.G. Edwards,  
+"The MU5 Secondary Operand Unit"
+*IERE Conference Proceedings*, Vol. 25, pp 429-440, 1972.  
+
+6. H.J. Kahn &amp; J.W.R. May,  
+"The Use of Logic Simulation in the Design of a Large Computer System"
+*IERE Conference Proceedings*, Vol. 25, pp. 19-30, 1972.  
+
+7. P.C. Capon, R.N. Ibbett &amp; C.R.C.B Parker,  
+"The Implementation of Record Processing in MU5"
+*IEE Conference Proceedings*, Vol.121, pp 226-235, 1974.  
+
+8. J.V. Woods &amp; F.H. Sumner,  
+"Operand Accessing in a Pipelined Computer System"
+*IEE Conference Proceedings*, Vol.121, pp 326-43, 1974.  
+
+9. F.H. Sumner,  
+"MU5 - An Assessment of the Design"
+*Information Processing 74*, North-Holland, Amsterdam, pp 133-136, 1974.  
+
+10. N.A. Yannacopoulos, R.N. Ibbett &amp; R.W. Holgate,  
+"Performance Measurements of the MU5 Primary Instruction Pipeline"
+*Information Processing 77*, North Holland, Amsterdam, pp 471-476, 1977.  
+
+11. R.N. Ibbett &amp; P.C. Capon,  
+"The Development of the MU5 Computer System"
+*Communications of the ACM*, pp 13-24, 1978.
+
+12. John K. Buckle,  
+*"The ICL 2900 Series"*, The Macmillan Press, London, 1978.
+
+13. Derrick Morris &amp; Roland N. Ibbett,  
+*"The MU5 Computer System"*
+The Macmillan Press, London, 1979.
+
+14. R.N. Ibbett,  
+ "The University of Manchester MU5 Project"
+*IEEE Annals of the History of Computing*, Vol. 21, No1, pp 24-33, 1999.
+
+15. R.N. Ibbett  
+"The University of Manchester MU5 Computer System"
+<http://ethw.org/The_University_of_Manchester_MU5_Computer_System>
+IEEE Engineering and Technology History Wiki
