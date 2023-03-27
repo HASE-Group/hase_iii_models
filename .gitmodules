@@ -54,3 +54,7 @@
 	path = dashclus/V2.8
 	url = git@github.com:HASE-Group/dashclus.git
 	branch = V2.8
+[submodule "mu5/V4.1"]
+	path = mu5/V4.1
+	url = git@github.com:HASE-Group/mu5.git
+	branch = V4.1
