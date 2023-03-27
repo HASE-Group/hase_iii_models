@@ -30,18 +30,6 @@
 	path = mu_baby/V3.1
 	url = ../mu_baby.git
 	branch = V3.1
-[submodule "mu5/V1.10"]
-	path = mu5/V1.10
-	url = ../mu5.git
-	branch = V1.10
-[submodule "mu5/V2.10"]
-	path = mu5/V2.10
-	url = ../mu5.git
-	branch = V2.10
-[submodule "mu5/V3.10"]
-	path = mu5/V3.10
-	url = ../mu5.git
-	branch = V3.10
 [submodule "cdc6600/V1.2"]
 	path = cdc6600/V1.2
 	url = ../cdc6600.git
