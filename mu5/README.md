@@ -524,9 +524,9 @@ The <tt>D SLD</tt> order is split into two phases at the PROP Decode stage, simi
 
 The STOP instruction is a feature of the HASE simulation model, not MU5 itself. It stops the simulation once it has reached the Accumulator Unit and sent a reply back to PROP; at this point all other instructions in the pipeline have been completed. As it passes through the processor, STOP causes the contents of those Name Store words and OBS buffers that have been updated to be written back to Local Store.
 
-### Scalar Product Program (Program 1)
+### Scalar Product Program (Program 2)
 
-The scalar (or *dot*) product program (Program 1) forms the sum of the products of corresponding pairs of elements of two 10-element vectors **X** and **Y** as shown in Figure 5.
+The scalar (or *dot*) product program (Program 2) forms the sum of the products of corresponding pairs of elements of two 10-element vectors **X** and **Y** as shown in Figure 5.
 
 ![Scalar Product diagram](images/scal_prod.gif)
 
@@ -568,9 +568,9 @@ The first 10 times that the Branch-if-not-equal instruction (<tt>Org BRne lit Z 
 
 On leaving the loop, the result of the scalar product operation is written to name 4 by the <tt>ACC ST V32 NB 4</tt> instruction.
 
-### String Processing Program (Program 2)
+### String Processing Program (Program 3)
 
-The string processing program (Program 2) performs three tasks. The first creates the composite string *"Hello world"* from individual strings containing its component parts. The second finds the first non-zero digit in the digit string 00083576 and places the ASCII representation of its value in the B register. The third searches for the word *light* in the sentence '*Let there be light.*'. Once it has been found, the B register indicates its position in the sentence.
+The string processing program (Program 3) performs three tasks. The first creates the composite string *"Hello world"* from individual strings containing its component parts. The second finds the first non-zero digit in the digit string 00083576 and places the ASCII representation of its value in the B register. The third searches for the word *light* in the sentence '*Let there be light.*'. Once it has been found, the B register indicates its position in the sentence.
 
 The strings are held in Block 3 of the Local Store. Each word in this block contains 8 characters. Because the simulation code is written in Hase++ (a superset of C++), it is strongly type-checked. Thus in order to process these characters using the same simulated hardware as that used for integer values, characters are converted to their ASCII integer values and packed into a pair of 32-bit integer words whenever they are read out of memory and, correspondingly, returning integer words are unpacked during a write-to-store operation. Similarly in the Descriptor Operand Processing Unit (Dop), each character is manipulated as an integer value, so for visualisation purposes, an extra register FRc is used to show the integer values in register FR, converted to character format. The SSA_SSB register shown in the Project Inspector frame is also a character display register, corresponding to the actual register ssa_ssb used internally within the code.
 
