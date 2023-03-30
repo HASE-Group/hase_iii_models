@@ -46,3 +46,7 @@
 	path = mu5/V4.1
 	url = git@github.com:HASE-Group/mu5.git
 	branch = V4.1
+[submodule "cray1/V2.1"]
+	path = cray1/V2.1
+	url = git@github.com:HASE-Group/cray1.git
+	branch = V2.1
