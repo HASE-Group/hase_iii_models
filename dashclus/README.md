@@ -5,7 +5,8 @@ The Stanford DASH architecture was designed to prove the feasibility of building
 This document describes the DASH architecture and explains how the HASE Cluster model works. The files for this model can be downloaded from
 <https//github.com?HASE-Group/hase_iii_models/dashclus/V2.8>
 
-Instructions on how to use HASE models can be found at
+Instructions on how to use HASE models can be found at https://github.com/HASE-Group/hase\_iii\_releases
+
 
 ## The Stanford DASH Architecture 
 
