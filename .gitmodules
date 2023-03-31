@@ -50,3 +50,7 @@
 	path = cray1/V2.1
 	url = git@github.com:HASE-Group/cray1.git
 	branch = V2.1
+[submodule "atlas/V4.1"]
+	path = atlas/V4.1
+	url = git@github.com:HASE-Group/atlas.git
+	branch = V4.1
