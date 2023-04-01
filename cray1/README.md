@@ -5,11 +5,11 @@ The Cray-1 was the logical successor to the CDC 7600. The instruction issue bott
 This document describes the design of the Cray-1 central processor and explains how the HASE simulation model works. The model contains three
 demonstration programs, all held in a Programs entity. The GLOBALS parameter <b>Program</b> can be edited after the model has been loaded into HASE, allowing the user to choose which of the programs to run.
 
-The model files be downloaded from cray1_v1.2.zip.
-
 *This Cray 1 model was originally built as an MSc project by Helen Berringer in 1998. It has since been considerably revised by Roland Ibbett.*
 
-Instructions on how to use HASE models can be found at Downloading, Installing and Using HASE. 
+The files for version 2.1 can be downloaded from https://github.com/HASE-Group/cray1/tree/V2.1
+
+Instructions on how to use HASE models can be downloaded from https://github.com/HASE-Group/hase\_iii 
 
 ### Design of the Cray-1
 
@@ -32,15 +32,16 @@ The overall design of the Cray-1 processor is shown in Figure 1. In addition to 
 
 The A registers are used primarily as address and index registers for scalar and vector memory references, but are also used for loop control, input-output operations and to provide values for shift counts. An A register can be loaded either from a B register or direct from memory, while the B register contents can be transferred to or from memory in block copy operations which proceed at a rate of one per clock period. The S registers contain scalar operands, which may be used in scalar operations in the same way that X register values are used in the 6600 and 7600, but an S register in the Cray-1 may also supply a scalar value required for a vector operation. S register values may be transferred to or from memory or the T registers, the latter allowing intermediate results of complex computations to be held in fast buffers rather than main memory. T register values can be transferred to or from memory in the same way as B register values.
 
-The instruction format used in the Cray-1 (Figure 2) is very similar to that used in the CDC 6600 and 7600, except that the major function field (g) contains four bits rather than three, and instructions are therefore 16 or 32 bits long rather than 15 or 30. The extra function bit allows vector as well as scalar operations to be specified, and a typical vector instruction takes the form:
-<center>
-Vi &#8592; Vj + Vk
-</center>  
+The instruction format used in the Cray-1 (Figure 2) is very similar to that used in the CDC 6600 and 7600, except that the major function field (g) contains four bits rather than three, and instructions are therefore 16 or 32 bits long rather than 15 or 30. The extra function bit allows vector as well as scalar operations to be specified, and a typical vector instruction takes the form:  
+
+Vi &#8592; Vj + Vk  
+
 implying that successive elements of Vk are to be added to successive elements of Vj, and the results returned as successive elements of Vi. Instructions which cause the transfer of an operand between A and B or S and T registers use the combined j and k fields to specify the B or T register.  The j and k fields are also combined to produce shift counts in shift instructions. Instructions are issued by the control logic associated with the CIP (Current Instruction Parcel) register. In the case of a 2-parcel (32-bit) instruction, the m field is taken from the LIP (Lower Instrucion Parcel) register, which is filled from the Instruction Buffers concurrently with the NIP (Next Instruction Parcel) register.
-<center>
+
 ![Cray-1 instruction format](images/cray1_ins.gif)
+
 **Figure 2. Cray-1 instruction formats**
-</center>
+
 Instructions which use immediate (literal) operands use the 32-bit format and combine the j, k and m fields to produce a 22-bit literal value. Memory referencing instructions similarly combine the j, k and m fields to produce a 22-bit memory address, and also use the h field to specify an A register for indexing. (The memory itself is an 8-way or 16-way interleaved 50 ns cycle-time semiconductor store containing 0.5M, 1M, 2M or 4M words according to the configuration.) Branch instructions combine the i, j, k and m fields to produce a 24-bit memory address field, allowing any 16-bit instruction parcel within a 64-bit word to be specified.
 
 In addition to the operating and buffer registers, the Cray-1 processor also contains several additional registers which support the control of program execution: the program counter (P), the Vector Mask register (VM) and the Vector Length register (VL). The VM register contains 64 bits, one per element position in the vector registers. In merge operations each bit in VM is used to select the corresponding element of one or other source vector for copying into the destination vector, while in test operations bits in VM are set according to whether or not corresponding elements in a source vector satisfy the chosen condition. The VL register contains a number in the range 0 to 64 and determines how many vector elements take part in an operation. In the case of an operation on a 150-element vector, for example, the hardware would be required to treat this as two successive 64-element operations (with VL = 64) followed by a 22-element operation (with VL = 22).
@@ -56,33 +57,36 @@ The Programs entity was introduced to allows users to create code in readable Cr
 When downloaded, the Programs entity contains three programs, held in the **PROGRAMS.prog_mem.mem** file. After loading the project, the user can choose which program to run by editing the GLOBALS parameter **Program** and updating the model's parameter file by clicking the "Write Parameters" button 
 <sub><img src="images/params.png" alt="Write Params button" width=20></sub>. Users can add a program of their own, as Program 4, in the **PROGRAMS.prog_mem.mem** file, starting at locations 1536. Program 1 requires no data and Programs 2 and 3 use the same data held in the **PROGRAMS.data_mem.mem** file. 
 
-<center>
 ![cray-1 model](images/HASE_cray1a.png)
-**Figure 3. Cray-1 simulation model loaded into HASE**
-</center>
-Once a trace file has been loaded, the animation control icons at the top of the Project View pane become active, as shown in Figure 4. From left to right, these allow the animation to be rewound, stopped, paused, single stepped, run or fast forwarded to the end. As the animation proceeds, packets of information can be seen passing between entities while the entities themselves change colour to reflect their states (idle, busy, waiting). The vector registers (individually identified as small rectangles) can be in one of three states:
-*idle* ![v_reg_idle](images/v_reg_i.gif), *reserved* ![v_reg_res](images/v_reg_r.gif), *chained* ![v_reg_chained](images/v_reg_c.gif). Right clicking on one of these vector register icons pops the corresponding register contents list out of the Project Inspector pane, as it does for the A, B, S and T registers.  Demonstration Program 3, described below, shows how the <i>chaining</i> mechanism operates.
-<center>
-![cray-1 model](images/HASE_cray1b.png)
-**Figure 4. Cray-1 simulation model during animation**
-</center>
-Table 1 shows the instruction in the Cray-1 instruction set that have been implemented in the HASE model while Table 2 shows those instructions that have not (yet) been implemented, mostly because they are specific to the implementation of floating-point numbers. More instructions may be implemented in future versions.
 
-<center>
+**Figure 3. Cray-1 simulation model loaded into HASE**  
+
+Once a trace file has been loaded, the animation control icons at the top of the Project View pane become active, as shown in Figure 4. From left to right, these allow the animation to be rewound, stopped, paused, single stepped, run or fast forwarded to the end. As the animation proceeds, packets of information can be seen passing between entities while the entities themselves change colour to reflect their states (idle, busy, waiting). The vector registers (individually identified as small rectangles) can be in one of three states:
+*idle* ![v_reg_idle](images/v_reg_i.gif), *reserved* ![v_reg_res](images/v_reg_r.gif), *chained* ![v_reg_chained](images/v_reg_c.gif). Right clicking on one of these vector register icons pops the corresponding register contents list out of the Project Inspector pane, as it does for the A, B, S and T registers.  Demonstration Program 3, described below, shows how the <i>chaining</i> mechanism operates.  
+
+![cray-1 model](images/HASE_cray1b.png)
+
+**Figure 4. Cray-1 simulation model during animation**  
+
+Table 1 shows the instruction in the Cray-1 instruction set that have been implemented in the HASE model while Table 2 shows those instructions that have not (yet) been implemented, mostly because they are specific to the implementation of floating-point numbers. More instructions may be implemented in future versions.  
+
 ![instructions implemented](images/cray1-inst-i.png)
+
 **Table 1. Cray-1 instructions implmented in the model**
 
 ![instructions not implemented](images/cray1-inst-n.png)
-**Table 2. Cray-1 instructions not implmented in the model**
-</center>
+
+**Table 2. Cray-1 instructions not implmented in the model**  
+
 ### Demonstration Program 1
+
 #### Instruction Buffers &amp; Branch Instructions
 
-The Cray-1 processor obtains its instructions from a set of instruction buffers(Figure 5).  Demonstration Program 1 (Table 3) is essentially a test program that checks that the Instruction Buffers and the branch instructions are working correctly. Each of the four buffers holds 64 consecutive 16-bit instruction parcels, and if an instruction request cannot be satisfied from within these buffers, a full 64-parcel block of instructions is transferred from main store into one of them.  A new instruction is accessed whenever the P register (program counter) is updated. For sequential instructions this occurs as an instruction parcel enters the Next Instruction Parcel register (NIP).  From NIP the instruction parcel is copied into the Current Instruction Parcel register (CIP), where it waits to be issued. In the case of a 32-bit instruction the second parcel iscontained in the Lower Instruction Parcel register (LIP) which is loaded in parallel with NIP.
-<center>
+The Cray-1 processor obtains its instructions from a set of instruction buffers(Figure 5).  Demonstration Program 1 (Table 3) is essentially a test program that checks that the Instruction Buffers and the branch instructions are working correctly. Each of the four buffers holds 64 consecutive 16-bit instruction parcels, and if an instruction request cannot be satisfied from within these buffers, a full 64-parcel block of instructions is transferred from main store into one of them.  A new instruction is accessed whenever the P register (program counter) is updated. For sequential instructions this occurs as an instruction parcel enters the Next Instruction Parcel register (NIP).  From NIP the instruction parcel is copied into the Current Instruction Parcel register (CIP), where it waits to be issued. In the case of a 32-bit instruction the second parcel iscontained in the Lower Instruction Parcel register (LIP) which is loaded in parallel with NIP.  
+
 ![cray-1 instruction buffers](images/cray1_ibu.gif)
-**Figure 5. Cray-1 Instruction Buffers**
-</center>
+
+**Figure 5. Cray-1 Instruction Buffers**  
 
 The Cray-1 has a 22-bit instruction address and the first instruction parcel in a buffer always has an address starting on a 64-parcel address boundary. Any one buffer is therefore defined by the 16 most significant bits of a parcel address, and for each buffer there is a 16-bit Bank Address Register containing this value. At each clock cycle the high order bits of the program address counter are compared with the contents of these registers. If a match occurs the required instruction parcel is selected from within the appropriate buffer either immediately, if the buffer concerned is the same as the one which supplied the previous parcel, or after a two clock period delay if a change of buffers is involved.
 
@@ -100,9 +104,8 @@ The first action that occurs at the start of a simulation is the P Register send
 
 Subsequent instructions check for correct *branch/no branch* outcomes of all the different conditional and unconditional branch instructions and for correct operation of the buffers. In Table 3 each branch from/to pair in the program is highlighted in a different colour. Entries in the **IB Action** column show the actions that occur in the Buffers each time P is updated by a branch instruction.
 
-The last instruction to be executed is an 004 (*normal exit*) instruction that stops the simulation. The *ijk* fields of an 004 instruction are ignored in the Cray-1 itself but this simulation model uses the *ijk* value to report which instance of the 004 instruction in the program ended the simulation. In this case the report should be "Simulation stopped by 004 instruction 0". At the end of the simulation the value in A2 should be 13, while the value in A3 should be unaltered, *i.e.* 0.
+The last instruction to be executed is an 004 (*normal exit*) instruction that stops the simulation. The *ijk* fields of an 004 instruction are ignored in the Cray-1 itself but this simulation model uses the *ijk* value to report which instance of the 004 instruction in the program ended the simulation. In this case the report should be "Simulation stopped by 004 instruction 0". At the end of the simulation the value in A2 should be 13, while the value in A3 should be unaltered, *i.e.* 0.  
 
-<center>
 ![prog1.1](images/prog1.1.png)
 ![prog1.2](images/prog1.2.png)
 ![prog1.3](images/prog1.3.png)
@@ -110,12 +113,11 @@ The last instruction to be executed is an 004 (*normal exit*) instruction that s
 ![prog1.5](images/prog1.5.png)
 ![prog1.6](images/prog1.6.png)
 ![prog1.7](images/prog1.7.png)
-</center>
-<center>
+
 **Table 3. Demonstration Program 1**
-</center>
 
 ### Demonstration Program 2
+
 #### Block Transfer, Address & Scalar instructions
 
 The Block Transfer instructions 034-037 (Memory to B Registers, B Registers to Memory, Memory to T Registers, T Registers to Memory) use the value in A<sub>0</sub> as the starting address in memory and the value of *jk* as the starting register number to transfer the number of words given by the value in A<sub><i>i</i></sub> from/to Memory and the B/T registers. If register B<sub>77</sub>/T<sub>77</sub> is reached before all (A<sub><i>i</i></sub>) values have been transferred, processing continues at B<sub>00</sub>/T<sub>00</sub>.
@@ -132,7 +134,6 @@ The Scalar Add, Scalar Shift and Scalar Logical Units perform operations on 64-b
 
 The fourth unit in this group is the Population and Leading Zero Count Unit which takes a 64-bit operand from an S register and returns a 7-bit result, equal to the number of ones in the operand or the number of zeros preceding the most significant 1 in the operand, to an A register. The first of these operations requires four clock periods for its execution, and the second three.
 
-<center>
 <table border>
 <tr><td><b>P</b></td><td><b>&nbsp;g &nbsp;h i j k </b></td><td><b>Instruction</b></td><td><b>Result</b></td></tr>
 <tr><td></td><td></td><td colspan=2><i><font color=red>Integer values are shown in </font>black, <font color=red>hexadecimal values in</font> <font color=blue>blue</font></i></td></tr>
@@ -252,10 +253,11 @@ The fourth unit in this group is the Population and Leading Zero Count Unit whic
 <tr><td>5D</td><td>00 0 0 0 2</td><td><b>m</b> field</td><td>M[396] = <font color=blue>FFFFFFFFFFFF4AAA</font></td></tr>
 <tr><td>5E</td><td>00 4 0 0 0</td><td> Stop </td><td> </td></tr>
 </table>
+
 <b>Table 4. Demonstration Program 2 </b>
-</center>
 
 ### Demonstration Program 3
+
 ### Vector Instructions
 
 #### Vector Register Reservations
@@ -264,12 +266,10 @@ Whilst a vector operation is being executed, a reservation is set not only for t
 
 The only other exception to these reservation requirements occurs when an element value which is being delivered to a vector register can, in the same clock period, be routed to another functional unit as an input operand. This arrangement allows *chaining* of vector operations.  Chaining starts when a match occurs between one of the V register operand designators of an instruction awaiting issue in CIP, and the V register result designator of a previously issued instruction which has not yet returned its first result element. When this element becomes available for delivery to the result register, the instruction in CIP is issued (provided there are no other hold-ups) and the result element is forwarded with this instruction to the appropriate functional unit. Successive elements follow until the whole vector has been both written into its result register and forwarded to the second functional unit. The results of this second vector operation may themselves be chained into a third operation, and so on, as shown in the following example:
 
-<center>
 V0 &#8592;  Memory  
 V1 &#8592;  Memory  
 V2 &#8592; S1 * V1  
 V3 &#8592; V0 + V2
-</center>
 
 Assuming that VL is set to 64, the first instruction causes 64 operands from a designated area in memory to be read out and copied in sequence into the 64 element positions in V0. Store requests are pipelined in such a way that the store appears to the processor as a pseudo functional unit. Thus after a start-up delay of seven clock periods, the first element of the vector from store becomes available for delivery to V2, and successive elements follow in successive clock periods.
 
@@ -279,7 +279,6 @@ The fourth instruction in the sequence becomes ready for issue in the clock peri
 
 In Program 3 in the model, the instruction at P = 02 sets VL to 16 (to avoid the tedium of watching 64-element operations), while the 4 instructions described above are at P = 05 and P = 0A - 0C. The instructions at P = 06 - 09 can proceed whilst the transfer from Memory to V1 is in progress, since they don't involve any Memory accesses. Likewise, the instruction at P = 0D, which sets A0 equal to the Memory start address for the subsequent block transfer of V5 to Memory, can proceed whilst the floating sums operation is in progress, but the block transfer itself cannot be chained to the floating sums operation because the first action of a block transfer instruction, at chain slot time, is the transfer of the start address in A0 to the Vector Registers, not the first transfer of a data value to Memory.
 
-<center>
 <table border>
 <tr><td><b>P</b></td><td><b>&nbsp;&nbsp;g&nbsp;h&nbsp;i&nbsp;j&nbsp;k&nbsp; </b></td><td><b>Instruction</b></td><td><b>Result</b></td></tr>
 <tr><td></td><td></td><td colspan=2><i><font color=red>Integer values are shown in </font>black, <font color=red>hexadecimal values in</font> <font color=blue>blue</font></i></td></tr>
@@ -397,20 +396,17 @@ V6 = 1920, 385, 1930, 387, 1940, 1945, 390, 1955,<br>
 <tr><td>31 </td><td>17 4 2 7 2</td><td> Population count parities <br> of (V7) to V2 </td>
  <td> V2 = 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0 </td></tr>
 <tr><td>32 </td><td>00 4 0 0 0</td><td> Stop </td><td> </td></tr>
-
 </table>
-<b>Table 5. Demonstration Program 3 </b>
-</center>
+
+**Table 5. Demonstration Program 3**
 
 ### References
 
-1. "CRAY-1 Hardware Reference Manual", May 1982
-<br>
+1. "CRAY-1 Hardware Reference Manual", May 1982  
 Available from <http://www.bitsavers.org/pdf/cray/CRAY-1/>
-2. Roland N. Ibbett<br>
-"The Architecture of High Performance Computers"<br>
-*The Macmillan Press*, 1982<br>
-Available from Springer Book Archives at:<br>
-<http://www.springer.com/gb/book/9780387912158?countryCh\
-anged=true>
+
+2. Roland N. Ibbett  
+"The Architecture of High Performance Computers" 
+*The Macmillan Press*, 1982
+Available from Springer Book Archives at: <http://www.springer.com/gb/book/9780387912158?countryChanged=true>
 
