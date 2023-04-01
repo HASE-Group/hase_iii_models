@@ -15,12 +15,10 @@ Instructions on how to use HASE models can be found at Downloading, Installing a
 
 Much of the description of the Cray-1 given here is taken from [2] which itself drew heavily on the material provided in the Cray1 Hardware Reference Manual [1]. *(To avoid tortuous grammatical constructs, much of the description is written in the present tense, even though there are no longer any real Cray-1s in operation.)*
 
-Vectors are contained in a set of eight V registers, each capable of holding 64 elements (each of 64 bits), and a typical vector instruction causes sets of operands to be taken from two V registers and the results to be returned to a third. In the following instruction sequence:
+Vectors are contained in a set of eight V registers, each capable of holding 64 elements (each of 64 bits), and a typical vector instruction causes sets of operands to be taken from two V registers and the results to be returned to a third. In the following instruction sequence:  
 
-<center>
 V0 &#8592; V1 + V2  
-V3 &#8592; V4 * V5
-</center>
+V3 &#8592; V4 * V5  
 
 the second instruction uses different registers and a different functional unit from the first and can be issued one clock period after the first instruction. Subsequent to the pipeline start-up delays in the functional units (each of which can carry out operations at a rate of one per clock period), a floating-point result will appear from both the adder and the multiplier in each successive clock period. Thus if performance is estimated in terms only of floating-point addition and multiplication, the maximum floating-point execution rate is 2 FLOPS/CLOCK. Furthermore, around 60 other instructions can be issued before these units require further instructions to keep them busy. With a clock period of 12.5 ns, 2 FLOPS/CLOCK corresponds to 160 MFLOPS.
 
@@ -28,11 +26,9 @@ The other serious bottleneck in the CDC 7600 architecture was the entry of resul
 
 The overall design of the Cray-1 processor is shown in Figure 1. In addition to the eight 64-element V registers, there are eight 64-bit S (scalar) registers and eight 24-bit A (address) registers (corresponding to the X and A registers in the CDC 6600 and 7600), together with 64 B registers (each of 24 bits) and 64 T registers (each of 64 bits). The B and T registers are used in a different way from any of the registers in the 6600 and 7600, however, in that they act as buffer stores for A and S register values, respectively. The functional units take their input operands from the A, S and V registers only, and only return results to these registers.
 
-<center>
 ![cray-1 processor](images/cray1_cpu.gif)
 
 **Figure 1. Cray-1 processor organisation**
-</center>
 
 The A registers are used primarily as address and index registers for scalar and vector memory references, but are also used for loop control, input-output operations and to provide values for shift counts. An A register can be loaded either from a B register or direct from memory, while the B register contents can be transferred to or from memory in block copy operations which proceed at a rate of one per clock period. The S registers contain scalar operands, which may be used in scalar operations in the same way that X register values are used in the 6600 and 7600, but an S register in the Cray-1 may also supply a scalar value required for a vector operation. S register values may be transferred to or from memory or the T registers, the latter allowing intermediate results of complex computations to be held in fast buffers rather than main memory. T register values can be transferred to or from memory in the same way as B register values.
 
