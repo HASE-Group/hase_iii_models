@@ -10,10 +10,7 @@ The files for version 1 can be downloaded from <https://github.com/HASE-Group/cd
 The files for version 2 can be downloaded from <https://github.com/HASE-Group/cdc6600/tree/V2.1>
 
 
-Instructions on how to use HASE models can be found at
-
-<a href="http://www.icsa.inf.ed.ac.uk/research/groups/hase/models/use.html"
-target="_blank">Downloading, Installing and Using HASE</a>.
+Instructions on how to use HASE models can be downloaded from https://github.com/HASE-Group/hase_iii_releases
 
 ### Design of the 6600
 
