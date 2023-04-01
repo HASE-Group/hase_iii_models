@@ -9,7 +9,7 @@ demonstration programs, all held in a Programs entity. The GLOBALS parameter <b>
 
 The files for version 2.1 can be downloaded from https://github.com/HASE-Group/cray1/tree/V2.1
 
-Instructions on how to use HASE models can be downloaded from https://github.com/HASE-Group/hase\_iii 
+Instructions on how to use HASE models can be downloaded from https://github.com/HASE-Group/hase_iii_releases
 
 ### Design of the Cray-1
 
