@@ -6,9 +6,9 @@ MU5 was the fifth computer system to be designed and built at the University of 
 
 This document describes the design of the MU5 computer, explains how the HASE simulation model works and includes a list of relevant publications. The most recent version of the model (V4.1) includes a Console entity containing a **Prog_No** parameter that can be edited after the model has been loaded into HASE. **Prog_No** can take values of 0, 1. 2 allowing the user to select one of three programs contained in the model.  Program 0 demonstrates the operation of the MU5 Name Store, Program 1 executes a scalar product program, Program 2 demonstrates the use of string processing instructions.
 
-The files for version 4 can be downloaded from <a href="http://www.icsa.inf.ed.ac.uk/research/groups/hase/models/mu5/MU5_V4.1.zip">MU5_V4.1.zip</a>.
+The files for version 4.1 can be downloaded from https://github.com/HASE-Group/mu5/tree/V4.1
 
-Instructions on how to use HASE models can be found at <a href="http://www.icsa.inf.ed.ac.uk/research/groups/hase/models/use.html" target="_blank">Downloading, Installing and Using HASE</a>.
+Instructions on how to use HASE models can be downloaded from https://github.com/HASE-Group/hase\_iii\_releases
 
 ### Overview
 
