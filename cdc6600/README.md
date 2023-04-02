@@ -3,7 +3,8 @@
 
 The CDC 6600 was first demonstrated by the Control Data Corporation in 1964. The design team was led by Seymour Cray, who went on to design the CDC 7600 and later, after he left CDC to form his own company, the Cray-1.  The 6600 was designed to solve problems substantially beyond contemporary computer capability. It achieved its performance by the use of parallel functional units, instruction buffering and by off-loading peripheral handling to separate peripheral processors. 
  
- The most recent version of the model (V3.1) includes a GLOBALS parameter Program that can be edited after the model has been loaded into HASE. Program can take values of 1, 2, 3 or 4 allowing the user to select one of two programs contained in the model or one of two new programs added by the user. After editing, clicking the "Write Parameters" Write Params button updates the model's parameters file. Program 1 in the model demonstrates the operation of many of the CDC 6600 instructions implemented in the model. Program 2 is a matrix multiplication program - most early supercomputers were designed specifically to perform well on this problem. 
+ The most recent version of the model (V3.1) includes a GLOBALS parameter Program that can be edited after the model has been loaded into HASE. Program can take values of 1, 2, 3 or 4 allowing the user to select one of two programs contained in the model or one of two new programs added by the user. After editing, clicking the "Write Parameters"
+ <sub><img src="images/params.png" alt="Write Params button" width=20></sub> button updates the model's parameters file. Program 1 in the model demonstrates the operation of many of the CDC 6600 instructions implemented in the model. Program 2 is a matrix multiplication program - most early supercomputers were designed specifically to perform well on this problem. 
 
 The files for version 3.1 can be downloaded from <https://github.com/HASE-Group/cdc6600/tree/V3.1>
 
