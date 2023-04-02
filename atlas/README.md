@@ -260,4 +260,4 @@ The value of k in the model is set at 15, so the model produces the results:
 
 1. T. Kilburn, D.B.G. Edwards, M.J. Lanigan and F.H. Sumner  
  "One-level Storage System"  
-*IRE Trans., Vol EC-11, pp 223-234*, 1962.
+*IRE Trans., Vol EC-11, pp 223-234*, 1962.*
