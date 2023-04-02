@@ -3,14 +3,12 @@
 
 The CDC 6600 was first demonstrated by the Control Data Corporation in 1964. The design team was led by Seymour Cray, who went on to design the CDC 7600 and later, after he left CDC to form his own company, the Cray-1.  The 6600 was designed to solve problems substantially beyond contemporary computer capability. It achieved its performance by the use of parallel functional units, instruction buffering and by off-loading peripheral handling to separate peripheral processors. 
  
-This document describes the design of the CDC 6600 central processor and explains how the HASE simulation model works. There are two versions of the model. Version 1 contains a program in its memory that demonstrates the operation of many of the CDC 6600 instructions implemented in the model. Version 2 contains a matrix multiplication program (most early supercomputers were designed specifically to perform well on this problem).  The two versions of the model are otherwise identical.
+ The most recent version of the model (V3.1) includes a GLOBALS parameter Program that can be edited after the model has been loaded into HASE. Program can take values of 1, 2, 3 or 4 allowing the user to select one of two programs contained in the model or one of two new programs added by the user. After editing, clicking the "Write Parameters" Write Params button updates the model's parameters file. Program 1 in the model demonstrates the operation of many of the CDC 6600 instructions implemented in the model. Program 2 is a matrix multiplication program - most early supercomputers were designed specifically to perform well on this problem. 
 
-The files for version 1 can be downloaded from <https://github.com/HASE-Group/cdc6600/tree/V1.1>
-
-The files for version 2 can be downloaded from <https://github.com/HASE-Group/cdc6600/tree/V2.1>
+The files for version 3.1 can be downloaded from <https://github.com/HASE-Group/cdc6600/tree/V3.1>
 
 
-Instructions on how to use HASE models can be downloaded from https://github.com/HASE-Group/hase_iii_releases
+Instructions on how to use HASE models can be downloaded from <https://github.com/HASE-Group/hase_iii_releases>
 
 ### Design of the 6600
 
@@ -78,9 +76,9 @@ The Instruction Stack in the model consists of eight registers (as in the real 6
 
 An important programming constraint imposed by the hardware design of the 6600 was that the target of a branch instruction could only be an instruction at the start of a 60-bit store word so, in the model, the target has to be instruction at an even store address. In both systems, this can require the code to be padded out with PASS instructions, more about which can be found below.
 
-### Demonstration Program
+### Demonstration Program (Program 1)
 
-Version 1 of the model contains the demonstration program shown in Table 2, together with some appropriate data.  For each instruction, the table shows its program address (PA), its machine code representation as the values of **F m i j k/K**, the instruction definition, the actions performed and the resulting outcome(s), *i.e.* the values written into the various X, A and B registers and Central Storage locations (CS n). Note that the model only uses a single instruction format, not two as in the real 6600, so that while **F**, **m**, **i** and **j** are all single digit octal values, **k/K** is treated as an octal value when it is a register designator (**k**) but as a decimal value when it is an immediate operand (**K**).
+Program 1 is shown in Table 2. For each instruction, the table shows its program address (PA), its machine code representation as the values of **F m i j k/K**, the instruction definition, the actions performed and the resulting outcome(s), *i.e.* the values written into the various X, A and B registers and Central Storage locations (CS n). Note that the model only uses a single instruction format, not two as in the real 6600, so that while **F**, **m**, **i** and **j** are all single digit octal values, **k/K** is treated as an octal value when it is a register designator (**k**) but as a decimal value when it is an immediate operand (**K**).
 
 The program is intended to demonstrate the operation of the architectural features of the central processor, in particular the way the scoreboard handles first, second and third order conflicts, as well as to test many of the instructions implemented in the model. Note that the instructions are not necessarily in the order that a simple compiler might have placed them but have been re-ordered to improve performance *e.g.* the instructions at PA = 15 and PA = 16. The first instruction tries (and fails) to load a non-zero value into B0 because B0 is defined in the architecture to always contain zero. Details about the remaining instructions are given in the section below the table.
 
@@ -265,9 +263,9 @@ In the example above the **F<sub>i</sub>** designator for the Add Unit identifie
 
 In the model, the right hand panel shown as part of each unit displays the **F<sub>i</sub>** designator of the register causing the third order conflict.
 
-#### Matrix Multiplication Program
+### Program 2 - Matrix Multiplication
 
-The matrix multiplication program contained in Version 2 of the HASE 6600 simulation model multiplies together a 4x3 matrix R and a 3x4 matrix S to produce a 3x3 matrix T, as shown in Figure 7. The first element of the first row of T is the scalar (dot) product of the first row of R and the first column of S, the second is the scalar product of the first row of R with the second column of S, *etc*. All three matrices are stored by row.
+The matrix multiplication program in the HASE 6600 simulation model multiplies together a 4x3 matrix R and a 3x4 matrix S to produce a 3x3 matrix T, as shown in Figure 7. The first element of the first row of T is the scalar (dot) product of the first row of R and the first column of S, the second is the scalar product of the first row of R with the second column of S, *etc*. All three matrices are stored by row.
 
  ![Matrix Multiplication diagram](images/43mat_mult.gif)
  
