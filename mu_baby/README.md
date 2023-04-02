@@ -2,7 +2,7 @@
 
 On 21<sup>st</sup> June 1948 the University of Manchester Small Scale Experimental Machine, affectionally known as the "Baby", became the first computer to execute a program stored in addressable read-write electronic memory.  This memory was a specially adapted cathode ray tube now known as a Williams-Kilburn Tube. The Baby demonstrated that the Williams-Kilburn Tube could be used as a random-access memory.  Subsequent developments led to the 1949 Manchester Mark I, which pioneered index registers, and, in February 1951, to Ferranti Ltd's commercial derivative, the Ferranti Mark I, becoming the first electronic computer marketed as a standard product and delivered to a customer.
 
-Like the Baby itself, the main emphasis of the HASE Baby model is to demonstrate the operation of the Williams-Kilburn Tube Main Store. The model includes three programs: Program 1 demonstrates the operation of all the SSEM instructions; Program 2 is the 18<sup>th</sup> July 1948 version of the highest factor program, the first program to be run on the SSEM; the purpose of Program 3 becomes clear once the playback of the simulation ends. The code and data for these programs are held in the <b>INPUT</b> entity. Program selection is determined by a GLOBALS parameter <b>Program</b> that can be edited after the model has been loaded into HASE. <b>Program</b> can take values of 1, 2. 3 or 4, <i>i.e.</i>  there is space for a fourth program.  After editing, clicking the "Write Parameters" button <sub><img src="Params.png" alt="Write Params button" width=20></sub> updates the model's parameters file.
+Like the Baby itself, the main emphasis of the HASE Baby model is to demonstrate the operation of the Williams-Kilburn Tube Main Store. The model includes three programs: Program 1 demonstrates the operation of all the SSEM instructions; Program 2 is the 18<sup>th</sup> July 1948 version of the highest factor program, the first program to be run on the SSEM; the purpose of Program 3 becomes clear once the playback of the simulation ends. The code and data for these programs are held in the <b>INPUT</b> entity. Program selection is determined by a GLOBALS parameter <b>Program</b> that can be edited after the model has been loaded into HASE. <b>Program</b> can take values of 1, 2. 3 or 4, <i>i.e.</i>  there is space for a fourth program.  After editing, clicking the "Write Parameters" button <sub><img src="images/Params.png" alt="Write Params button" width=20></sub> updates the model's parameters file.
 
 
 The files for version 4.1 can be downloaded from https://github.com/HASE-Group/mu_baby/tree/V4.1
@@ -35,7 +35,7 @@ The arithmetic unit was based on a serial subtractor. The logic employed EF50 pe
 
 The main components of the Baby can be seen in the image of the HASE simulation model (Figure 1). The Williams-Kilburn Tube that implemented CI was also used to hold the Present Instruction (PI) subsequent to its being read out of the main store. Either the value of CI or PI could be fed from the Control Tube to an 8-bit flip-flop register known as the staticisor.  This staticised the function bits (F) and the operand address bits (S) during the execution of an order and then staticised the address of the next order during the instruction fetch phase. In what today seems like an anomaly, numbers were stored with the least-significant digit on the left, a consequence of CRTs being scanned from left to right and the fact that in a serial arithmetic unit, computations must start with the least-significant digit. In the model, digits in the Main Store are shown as they would have appeared using the focus/defocus representation, in which a 0 appears as a small dot and a 1 as a larger dot.  
 
-![Image of HASE Baby model](HASE_SSEM-1.png)
+![Image of HASE Baby model](images/HASE_SSEM-1.png)
 
 **Figure 1. The Baby simulation model**  
 
@@ -91,7 +91,7 @@ Because the main emphasis of the project was to prove the practicality of the Wi
 
 Figure 2 shows an image of the HASE user interface with the simulation model of the Baby in the main (right-hand) Project View pane. The left-hand Project Inspector pane displays the model parameters, <i>e.g.</i> register and store contents, while the lower, Output pane, shows information produced by HASE when a model is loaded or compiled or when a simulation is run. The icons in the top row allow the user to load a model, compile it, run the simulation code thus created and to load the trace file produced by running a simulation back into the model for animation. Once a trace file has been loaded, the animation control icons at the top of the Project View window become active. From left to right, these allow the animation to be rewound, stopped, paused, single stepped, run or fast forwarded to the end.  As the animation proceeds, packets of information can be observed passing between entities while the entities themselves can change colour to reflect their states, <i>e.g.</i> idle (blue) or busy (red).
 
-![Image of HASE user interface](HASE_SSEM-2.png)
+![Image of HASE user interface](images/HASE_SSEM-2.png)
 
 **Figure 2. The HASE User Interface**
 
