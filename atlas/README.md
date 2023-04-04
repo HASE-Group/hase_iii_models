@@ -2,30 +2,24 @@
 
 The first Ferranti Atlas computer was inaugurated at the University of Manchester in December 1962. Designed by Professor Tom Kilburn and a joint University/Ferranti team, it incorporated a number of novel features, the most influential of which was Virtual Memory.
 
-This document describes the design of the Atlas computer and explains how the HASE simulation model works. There are three versions of the model. Version 1 contains a program in its memory that demonstrates the operation of all the Atlas instructions implemented in the model. Version 2 contains a matrix multiplication program, designed to show in particular the operation of the scalar (dot) product calculation that forms the inner loop of matrix multiplication. Most early supercomputers were designed specifically to perform well on this problem, *e.g.* especially the Cray 1 in 1976. Version 3 contains a program that computes values of a,b,c such that a^2 + b^2 = c^2 and a,b,c < k.
+This document describes the design of the Atlas computer and explains how the HASE simulation model works.  The most recent version of the model (V4.1) includes a GLOBALS parameter Program that can be edited after the model has been loaded into HASE. Program can take values of 1, 2. 3 allowing the user to select one of three programs contained in the model. After editing, clicking the "Write Parameters" button <sub><img src="images/params.png" alt="Write Params button" width=20></sub> updates the model's parameters file.
 
-The files for version 1 can be downloaded from <https://github.com/HASE-Group/atlas/tree/V1.5>
+Program 1 demonstrates the operation of all the Atlas instructions implemented in the model. Program2 is a matrix multiplication program, designed to show in particular the operation of the scalar (dot) product calculation that forms the inner loop of matrix multiplication. Most early supercomputers were designed specifically to perform well on this problem, *e.g.* especially the Cray 1 in 1976. Program 3 is is an adaptation of a program that finds values for the lengths of the sides of Pythagorean right triangles, *i.e.* it computes values of a,b,c such that a^2 + b^2 = c^2 and a,b,c < k.
 
-The files for version 2 can be downloaded from <https://github.com/HASE-Group/atlas/tree/V2.5>
+The files for version 4.1 can be downloaded from https://github.com/HASE-Group/atlas/tree/V4.1
 
-The files for version 3 can be downloaded from <https://github.com/HASE-Group/atlas/tree/V3.5>
-
-Instructions on how to use HASE models can be found at
-
-<a href="http://www.icsa.inf.ed.ac.uk/research/groups/hase/models/use.html"
-target="_blank">Downloading, Installing and Using HASE</a>.
-
-### Overview
+Instructions on how to use HASE models can be downloaded from https://github.com/HASE-Group/hase_iii_releases
 
 The HASE user interface window contains three panes.  Figure 1 shows an image of the HASE user interface with the simulation model of Atlas in the main (right hand) Project View pane and model parameters (*e.g.* register and store contents) in the (left hand) Project Inspector pane. The lower, Output pane shows information produced by HASE. The icons in the top row allow the user to load a model, compile it, run the simulation code thus created and to load the trace file produced by running a simulation back into the model for animation.
 
- ![Image of HASE Atlas simulation](images/HASE_Image1.png)
+ ![Image of HASE Atlas simulation](images/HASE_Atlas_V4-1.png)
+)
  
 **Figure 1. The Atlas simulation model loaded into HASE**
 
 Once a trace file has been loaded, the animation control icons at the top of the Project View window become active (Figure 2). From left to right, these allow the animation to be rewound, stopped, paused, single stepped, run or fast forwarded to the end.  As the animation proceeds, packets of information can be seen passing between entities while the entities themselves change colour to reflect their states (idle, busy, waiting).
 
- ![Image of HASE Atlas simulation](images/HASE_Image2.png)
+ ![Image of HASE Atlas simulation](images/HASE_Atlas_V4-2.png)
  
 **Figure 2. The Atlas simulation model during animation**
 
@@ -73,7 +67,7 @@ The model implements floating-point arithmetic using the floating-point operatio
 
 For the same reasons, the model does not implement the full set of Atlas floationg-point instructions, nor does it attempt to model the Accumulator as a double-length register. It just implements simple load, store, add, subtract, multiply and divide operations on AM, the most significant half of the Atlas double-length accumulator.  Also, B124, the floating-point exponent register in Atlas, is not implemented.
 
-### Demonstration Program
+### Instruction Test Program (Program 1)
 
 Version 1 of the model contains the demonstration program shown in Table 1 (below), together with some appropriate data. The program is initially held in Page 0 of the Drum Store and is copied into Block 0 of the Core Store following the page fault caused by the first instruction access. The integers held initially in Page 2 of the Drum Store are copied into Block 1 of the Core Store when the first integer operand access causes a page fault and likewise the floating-point numbers initially held in Page 3 of the Drum Store are copied into Block 2 of the Core Store. The program is essentially a test program that executes each of the instructions implemented in the model. These include all the B functions and the A functions as described above. The table shows the actions performed for each instruction and the resulting outcome.
 
@@ -168,9 +162,9 @@ AM = Accumulator, VS = Virtual Store, CS B2W8 = Core Store Block 2, Word 8
 **Table 1. The demonstration program**
 
 
-### Matrix Multiplication Program
+### Matrix Multiplication Program (Program 2)
 
-The matrix multiplication program contained in Version 2 of the HASE Atlas simulation model multiplies together a 4x3 matrix X and a 3x4 matrix Y to produce a 4x4 matrix Z, as shown in Figure 4. The first element of the first row of Z is the scalar (dot) product of the first row of X and the first column of Y, the second is the scalar product of the first row of X with the second column of Y, *etc*.
+The matrix multiplication program multiplies together a 4x3 matrix X and a 3x4 matrix Y to produce a 4x4 matrix Z, as shown in Figure 4. The first element of the first row of Z is the scalar (dot) product of the first row of X and the first column of Y, the second is the scalar product of the first row of X with the second column of Y, *etc*.
 
 Table 2 shows the program, which is in the form of a triple nested loop. The outer loop increments the X row at each iteration, the middle loop increments the Y column at each iteration while the inner loop forms the scalar products.
 
@@ -211,9 +205,9 @@ Table 2 shows the program, which is in the form of a triple nested loop. The out
 
 **Table 2. The matrix multiplication program**
 
-### Sums of Squares
+### Sums of Squares (Program 3)
 
-Version 3 of the HASE Atlas model contains a program written by John Buckle in 1962 as a Ferranti training exercise. Figure 5 shows the original code with comments (which include one minor mistake) and the corresponding HASE Atlas simulation code. The value of k is in virtual store word 1024. The program uses three extracodes E1302, E1064 and E1067. E1302 is a B multiply instruction, implemented in the model simply as an instruction executed directly in the B Arithmetic unit. E1064 and E1067 are implemented by the Control Unit and write values into the Subsidiary Store which are printed at the end of the simulation run in the output pane of the HASE GUI. This is not how it would have worked in the real Atlas, of course, but simply a device to enable the sum of squares program to be demonstrated at the <a href="http://curation.cs.manchester.ac.uk/atlas/elearn.cs.man.ac.uk/_atlas/">Atlas 50th Anniversary Symposium</a>.
+Program 3 is a version of a program written by John Buckle in 1962 as a Ferranti training exercise. Figure 5 shows the original code with comments (which include one minor mistake) and the corresponding HASE Atlas simulation code. The value of k is in virtual store word 1024. The program uses three extracodes E1302, E1064 and E1067. E1302 is a B multiply instruction, implemented in the model simply as an instruction executed directly in the B Arithmetic unit. E1064 and E1067 are implemented by the Control Unit and write values into the Subsidiary Store which are printed at the end of the simulation run in the output pane of the HASE GUI. This is not how it would have worked in the real Atlas, of course, but simply a device to enable the sum of squares program to be demonstrated at the <a href="http://curation.cs.manchester.ac.uk/atlas/elearn.cs.man.ac.uk/_atlas/">Atlas 50th Anniversary Symposium</a>.
 
  ![Sums of Squares code](images/ABL_Code.png)
 
