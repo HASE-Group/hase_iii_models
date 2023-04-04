@@ -54,3 +54,7 @@
 	path = atlas/V4.1
 	url = git@github.com:HASE-Group/atlas.git
 	branch = V4.1
+[submodule "dlx-scb/V2.9"]
+	path = dlx-scb/V2.9
+	url = git@github.com:HASE-Group/dlx-scb.git
+	branch = V2.9
