@@ -58,3 +58,7 @@
 	path = dlx-scb/V2.9
 	url = git@github.com:HASE-Group/dlx-scb.git
 	branch = V2.9
+[submodule "dashnode/V1.5"]
+	path = dashnode/V1.5
+	url = git@github.com:HASE-Group/dashnode.git
+	branch = V1.5
