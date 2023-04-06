@@ -14,11 +14,13 @@ target="_blank">Downloading, Installing and Using HASE</a>.
 Like all register-register load/store architectures with parallel function units, the DLX derives from the CDC 6600.  To make effective use of this parallelism, the instruction set must include multiple-address (minimally two but more typically three) register-register arithmetic and logic operations, together with instructions which move data between the registers and memory, and sequencing (test and branch) instructions. Figure 1 shows the DLX instruction formats.
 
 ![DLX instruction format](images/dlx-instr-form.png)
+
 **Figure 1. DLX Instruction Formats**
 
 Whereas the CDC 6600 had ten parallel execution units, most modern systems havefewer, and the DLX is normally assumed to have four: an Integer Unit, a Floating-point Add Unit, a Multiply Unit and a Divide Unit (with both of the latter two operating on both integer and floating-point numbers). Figure 2 shows a typical `implementation' of the DLX architecture.  The Integer Unit is used for bothdata and address arithmetic, so load/store instructions are processed by the Integer Unit before being sent to the Memory Access Unit and thence to Memory. The Integer Unit also executes the additions required for integer test and relative branch instructions, so the Memory Access Unit also executes branches.
 
 ![Diagram of DLX with Scoreboard](images/dlx.gif)
+
 **Figure 2. DLX with Parallel Function Units**
 
 The Execution Units receive their operands from the Instruction Decode Unit, which is closely coupled to the Registers. These consist of 32 Integer and 32 Floating-point registers. The results from both arithmetic/logic and load instructions are returned to the Registers by the Write Back Unit.
@@ -62,6 +64,7 @@ The HASE Simulation Model of the DLX with Parallel Function Units is one of a nu
 In Figure 3 the Instruction Fetch Unit, the Integer Unit, the Memory Access Unit the Write Back Unit and the Memory are all busy, whilst the Registers and the Floating-point, Multiply and Divide Units are idle.  The Instruction Decode Unit is held up because its BNEZ order requires the value in R7 as its source operand and has to wait for the ADDI instruction in the Integer Unit to complete.
 
 ![HASE DLX with Scoreboard model](images/dlx-scb.png)
+
 **Figure 3. HASE DLX with Scoreboard Model**
 
 The latencies of the Floating-point, Multiply and Divide Units and the access time to the data memory can be varied (by using the sliders in the Project panel of the HASE window). The latency of the Integer unit and the access time to the instruction memory are fixed at 1.
