@@ -2,7 +2,7 @@
 
 The Stanford DASH architecture was designed to prove the feasibility of building a scaleable high performance machine with multiple coherent caches and a single address space. There are currently two HASE simulation models of parts of the DASH architecture, originally built in 1995/6 by Lawrence Williams as parts of his MSc project, one modelling a single node and one modelling a cluster of four nodes. These models are designed to demonstrate the cache coherency protocols used in the DASH [1].  The Node model demonstrates a simple 2-level cache arrangement. The files for the HASE DASH Node model can be downloaded from <https://github.com/HASE-Group/hase_iii_models/dashnode/tree/V1.5>
 
-Instructions on how to use HASE models can be found at
+Instructions on how to use HASE models can be found at <https://github.com/HASE-Group/hase_iii_releases>
 
 ### The Stanford DASH Architecture
 
