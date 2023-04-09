@@ -24,7 +24,7 @@ One of the problems facing the designers of high-speed computer systems at the t
 
 The HASE simulation model shown in Figure 2 closely follows the design of the IBM System/360 Model 91 Floating-point Unit.  Tomasulo's Algorithm was designed to maximise the benefit of the parallel floating-point arithmetic units provided in the Model 91 by controlling the movement of data between the floating-point registers and these units.  The 360 processor and memory are represented in the model by an Instruction/Data Source Unit which stores a sequence of instructions and a set of data values. As in the Model 91, the instructions are converted into pseudo register-register instructions before being sent to the FLOS. For instructions which specify a storage address, the corresponding operands are sent via a queue within the Source Unit (equal in length to the assumed memory latency) to the Floating-point Buffers (FLBs). These buffers are allocated cyclicly and the corresponding FLB number is entered into the pseudo instruction issued to the FLOS.
 
-![screen image of model](images/screen.png)
+![screen image of model](images/V1.8screen.png)
 
 **Figure 2. The HASE Tomasulo's Algorithm model**
 
