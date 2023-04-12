@@ -389,7 +389,7 @@ More than one cache can of course hold a copy of an unmodified quad-word, so ifa
     state remains unchanged</td></tr>
 <tr><td>Write Miss <br>Unmodified</td><td>WM</td><td>
     1. Send Bus Read Request<br>
-    2. In next clock cycle: check if there's an MW packet  
+    2. In next clock cycle: check if there's an MW packet<br>
       &nbsp; &nbsp; (a) if not, issue Memory Read<br>
       &nbsp; &nbsp; (b) if so, wait for WR packet<br>
       &nbsp; &nbsp; then issue Memory Read<br>
