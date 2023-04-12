@@ -66,3 +66,7 @@
 	path = tomasulo/V1.8
 	url = git@github.com:HASE-Group/tomasulo.git
 	branch = V1.8
+[submodule "snoopy_cache/V4.1"]
+	path = snoopy_cache/V4.1
+	url = git@github.com:HASE-Group/snoopy_cache.git
+	branch = V4.1
