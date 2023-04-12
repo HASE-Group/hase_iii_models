@@ -163,7 +163,7 @@ The possible outcomes and actions for read requests and write requests are shown
 <tr><td>Outcome</td><td>State</td><td align=center>Action</td></tr>
 <tr><td> Read Hit </td><td>RH</td><td> Send data to processor</td></tr>
 <tr><td>Read Miss</td><td>RM</td><td> 
-   1. Issue Memory Read (MR)  
+   1. Issue Memory Read (MR)<br>
    2. When memory replies (RR), write memory word to cache, send data to processor</td></tr>
 </table>
 
@@ -172,10 +172,10 @@ The possible outcomes and actions for read requests and write requests are shown
 <table>
 <tr><td>Outcome</td><td>State</td><td align=center>Action</td></tr>
 <tr><td>Write Hit</td><td>WH</td><td>
-    1. Send MW packet to memory  
+    1. Send MW packet to memory<br>
     2. When memory replies (WR), update cache and send ack to processor </td></tr>
 <tr><td>Write Miss</td><td>WM</td><td>
-    1. Send MW packet to memory  
+    1. Send MW packet to memory<br>
     2. When memory replies (WR), send ack to processor </td></tr>
 </table>
 
