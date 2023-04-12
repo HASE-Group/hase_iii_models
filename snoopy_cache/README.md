@@ -213,7 +213,7 @@ The Write-Through / Write-Invalidate / Write-Allocate Model differs from the Wri
 <tr><td>Outcome</td><td>State</td><td align=center>Action</td></tr>
 <tr><td> Read Hit </td><td>RH</td><td> Send data to processor</td></tr>
 <tr><td>Read Miss</td><td>RM</td><td>
-   1. Issue Memory Read (MR)  
+   1. Issue Memory Read (MR)<br>
    2. When memory replies (RR), write memory word to cache, send data to processor</td></tr>
 </table>
 
@@ -222,12 +222,12 @@ The Write-Through / Write-Invalidate / Write-Allocate Model differs from the Wri
 <table>
 <tr><td>Outcome</td><td>State</td><td align=center>Action</td></tr>
 <tr><td>Write Hit</td><td>WH</td><td>
-    1. Send MW packet to memory  
+    1. Send MW packet to memory<br>
     2. When memory replies (WR), update cache, send ack to processor </td></tr>
 <tr><td>Write Miss</td><td>WM</td><td>
-    1. Issue Memory Read (MR)  
-    2. When memory replies, update word in quad-word  
-    3  Send MW packet to memory  
+    1. Issue Memory Read (MR)<br>
+    2. When memory replies, update word in quad-word<br>
+    3  Send MW packet to memory<br>
     4. When memory replies (WR), update cache, send ack to processor </td></tr>
 </table>
 
@@ -251,7 +251,7 @@ The possible outcomes and actions for read requests and write requests in the Wr
 <tr><td>Outcome</td><td>State</td><td align=center>Action</td></tr>
 <tr><td> Read Hit </td><td>RH</td><td> Send data to processor</td></tr>
 <tr><td>Read Miss</td><td>RM</td><td> 
-   1. Issue Memory Read (MR)  
+   1. Issue Memory Read (MR)<br>
    2. When memory replies (RR), write data to cache and send to processor</td></tr>
 </table>
 
@@ -260,16 +260,16 @@ The possible outcomes and actions for read requests and write requests in the Wr
 <table>
 <tr><td>Outcome</td><td>State</td><td align=center>Action</td></tr>
 <tr><td>Write Hit</td><td>WH</td><td>
-    1. Send MW packet to memory  
-    2. When memory replies (WR), write memory word to cache  
-    3. Update cache,  
+    1. Send MW packet to memory<br>
+    2. When memory replies (WR), write memory word to cache<br>
+    3. Update cache<br>
     4. Send ack to processor </td></tr>
 <tr><td>Write Miss</td><td>WM</td><td>
-    1. Issue Memory Read (MR)  
-    2. When memory replies, update value  
-    3. Send MW packet to memory  
-    4. When memory replies (WR), write memory word to cache  
-    5. Update cache  
+    1. Issue Memory Read (MR)<br>
+    2. When memory replies, update value<br>
+    3. Send MW packet to memory<br>
+    4. When memory replies (WR), write memory word to cache<br>
+    5. Update cache<br>
     6. Send ack to processor </td></tr>
 </table>
 
@@ -365,15 +365,14 @@ More than one cache can of course hold a copy of an unmodified quad-word, so ifa
 <tr><td>Read Hit <br> Modified </td><td>RH</td><td>
     Supply data to processor; state remains unchanged</td></tr>
 <tr><td>Read Miss <br> Umodified</td><td>RM</td><td> 
-    1. Send Bus Read Request  
-    2. In next clock cycle: check if there's an MW packet  
-      &nbsp; &nbsp; (a) if not, issue Memory Read  
-      &nbsp; &nbsp; (b) if so, wait for WR packet  
-      &nbsp; &nbsp; then issue Memory Read  
-    3. When memory replies (RR), write data to cache,  
-    &nbsp; &nbsp; send data to processor</td></tr>
+    1. Send Bus Read Request<br>
+    2. In next clock cycle: check if there's an MW packet<br>
+      &nbsp; &nbsp; (a) if not, issue Memory Read<br>
+      &nbsp; &nbsp; (b) if so, wait for WR packet<br>
+      &nbsp; &nbsp; then issue Memory Read<br>
+    3. When memory replies (RR), write data to cache, send data to processor</td></tr>
 <tr><td>Read Miss <br> Modified</td><td>RMM</td><td>
-    1. Write modified data to memory  
+    1. Write modified data to memory<br>
     2. Proceed as for Read Miss Unmodified</td></tr>
 </table>
 
@@ -382,22 +381,21 @@ More than one cache can of course hold a copy of an unmodified quad-word, so ifa
 <table>
 <tr><td>Outcome</td><td>State</td><td align=center>Action</td></tr>
 <tr><td>Write Hit<br> Unmodified</td><td>WH</td><td>
-    1. Send Invalidate packet to Bus  
-    2. Write data to cache  
+    1. Send Invalidate packet to Bus<br>
+    2. Write data to cache<br>
     3. Set state to Modified</td></tr>
 <tr><td>Write Hit <br> Modified</td><td> WHM</td><td>
-    Write data to cache;  
+    Write data to cache;<br>
     state remains unchanged</td></tr>
 <tr><td>Write Miss <br>Unmodified</td><td>WM</td><td>
-    1. Send Bus Read Request  
-    2. In next clock cycle:  
-      &nbsp; &nbsp; check if there's an MW packet  
-      &nbsp; &nbsp; (a) if not, issue Memory Read  
-      &nbsp; &nbsp; (b) if so, wait for WR packet  
-      &nbsp; &nbsp; then issue Memory Read  
+    1. Send Bus Read Request<br>
+    2. In next clock cycle: check if there's an MW packet  
+      &nbsp; &nbsp; (a) if not, issue Memory Read<br>
+      &nbsp; &nbsp; (b) if so, wait for WR packet<br>
+      &nbsp; &nbsp; then issue Memory Read<br>
     3. When memory replies (RR), write updated data to cache</td></tr>
 <tr><td>Write Miss <br> Modified</td><td>WMM</td><td>
-        1. Write modified data to memory  
+        1. Write modified data to memory<br>
        2. Proceed as for Write Miss Unmodified</td></tr>
 </table>
 
