@@ -5,11 +5,11 @@ Directory-based cache coherence protocols were invented as a means of dealing wi
 In directory based systems, the directory can be held centrally with the main memory in a multi-processor system or can be distributed among the caches as singly or doubly linked lists. This website contains models demonstrating each of these three mechanisms.  For each model, students can be asked, as an exercise, to write a report explaining what protocol actions occur for each of the read and write requests that the processors make to their caches, *e.g.* by listing the packets which are sent around the system in response to each request and explaining the purpose of each packet.
 
 
-The files for the Central Directory protocol model can be downloaded from <https://github.com/HASE-Group/dir-cache/tree/V1.3>  
+The files for the Central Directory protocol model can be downloaded from <https://github.com/HASE-Group/dir_cache/tree/V1.3>  
 
-The files for the Singly-linked list protocol model, based on the coherence mechanisms used in the SDD (Stanford Distributed Directory) protocol, can be downloaded from <https://github.com/HASE-Group/dir-cache/tree/V2.2>
+The files for the Singly-linked list protocol model, based on the coherence mechanisms used in the SDD (Stanford Distributed Directory) protocol, can be downloaded from <https://github.com/HASE-Group/dir_cache/tree/V2.2>
 
-The files for the Doubly-linked list protocol model, based on the coherence mechanisms used in the SCI (Scalable Coherent Interface) protocol, can be downloaded from  <https://github.com/HASE-Group/dir-cache/tree/V3.5>
+The files for the Doubly-linked list protocol model, based on the coherence mechanisms used in the SCI (Scalable Coherent Interface) protocol, can be downloaded from  <https://github.com/HASE-Group/dir_cache/tree/V3.5>
 
 Instructions on how to use HASE models can be found at <https://github.com/HASE-Group/hase_iii_releases>
 
