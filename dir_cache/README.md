@@ -1,5 +1,5 @@
 ## Directory-based Cache Coherence
-**
+
 Directory-based cache coherence protocols were invented as a means of dealing with cache coherence in systems containing more processors than can be accommodated on a single bus. In single bus systems, cache coherence can be ensured using a snoopy protocol in which each processor's cache monitors the traffic on the bus and takes appropriate action when it sees an update to an address matching one that it holds.
 
 In directory based systems, the directory can be held centrally with the main memory in a multi-processor system or can be distributed among the caches as singly or doubly linked lists. This website contains models demonstrating each of these three mechanisms.  For each model, students can be asked, as an exercise, to write a report explaining what protocol actions occur for each of the read and write requests that the processors make to their caches, *e.g.* by listing the packets which are sent around the system in response to each request and explaining the purpose of each packet.
