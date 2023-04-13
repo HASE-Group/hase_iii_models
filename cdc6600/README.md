@@ -19,13 +19,13 @@ The design of the CDC 6600 is comprehensively described in the book "Design of a
 
 The CDC 6600 was designed to solve problems substantially beyond contemporary computer capability and, in order to achieve this end, a high degree of functional parallelism was incorporated into the design of the central processor, as shown in Figure 1.  In order to exploit this parallelism, the instruction set uses a three-address format (Figure 2) that allows successive instructions to refer to totally independent input and result operands.  This would be quite impossible with a one-address instruction format, for example, where one of the inputs for an arithmetic operation is normally taken from, and the result returned to, a single implicit accumulator.  Despite the potential for instruction overlap, dependencies between instructions can still occur in a three-address system. For example, where one instruction requires as its input the result of an immediately preceding instruction, the hardware must ensure that this ordering is strictly maintained.  This would have been difficult if full store addresses were involved, since it would have made 6600 instructions prohibitively long, and it would in any case have been impossible to move operands in and out of Central Storage at a rate matching the execution rates of the functional units.  The use of a small number of Scratch Pad Registers overcame both these problems.
 
- ![6600 processor](images/cdc6600.gif)
+ ![6600 processor](images/CDC_6600.gif)
 
 **Figure 1. 6600 processor organisation**
 
 During program execution, instructions are taken in sequence from the Instruction Stack and issued by the Scoreboard to the appropriate execution unit. Each unit takes its input operands from among the 24 scratch-pad registers (eight 60-bit X (operand) registers, eight 18-bit A (address) registers, and eight 18-bit B (index) registers) and returns its result to one of these registers.  The maximum rate of issue is one instruction per minor clock cycle (100 ns), while the units take typically 300 or 400 ns to complete their operations. Thus while the units can in principle all operate simultaneously, simultaneous operation of three or four units is more typical in practice. The issuing of instructions is not straightforward, since instruction dependencies can require that some instructions be held up until the completion of other, previously issued, instructions. In order to maximise the amount of concurrent processing, the Scoreboard is designed to issue each instruction as early as possible, within the limits set by these dependencies, so as to allow the following instruction to be issued, hopefully to a different unit. Dependency conflicts are resolved by the Scoreboard through control signals which link it to each unit and by the use of information buffered about the registers in respect of each unit and about the units in respect of each register.
 
- ![6600 instruction set](images/cdc6600_instr.gif)
+ ![6600 instruction set](images/CDC_6600-instr.gif)
  
 **Figure 2. 6600 instruction format**
 
@@ -33,7 +33,7 @@ During program execution, instructions are taken in sequence from the Instructio
 
 The Instruction Stack in the 6600 consists of eight 60-bit registers (I0-I7 in Figure 3) which operate as a push-up stack and which can contain instruction loops. Programs are initiated in by an * Exchange Jump* in which the contents of all addressable registers in the central processor are interchanged with the contents of a designated store area. Following such an Exchange Jump the new contents of the program address register are used to access the first instruction word. This word is received from Central Storage into an Input Register and then loaded into the bottom register of the Instruction Stack.
 
- ![6600 instruction stack](images/cdc6600_istack.gif)
+ ![6600 instruction stack](images/CDC_6600_istack.gif)
  
 **Figure 3. 6600 instruction stack**
 
@@ -63,7 +63,7 @@ Once a trace file has been loaded, the animation control icons at the top of the
 
 Table 1 shows the full instruction set of the 6600, with the instructions grouped according to the functional unit that executes them. Not all of them are implemented in the HASE model; those that are implemented have their octal code shown in <font color=red>red</font>. Most of those that are not (shown in <font color=blue>blue</font>) have been omitted because they are specific to the implementation of floating-point numbers (somewhat unusually in 1's complement in the 6600). In the model, all numbers are implemented as integer (fixed-point) values. This is because memories in HASE are implemented as C++ arrays and the type-checking in C++ means that it is not possible to mix different types of element in a single array. This is not a major issue in terms of holding instructions and operands in different arrays, since in real computers they are normally stored in quite separate regions of memory. For floating-point variables the choice is between representing them as the integer equivalents of their floating-point bit patterns (as in version 2 of the HASE DLX model, for example), and implementing the appropriate conversions, or simply confining the model to fixed-point variables. The latter option was chosen for the 6600, as it was for the HASE MU5 model.
 
- ![6600 Instruction Set](images/6600-iset.png)
+ ![6600 Instruction Set](images/CDC_6600-iset.png)
  
 <small>Left hand column of each table = Octal Code, blue = IMPLEMENTED, red = NOT IMPLEMENTED in the model</small> 
 
@@ -197,7 +197,7 @@ The result register of the Branch Unit is the Program Address register, which is
 
 Dependency conflicts between successive instructions in the 6600 are classified by Thornton into three types: first order, second order and third order. The Scoreboard resolves these conflicts using the control signals which link it to each unit. The Scoreboard can send an Issue, Go Read and Go Store signal to each unit separately, and can receive from each unit a Request Release signal (Figure 6). The Issue signal enters information into the unit identifying the source of its input operands and the mode in which it is required to operate, while Go Read causes the operands themselves to be copied into the unit. When a unit completes its operation it sends a Request Release signal to the Scoreboard, which, when certain conditions are satisfied, responds with Go Store, a signal which allows the result of the operation to be copied out of the unit's Temporary Register and into the appropriate result register.
 
- ![6600 function unit](images/6600-unit.gif)
+ ![6600 function unit](images/CDC_6600-unit.gif)
  
 **Figure 6. Control schematic for a 6600 functional unit**
 
