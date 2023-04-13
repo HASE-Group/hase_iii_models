@@ -70,3 +70,7 @@
 	path = snoopy_cache/V4.1
 	url = git@github.com:HASE-Group/snoopy_cache.git
 	branch = V4.1
+[submodule "dir_cache/V1.3"]
+	path = dir_cache/V1.3
+	url = git@github.com:HASE-Group/dir_cache.git
+	branch = V1.3
