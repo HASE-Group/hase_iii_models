@@ -1,0 +1,238 @@
+<html>
+<center>
+<table border>
+<tr><td>
+ <table>
+   <tr><td><b>00 GROUP</b></td></tr>
+ </table>
+ <table border>
+  <tr><td width=20><small><font color=blue>000&nbsp;000</font><br>
+    <font color=blue> 0020&nbsp;xk</font><br> 
+      <font color=blue>003&nbsp;xjx<br>
+    004&nbsp;xxx<br> 005&nbsp;xjk<br> 006&nbsp;ijkm<br>
+      007&nbsp;ijkm</font></small></td>
+  <td width=310><small>
+   Error exit (000000)<br>
+   Transmit (Ak) to VL<br>
+   Transmit (Sj) to vector mask (VM)<br>
+   Normal exit<br>
+   Branch to (Bjk)<br>
+   Branch to ijkm<br>
+   Return jump to ijkm; set B00 to (P)<br>
+
+  </small> </td></tr>
+ </table>
+
+ <table>
+   <tr><td><b>01 GROUP</b></td></tr>
+ </table>
+ <table border>
+  <tr><td width=20><small><font color=blue>010&nbsp;ijkm
+  <br>011&nbsp;ijkm<br>012&nbsp;ijkm<br>013&nbsp;ijkm<br>
+   014&nbsp;ijkm<br>015&nbsp;ijkm<br>016&nbsp;ijkm
+  <br>017&nbsp;ijkm</font></small></td>
+  <td width=310><small>
+   Branch to ijkm if (A0) = 0<br>
+   Branch to ijkm if (A0) &#8800; 0<br>
+   Branch to ijkm if (A0) positive<br>
+   Branch to ijkm if (A0) negative<br>
+   Branch to ijkm if (S0) = 0<br>
+   Branch to ijkm if (S0) &#8800; 0<br>
+   Branch to ijkm if (S0) positive<br>
+   Branch to ijkm if (S0) negative</small>
+  </td></tr>
+ </table>
+
+ <table>
+  <tr><td><b>02 GROUP</b></td></tr>
+ </table>
+ <table border>
+  <tr><td width=20><small><font color=blue>020&nbsp;ijkm<br>
+   021&nbsp;ijkm<br> 022&nbsp;ijk<br>
+  023&nbsp;ijx<br> 024&nbsp;ijk <br> 025&nbsp;ijk<br>
+  026&nbsp;ijx<br> 027&nbsp;ijx</font></small></td>
+  <td width=310><small>Transmit jkm to Ai<br>
+   Transmit ~jkm to Ai<br>
+   Transmit jk to Ai<br>
+   Transmit (Sj) to Ai<br>
+   Transmit (Bjk) to Ai<br>
+   Transmit (Ai) to Bjk<br>
+   Population count of (Sj) to Ai<br>
+   Leading zero count of (Sj) to Ai<br></small></td></tr>
+ </table>
+ <table>
+  <tr><td><b>03 GROUP</b></td></tr>
+ </table>
+ <table border>
+ <tr><td width=20><small><font color=blue>030&nbsp;ijk<br>
+  031&nbsp;ijk<br> 032&nbsp;ijk</font><br>
+  <font color=blue>034&nbsp;ijk<br>
+   035&nbsp;ijk<br> 036&nbsp;ijk<br> 037&nbsp;ijk
+</font></small></td>
+  <td width=310><small>Integer Sum of (Aj) and (Ak) to Ai<br>
+   Integer Difference of (Aj) and (Ak) to Ai <br>
+   Integer Product of (Aj) and (Ak) to Ai<br>
+   Block transfer; Memory to B registers<br>
+   Block transfer: B registers to Memory<br>
+   Block transfer: Memory to T registers<br>
+   Block transfer: T registers to Memory</small></td></tr>
+ </table>
+ <table>
+  <tr><td><b>04 GROUP</b></td></tr>
+ </table>
+ <table border>
+  <tr><td width=20><small><font color=blue>040&nbsp;ijkm<br>
+  041&nbsp;ijkm<br>042&nbsp;ijk<br>043&nbsp;ijk<br>044&nbsp;ijk<br>
+  045&nbsp;ijk<br>046&nbsp;ijk<br>047&nbsp;ijk</font></small></td>
+  <td width=310><small>
+  Transmit jkm to Si<br>
+  Transmit ~jkm to Si<br>
+  Form 64-jk bits of 1's mask of Si from right<br>
+  Form jk bits of 1's mask in Si from left<br>
+  Logical product of (Sj) and (Sk) to Si<br>
+  Logical product of (Sj) and ~(Sk) to Si<br>
+  Logical difference of (Sj) and (Sk) to Si<br>
+  Logical difference of (Sj) and ~(Sk) to Si</small></td></tr>
+ </table>
+ <table>
+  <tr><td><b>05 GROUP</b></td></tr>
+ </table>
+ <table border>
+  <tr><td width=20><small>
+  <font color=blue>051&nbsp;ijk<br>052&nbsp;ijk<br>053&nbsp;ijk<br>
+  054&nbsp;ijk<br>055&nbsp;ijk</font><br>
+</td>
+  <td width=310><small>
+  Logical sum of (Sj) and (Sk) to Si<br>
+  Shift (Si) left jk places to S0<br>
+  Shift (Si) right 64-jk places to S0<br>
+  Shift (Si) left jk places to Si<br>
+  Shift (Si) right 64-jk places to Si<br>
+ </table>
+
+ <td>&nbsp; &nbsp;</td>
+ <td>
+
+ <table>
+  <tr><td><b>06 GROUP</b></td></tr>
+ </table>
+ <table border>
+  <tr><td width=20><small><font color=blue>060&nbsp;ijk<br> 061&nbsp;ijk</font><br>
+</small></td>
+  <td width=310><small>
+   Integer sum of (Sj) and (Sk) to Si<br>
+   Integer difference of (Sj) and (Sk) to Si<br>
+   </small></td></tr>
+ </table>
+
+ <table>
+  <tr><td><b>07 GROUP</b></td></tr>
+ </table>
+ <table border>
+  <tr><td width=20><small>
+  <font color=blue>074&nbsp;ijk<br>075&nbsp;ijk<br>076&nbsp;ijk<br>077&nbsp;ijk
+  </font></small></td>
+  <td width=310><small>
+  Floating reciprocal approximation of (Sj) to Si <br>
+  Transmit (Ak) or normalised FP constant to Si  <br>
+  Transmit (RTC) to Si <br>
+</small></td></tr>
+ </table>
+
+ <table>
+  <tr><td><b>10/11/12/13 GROUP</b></td></tr>
+ </table>
+ <table border>
+  <tr><td width=20><small><font color=blue>10&nbsp;hijk<br>11&nbsp;hijk<br>
+  12&nbsp;hijk<br>13&nbsp;hijk
+	</font></small></td>
+  <td width=310><small>
+  Read from ((Ah) + jkm) to Ai <br>
+  Store (Ai) to (Ah) + jkm <br>
+  Read from ((Ah + jkm) to Si <br>
+  Store (Si) to (Ah) + jkm
+  </small></td></tr>
+ </table>
+
+ <table>
+  <tr><td><b>14 GROUP</b></td></tr>
+ </table>
+ <table border>
+  <tr><td width=20><small><font color=blue>140&nbsp;ijk<br>
+  141&nbsp;ijk<br>142&nbsp;ijk<br>143&nbsp;ijk<br>144&nbsp;ijk<br>
+  145&nbsp;ijk<br>146&nbsp;ijk<br><br>
+  147 ijk<br><br>
+  </font></small></td>
+  <td width=310><small>
+  Logical products of (Sj) and (Vk) to Vi<br>
+  Logical products of (Vj) and (Vk) to Vi <br>
+  Logical sums of (Sj) and (Vk) to Vi  <br>
+  Logical sums of (Vj) and (Vk) to Vi <br>
+  Logical differences of (Sj) and (Vk) to Vi <br>
+  Logical differences of (Vj) and (Vk) to Vi <br>
+  If VM bit = 1, transmit (Sj) to Vi<br> 
+  If VM bit = 0, transmit (Vk) to Vi <br>
+  If VM bit = 1, transmit (Vj) to Vi <br>
+  If VM bit = 0, transmit (Vk) to Vi 
+     </small></td></tr>
+ </table>
+
+ <table>
+  <tr><td><b>15 GROUP</b></td></tr>
+ </table>
+ <table border>
+  <tr><td width=20><small><font color=blue>150&nbsp;ijk<br> 151&nbsp;ijk </font><br>
+  <font color=blue> 154&nbsp;ijk<br>155&nbsp;ijk<br>
+  156&nbsp;ijk<br>157&nbsp;ijk</font></small></td>
+  <td width=310><small>
+  Single shift of (Vj) left by (Ak) places to Vi <br>
+  Single shift of (Vj) right by (Ak) places to Vi <br>
+  Integer sums of (Sj) and (Vk) to Vi <br>
+  Integer sums of (Vj) and (Vk) to Vi <br>
+  Integer differences of (Sj) and (Vk) to Vi <br>
+  Integer differences of  (Vj) and (Vk) to Vi <br>
+   </small></td></tr>
+ </table>
+
+ <table>
+  <tr><td><b>16 GROUP</b></td></tr>
+ </table>
+ <table border>
+  <tr><td width=20><small><font color=blue>160&nbsp;ijk <br>161&nbsp;ijk</font><br>
+  </font>
+</small></td>
+  <td width=310><small>
+  Floating products of (Sj) and (Vk) to Vi <br>
+   </small></td></tr>
+ </table>
+
+ <table>
+  <tr><td><b>17 GROUP</b></td></tr>
+ </table>
+ <table border>
+  <tr><td width=20><small><font color=blue>170&nbsp;ijk<br>
+  171&nbsp;ijk<br> 172&nbsp;ijk<br>173&nbsp;ijk</font><br>
+<font color=blue>174&nbsp;ij1<br>174&nbsp;ij2<br></font>
+  <font color=blue>175&nbsp;xjk<br>176&nbsp;ijk<br>177&nbsp;ijk</font></small></td>
+  <td width=310><small>
+  Floating sums of (Sj) and  (Vk) to Vi <br>
+  Floating sums of (Vj) and (Vk) to Vi <br>
+  Floating differences of (Sj) and (Vk) to Vi <br>
+  Floating differences of (Vj) and (Vk) to Vi <br>
+  Population counts of (Vj elements) to Vi elements<br>
+  Pop. count parities of (Vj elements) to Vi elements<br>
+  Test (Vj); enter results into VM; k defines test <br>
+  Block transfer: Memory to Vi <br>
+  Block transfer: (Vj) to Memory 
+   </small></td></tr>
+ </table>
+<table>
+  <tr><td><small> (Aj), (Bjk), (Sj), (Tjk) imply contents of Aj, etc.</small></td></tr>
+  <tr><td><small> (Vj) implies (elements of Vj), etc.</small></td></tr>
+  <tr><td><small> ~ implies "complement of"</small></td></tr>
+
+</table>
+ </td></tr>
+</table>
+</center>
+</html>
