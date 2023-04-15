@@ -119,8 +119,8 @@ The STS functions (SLGC, SMVB, SCMP, BLGC, BMVB, BMVE, SMVF, BSCN and BCMP) perf
 
 <center>
 <table border>
-<tr><td colspan=8 align=center> *Organisational* </td></tr>
-<tr><td> **Function** </td><td> **Action** </td><td> **Function** </td><td>** Action **</td><td> **Function** </td><td> **Action** </td><td> **Function** </td><td>** Action **</td></tr>
+<tr><td colspan=8 align=center> Organisational </td></tr>
+<tr><td> Function </td><td> Action </td><td> Function </td><td> Action </td><td> Function </td><td> Action </td><td> Function </td><td> Action </td></tr>
 <tr><td> BR </td><td> -> <br> (CO = CO + Op) </td><td>EXIT</td><td>  </td><td>  </td><td> </td><td> </td><td>   </td></tr>
 <tr><td> JUMP </td><td>CO = Op </td><td>RETURN</td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
 <tr><td> XC0 </td><td> eXecutive Call<br>not implemented  </td><td> XC1  </td><td> </td><td> XC2 </td><td>  </td><td> XC3  </td><td>   </td></tr>
@@ -157,7 +157,7 @@ The STS functions (SLGC, SMVB, SCMP, BLGC, BMVB, BMVE, SMVF, BSCN and BCMP) perf
 </center>
 
 <center>
-<table border bgcolor="#ffffff">
+<table border>
 <tr><td colspan=2 align=center> **B**</td> <td colspan=4 align=center> **STS/D**</td> <td colspan=2 align=center> **ACC** </td></tr>
 <tr><td> **Function** </td><td> **Action** </td><td> **Function** </td><td> **Action** </td><td> **Function** </td><td> **Action** </td><td> **Function** </td><td> **Action** </td></tr>
 <tr><td> LD  </td><td> B = Op  </td><td>XDO_LD</td><td>XDO = Op</td><td>DO_LD</td><td>DO = Op</td><td> LD  </td><td> ACC = Op  </td></tr>
