@@ -550,7 +550,7 @@ Table 6 lists the program instructions and their actions.
 
 | Instruction | Action |
 |:----------- |:---------------------------------------- |
-|**Org&nbsp;NB_LD&nbsp;V32&nbsp;Z&nbsp;0 &nbsp; &nbsp; &nbsp; &nbsp;** | Loads the value in virtual address 0 into the Name Store and thence into NB, so that NB points to VA 16. |
+|**Org&nbsp;NB_LD&nbsp;V32&nbsp;Z&nbsp;0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;** | Loads the value in virtual address 0 into the Name Store and thence into NB, so that NB points to VA 16. |
 |**STS D_LD V64 NB 3** | Loads the DR register with the descriptor held in VA 19. This is a Type 1 descriptor with size 8 (mandatory for a Type 1 descriptor), length 16 and an origin field that points to the starting byte location in Block 3 of the Local Store where the composite string will be stored. Since descriptors are stored in Block 0, they must be stored as pairs of 32-bit integers; the table below shows how the integer value of the most sigificant word, containing the Type, Size and Length, is constructed. <br>![DR table](images/DR_table.png) |
 |**STS XD_LD V64 NB 0** | Loads the XDR register with the descriptor held in VA 16; the origin of this descriptor points to the first source string which contains just one element, &#168;. |
 |**STS SMVB lit Z 32** | SMVB moves (strictly speaking, *copies*) one byte from the source string to the destination string. The Origin fields of DR and XDR are each incremented by 1 and the Length fields are decremented by one. The destination string initially contains 16 bytes, held as two sequential words in the Local Store, each containing the string '-------'. At the end of the SMVB instruction the first word, *i.e.* the word currently in FRc, contains '&#168;-------'. |
