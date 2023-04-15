@@ -119,7 +119,7 @@ The STS functions (SLGC, SMVB, SCMP, BLGC, BMVB, BMVE, SMVF, BSCN and BCMP) perf
 
 <center>
 <table border>
-<tr><td colspan=8 align=center> **Organisational** </td></tr>
+<tr><td colspan=8 align=center> *Organisational* </td></tr>
 <tr><td> **Function** </td><td> **Action** </td><td> **Function** </td><td>** Action **</td><td> **Function** </td><td> **Action** </td><td> **Function** </td><td>** Action **</td></tr>
 <tr><td> BR </td><td> -> <br> (CO = CO + Op) </td><td>EXIT</td><td>  </td><td>  </td><td> </td><td> </td><td>   </td></tr>
 <tr><td> JUMP </td><td>CO = Op </td><td>RETURN</td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
