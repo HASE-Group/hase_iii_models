@@ -557,8 +557,7 @@ Table 6 lists the program instructions and their actions.
 |**STS XD_LD V64 NB 1** | Loads the XDR register with the descriptor held in VA 17; the origin of this descriptor points to the second source string; this contains the word *hello*.|
 |**STS SMVE lit Z 32**|SMVE moves (*i.e.* copies) the source string to the destination string using an alternating sequence of *load cycles* and *store cycles*; at the end the first word of the destination string contains '&#168;hello--'. |
 |**STS BMVB lit Z 32**| During its *first cycle*, BMVB load the operand (32, the ASCII decimal value of the 'space' character) into the MASK_BYTE register and then moves one copy of BYTE to the destination string; the first word of the destination string now contains '&#168;hello&nbsp;-'. |
-|**STS XD_LD V64 NB 2** |
-<td>Loads the XDR register with the descriptor held in VA 18; the origin of this descriptor points to the third source string; this contains the word *world*.|
+|**STS XD_LD V64 NB 2** | Loads the XDR register with the descriptor held in VA 18; the origin of this descriptor points to the third source string; this contains the word *world*.|
 |**STS SMVE lit Z 34** | At the end of this SMVE instruction the first destination word contains '&#168;hello w' while the second, the word currently shown in FRc, contains 'orld----'.|
 |**STS XD_LD V64 NB 0** | Re-loads the XDR register with the descriptor of the first source string. |
 |**STS SMVF lit Z 32** | This SMVF (String MoVe and Fill) instruction moves the single byte (&#168;) in the source string to the destination string. The destination string is not yet full, however, so at the end of the first *store cycle*, instead of a second *load cycle*, further *store cycles* are sent through OBS to Dop with the function field changed to BMVB. This causes the remainder of the 16-byte destination string to be filled with copies of BYTE, in this case with spaces. |
