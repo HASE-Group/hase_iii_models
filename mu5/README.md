@@ -158,8 +158,8 @@ The STS functions (SLGC, SMVB, SCMP, BLGC, BMVB, BMVE, SMVF, BSCN and BCMP) perf
 
 <center>
 <table border>
-<tr><td colspan=2 align=center> **B**</td> <td colspan=4 align=center> **STS/D**</td> <td colspan=2 align=center> **ACC** </td></tr>
-<tr><td> **Function** </td><td> **Action** </td><td> **Function** </td><td> **Action** </td><td> **Function** </td><td> **Action** </td><td> **Function** </td><td> **Action** </td></tr>
+<tr><td colspan=2 align=center> B</td> <td colspan=4 align=center> STS/D</td> <td colspan=2 align=center> ACC </td></tr>
+<tr><td> Function </td><td> Action </td><td> Function </td><td> Action </td><td> Functio* </td><td> Action </td><td> Function </td><td> Action </td></tr>
 <tr><td> LD  </td><td> B = Op  </td><td>XDO_LD</td><td>XDO = Op</td><td>DO_LD</td><td>DO = Op</td><td> LD  </td><td> ACC = Op  </td></tr>
 <tr><td> LDD </td><td> B = Op - 1 </td><td>XD_LD</td><td>XD = Op</td><td>D_LD</td><td>D = Op</td><td> nop </td><td>  </td></tr>
 <tr><td> SLD </td><td> Stack B<br> B = Op </td><td>STACK </td><td>Stack Op </td><td>D_SLD</td><td>Stack D<br>D = Op</td><td> SLD </td><td> Stack ACC<br> ACC = Op </td></tr>
@@ -270,7 +270,7 @@ Variables used by B, Dr and PROP instructions are normally held in the PROP Name
 - when a B instruction writes to a variable in the OBS Name Store
 
 <center>
-<table border bgcolor=white>
+<table border>
 <tr><td>**CO**</td><td>**Instruction**</td><td>**Action**</td><td>**NS line**</td><td>**Result**</td></tr>
 <tr><td>65536</td><td>Org NB_LD lit Z 16</td><td> NB = literal </td><td> </td><td>RNB = 16 </td></tr>
 <tr><td>65537</td><td>Org SFNB_PL lit Z 22</td><td> SF = NB + literal </td><td> </td><td> RSF = 38 </td></tr>
