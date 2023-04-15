@@ -574,7 +574,7 @@ Table 6 lists the program instructions and their actions.
 |**Org BReq lit Z 6** | If/when the SCMP instruction finds equality (*i.e.* the test bits T1 and T2 are set to =0), this instruction causes a branch to the ACC STOP instruction. |
 |**STS BSCN lit Z 95** | Scans the destination string looking for the &#95; character *i.e.*  the SCMP instruction terminated before the end of the current word was reached, so the descriptor now needs to be moved forward to the start of the next word. This BSCN order leaves DR pointing to the (underscore) separator, so the next instruction: |
 |**STS MOD lit Z 1** | moves DR forwards by 1 to point to the start of the next word. |
-|**STS XD_LD V64 NB 5** | Re-loads XDR to point to the start of 'light'. |
+|**STS&nbsp;XD_LD&nbsp;V64&nbsp;NB&nbsp;5 &nbsp;** | Re-loads XDR to point to the start of 'light'. |
 |**B ADD lit Z 1** | Increments the B register, so that when the loop terminates, B indicates which word in the destination string is the one being sought. |
 |**Org BR lit Z -6** | Branches back to the SCMP order at the start of the loop. |
 |**ACC STOP lit Z 0** | Stops the simulation but, before it reaches the accumulator, causes the contents of those Name Store words and OBS buffers that have been updated to be written back to Local Store. |
