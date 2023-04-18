@@ -2,12 +2,9 @@
 
 The first scoreboard was designed as part of the CDC 6600 as a means of controlling the flow of data between registers and multiple arithmetic units in the presence of inter-instruction dependencies such as Read-After-Write.  Scoreboards are still used today in a variety of modern microprocessor, though most are less complex than that used in the CDC 6600.  The DLX architecture is a generic RISC architecture designed by Hennessy and Patterson and described in early editions of [1]. Two HASE simulation models of architectures with parallel function units and a scoreboard have been built to illustrate the way scoreboards work, one based on the DLX, the other on the MIPS processor.
 
-This website explains why Scoreboards are necessary and how the HASE DLX model works.  The files for the DLX/Scoreboard model can be downloaded
-from <a href="http://www.icsa.inf.ed.ac.uk/research/groups/hase/models/dlx-scb/dlx-scb_v2.9.zip">dlx-scb_v2.9.zip</a><p>
+This website explains why Scoreboards are necessary and how the HASE DLX model works.  The files for the DLX/Scoreboard model can be downloaded from https://github.com/HASE-Group/dlx-scb/tree/V2.9
 
-Instructions on how to use HASE models can be found at
-<a href="http://www.icsa.inf.ed.ac.uk/research/groups/hase/models/use.html"
-target="_blank">Downloading, Installing and Using HASE</a>.
+Instructions on how to use HASE models can be found at https://github.com/HASE-Group/hase_iii_releases
 
 ### Parallel Function Units
 
