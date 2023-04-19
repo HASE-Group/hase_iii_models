@@ -6,9 +6,9 @@ MU5 was the fifth computer system to be designed and built at the University of 
 
 This document describes the design of the MU5 computer, explains how the HASE simulation model works and includes a list of relevant publications. The most recent version of the model (V4.1) includes a Console entity containing a **Prog_No** parameter that can be edited after the model has been loaded into HASE. **Prog_No** can take values of 0, 1. 2 allowing the user to select one of three programs contained in the model.  Program 0 demonstrates the operation of the MU5 Name Store, Program 1 executes a scalar product program, Program 2 demonstrates the use of string processing instructions.
 
-The files for version 4.1 can be downloaded from https://github.com/HASE-Group/mu5/tree/V4.1
+The files for version 4 can be downloaded from <a href="http://www.icsa.inf.ed.ac.uk/research/groups/hase/models/mu5/MU5_V4.1.zip">MU5_V4.1.zip</a>.
 
-Instructions on how to use HASE models can be downloaded from https://github.com/HASE-Group/hase\_iii\_releases
+Instructions on how to use HASE models can be found at <a href="http://www.icsa.inf.ed.ac.uk/research/groups/hase/models/use.html" target="_blank">Downloading, Installing and Using HASE</a>.
 
 ### Overview
 
@@ -108,7 +108,7 @@ Figure 4 shows the instruction set used in the model. The additional *Type of In
 
 **Figure 4. The HASE MU5 instruction set**
 
-The functions are shown in the table below. Empty boxes correspond to functions that have not yet been implemented in the model (and in some cases may never be), or did not exist in the real MU5. "Op" means "operand".
+The functions are shown in Tables 1 and 2 below. Empty boxes correspond to functions that have not yet been implemented in the model (and in some cases may never be), or did not exist in the real MU5. "Op" means "operand".
 
 The B functions correspond exactly to those mplemented in MU5. COMP (*compare*) sets the two test bits T1 (=&nbsp;0 / &#8800;&nbsp;0) and T2 (&#8805;&nbsp;0 / <&nbsp;0) according to the result of <tt>B - operand</tt>; B itself remains unaltered. In the real MU5, a third test bit (T0) was set to 1 if the comparison produced an overflow; in the model, an arithmetic overflow would be caught by the underlying runtime system, so T0 is not implemented.  CINC (*compare & increment*) acts similarly but increments B after the comparison. CINC was intended for use with a subsequent conditional branch instruction in the implementation of *for* loops.
 
@@ -117,67 +117,47 @@ The ACC (Accumulator) functions are implemented in the model in exactly the same
 The STS functions (SLGC, SMVB, SCMP, BLGC, BMVB, BMVE, SMVF, BSCN and BCMP) perform string processing operations. They were designed for use in record processing applications written in languages such as COBOL, PL/1 and Algol68. Their operation is explained in the description of the actions that take place during execution of the String Processing Program (Progam 2 in the model,
 
 
-<center>
-<table border bgcolor="#ffffff">
-<tr><td colspan=8 align=center> **Organisational** </td></tr>
-<tr><td> **Function** </td><td> **Action** </td><td> **Function** </td><td>** Action **</td><td> **Function** </td><td> **Action** </td><td> **Function** </td><td>** Action **</td></tr>
-<tr><td> BR </td><td> -> <br> (CO = CO + Op) </td><td>EXIT</td><td>  </td><td>  </td><td> </td><td> </td><td>   </td></tr>
-<tr><td> JUMP </td><td>CO = Op </td><td>RETURN</td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
-<tr><td> XC0 </td><td> eXecutive Call<br>not implemented  </td><td> XC1  </td><td> </td><td> XC2 </td><td>  </td><td> XC3  </td><td>   </td></tr>
-<tr><td> XC4 </td><td>  </td><td>XC5</td><td> </td><td> XC6 </td><td>  </td><td> STACK LINK  </td><td> </td></tr>
-<tr><td> MS = </td><td>  </td><td> </td><td> </td><td> </td><td> </td><td> SET LINK  </td><td>  </td></tr>
-<tr><td> XNB_LD </td><td> RXNB = Op </td><td>  </td><td>  </td><td> XNB_PL</td><td> RXNB = RXNB + Op </td><td> XNB_ST</td><td> RXNB => Op  </td></tr>
-<tr><td> SF_LD </td><td> RSF = Op </td><td> SF_PL </td><td> RSF = RSF + Op </td><td> SFNB_PL </td><td> RSF = RNB + Op </td><td> SF_ST </td><td> RSF => Op  </td></tr>
-<tr><td> NB_LD </td><td> RNB = Op </td><td> NBSF_PL </td><td> RNB = RSF + Op </td><td> NB_PL </td><td> RNB = RNB + Op </td><td> NB_ST </td><td> RNB => Op  </td></tr>
-<tr>
-<td> BReq </td><td> -> if = 0</td>
-<td> BRne </td><td> -> if /= 0  </td>
-<td> BRge </td><td> -> if >= 0 </td>
-<td> BRlt </td><td> -> if < 0 </td></tr>
-<tr>
-<td> BRle </td><td> -> if =< 0</td>
-<td> BRgr </td><td> -> if > 0  </td>
-<td> OVERFLOW </td><td> -> if overflow <BR>(not implemented) </td>
-<td> BRBn </td><td> -> if Bn = 1 </td></tr>
-<tr>
-<td> Bneq </td><td> Set Bn if = 0</td>
-<td> Bnne </td><td> Set Bn if /= 0  </td>
-<td> Bnge </td><td> Set Bn if >= 0 </td>
-<td> Bnlt </td><td> Set Bn if < 0 </td></tr>
-<tr>
-<td> Bnle </td><td> Set Bn if =< 0</td>
-<td> Bngr </td><td> Set Bn if > 0  </td>
-<td> OVERFLOW </td><td> Set Bn if overflow <BR>(not implemented) </td>
-<td> BnBn </td><td> Set Bn if Bn = 1 </td></tr>
-<tr><td>  </td><td>  </td><td>   </td><td>   </td><td>  </td><td>  </td><td>   </td><td>   </td></tr>
-<tr><td>  </td><td>  </td><td>   </td><td>   </td><td>  </td><td>  </td><td>   </td><td>   </td></tr>
-<tr><td>  </td><td>  </td><td>   </td><td>   </td><td>  </td><td>  </td><td>   </td><td>   </td></tr>
-<tr><td>  </td><td>  </td><td>   </td><td>   </td><td>  </td><td>  </td><td>   </td><td>   </td></tr>
-</table>
-</center>
+| Function | Action | Function | Action | Function | Action | Function | Action |
+| :-------: | :---------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: |
+| BR | -> <br> (CO = CO + Op) | EXIT | | | | | |
+| JUMP |CO = Op |RETURN| | | | | |
+| XC0 | eXecutive&nbsp;Call<br>(not&nbsp;implemented) | XC1  | | XC2 |  | XC3  |   |
+| XC4 |  |XC5| | XC6 |  | STACK&nbsp;LINK  | |
+| MS = |  | | | | | SET LINK  |  |
+| XNB_LD | RXNB = Op |  |  | XNB_PL| RXNB&nbsp;=&nbsp;RXNB&nbsp;+&nbsp;Op | XNB_ST| RXNB&nbsp;=>&nbsp;Op |
+| SF_LD | RSF = Op | SF_PL | RSF&nbsp;=&nbsp;RSF&nbsp;+&nbsp;Op | SFNB_PL | RSF = RNB + Op | SF_ST | RSF => Op  |
+| NB_LD | RNB = Op | NBSF_PL | RNB = RSF + Op | NB_PL | RNB = RNB + Op | NB_ST | RNB => Op  |
+| BReq | -> if = 0 | BRne | -> if /= 0 | BRge | -> if >= 0 | BRlt | -> if < 0 |
+| BRle | -> if =< 0 | BRgr | -> if > 0 | OVERFLOW | -> if overflow <BR>(not implemented) | BRBn | -> if Bn = 1 |
+| Bneq | Set Bn if = 0 | Bnne | Set Bn if /= 0 | Bnge | Set Bn if >= 0 | Bnlt | Set Bn if < 0 |
+| Bnle | Set Bn if =< 0 | Bngr | Set Bn if > 0 | OVERFLOW | Set Bn if overflow <BR>(not implemented) | BnBn | Set&nbsp;Bn&nbsp;if&nbsp;Bn&nbsp;=&nbsp;1 |
+|  |  |   |   |  |  |   |   |
+|  |  |   |   |  |  |   |   |
+|  |  |   |   |  |  |   |   |
+|  |  |   |   |  |  |   |   |
 
-<center>
-<table border bgcolor="#ffffff">
-<tr><td colspan=2 align=center> **B**</td> <td colspan=4 align=center> **STS/D**</td> <td colspan=2 align=center> **ACC** </td></tr>
-<tr><td> **Function** </td><td> **Action** </td><td> **Function** </td><td> **Action** </td><td> **Function** </td><td> **Action** </td><td> **Function** </td><td> **Action** </td></tr>
-<tr><td> LD  </td><td> B = Op  </td><td>XDO_LD</td><td>XDO = Op</td><td>DO_LD</td><td>DO = Op</td><td> LD  </td><td> ACC = Op  </td></tr>
-<tr><td> LDD </td><td> B = Op - 1 </td><td>XD_LD</td><td>XD = Op</td><td>D_LD</td><td>D = Op</td><td> nop </td><td>  </td></tr>
-<tr><td> SLD </td><td> Stack B<br> B = Op </td><td>STACK </td><td>Stack Op </td><td>D_SLD</td><td>Stack D<br>D = Op</td><td> SLD </td><td> Stack ACC<br> ACC = Op </td></tr>
-<tr><td> ST </td><td>  B => Op</td><td>XD_ST</td><td>XD => Op</td><td>D_ST</td><td>D => Op</td><td> ST </td><td>  ACC => Op</td></tr>
-<tr><td> ADD </td><td> B = B + Op </td><td>XDB_LD</td><td>XDB = Op</td><td>DB_LD</td><td>DB = Op</td><td> ADD </td><td> ACC = ACC + Op </td></tr>
-<tr><td> SUB </td><td> B = B - Op </td><td> </td><td> </td><td> </td><td> </td><td> SUB </td><td> ACC = ACC - Op </td></tr>
-<tr><td> MUL </td><td> B = B * Op </td><td> </td><td> </td><td>MOD</td><td>DO = DO + Op<br>DB = DB - Op</td><td> MUL </td><td> ACC = ACC * Op </td></tr>
-<tr><td> DIV </td><td> DUMMY  </td><td>XMOD</td><td>XDO = XDO + Op<br>XDB = XDB - Op </td><td> </td><td> </td><td> DIV </td><td> ACC = ACC / Op </td></tr>
-<tr><td> XOR </td><td> B = B xor Op </td><td> SLGC </td><td> </td><td> BLGC </td><td> </td><td> XOR </td><td> ACC = ACC xor Op </td></tr>
-<tr><td> OR  </td><td> B = B v Op </td><td> SMVB </td><td> </td><td> BMVB </td><td> </td><td> OR  </td><td> ACC = ACC v Op </td></tr>
-<tr><td> SHL </td><td> B = B &#8592; Op </td><td> </td><td> </td><td> BMVE </td><td> </td><td> SHL </td><td> ACC = ACC &#8592; Op </td></tr>
-<tr><td> AND  </td><td> B = B & Op </td><td>  </td><td> </td><td> SMVF </td><td> </td><td> AND </td><td> ACC = ACC & Op </td></tr>
-<tr><td> RSUB </td><td> B = Op - B </td><td> </td><td> </td><td> </td><td> </td><td> RSUB </td><td> ACC = Op - ACC </td></tr>
-<tr><td> COMP </td><td> set T1 &amp; T2 acc.<br>B - Op </td><td> </td><td> </td><td> BSCN</td><td> </td><td> COMP </td><td> set T1 &amp; T2 acc.<br>ACC - Op </td></tr>
-<tr><td> CINC </td><td> set T1 &amp; T2 acc.<br>B - Op; B = B + 1 </td><td> SCMP </td><td> </td><td> BCMP </td><td> </td><td> nop </td><td> </td></tr>
-<tr><td> RDIV </td><td> DUMMY </td><td> </td><td> </td><td> </td><td> </td><td> RDIV </td><td> ACC = Op / B </td></tr>
-</table>
-</center>
+**Table 1. Organisational Instructions**
+
+| Function | Action | Function | Action | Function | Action | Function | Action |
+| :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: |
+| LD  | B = Op  |XDO_LD|XDO = Op|DO_LD|DO = Op| LD  | ACC = Op  |
+| LDD | B = Op - 1 |XD_LD|XD = Op|D_LD|D = Op| nop |  |
+| SLD | Stack B<br> B = Op |STACK |Stack Op |D_SLD|Stack D<br>D = Op| SLD | Stack ACC<br> ACC = Op |
+| ST |  B => Op|XD_ST|XD => Op|D_ST|D => Op| ST |  ACC => Op|
+| ADD | B = B + Op |XDB_LD|XDB = Op|DB_LD|DB = Op| ADD | ACC = ACC + Op |
+| SUB | B = B - Op | | | | | SUB | ACC = ACC - Op |
+| MUL | B = B * Op | | |MOD|DO&nbsp;=&nbsp;DO&nbsp;+&nbsp;Op<br>DB = DB - Op| MUL | ACC = ACC * Op |
+| DIV | DUMMY  |XMOD|XDO&nbsp;=&nbsp;XDO&nbsp;+&nbsp;Op<br>XDB = XDB - Op | | | DIV | ACC = ACC / Op |
+| XOR | B = B xor Op | SLGC | | BLGC | | XOR | ACC&nbsp;=&nbsp;ACC&nbsp;xor&nbsp;Op |
+| OR  | B = B v Op | SMVB | | BMVB | | OR  | ACC = ACC v Op |
+| SHL | B = B &#8592; Op | | | BMVE | | SHL | ACC = ACC &#8592; Op |
+| AND  | B = B & Op |  | | SMVF | | AND | ACC = ACC & Op |
+| RSUB | B = Op - B | | | | | RSUB | ACC = Op - ACC |
+| COMP | set&nbsp;T1&nbsp;&amp;&nbsp;T2&nbsp;acc.<br>B - Op | | | BSCN| | COMP | set T1 &amp; T2 acc.<br>ACC - Op |
+| CINC | set T1 &amp; T2 acc.<br>B - Op;<br>B = B + 1 | SCMP | | BCMP | | nop | |
+| RDIV | DUMMY | | | | | RDIV | ACC = Op / B |
+
+**Table 2. B, STS/D and Accumulator Instructions**
 
 #### The Address Space
 
@@ -193,34 +173,32 @@ The design of the Primary Operand Unit in the model follows as closely as possib
 
 The PROP entity models the clocking system used to progress instructions through the pipeline.  As in the real PROP, instructions are moved through the pipeline in a series of *beats*, with each beat being generated when an instruction leaves PROP or is completed by PROP itself (including the (non-)execution of instructions marked Invalid (I)). Each beat propagates through the pipeline from the Execute stage back to the Decode stage, and thence to the IBU, with a 1-unit HASE time delay between stages, representing the 10 ns stagger between stages in the real PROP (this stagger was necessary because of the nature of the ECL technology used to implement MU5). Although the timing between PROP stages is fixed, the actual generation of beats is asynchronous in the model, as it was in MU5; there is no central clock.
 
-The function registers in the real MU5 had extra function bits associated with them, one of which indicated whether or not the instruction was valid.  Other bits indicated a variety of different conditions. These bits are represented in the HASE model by an additional (character) Type field. This Type field is used to represent the various types of instruction and address packets used throughout the model, as shown in Table 1.
+The function registers in the real MU5 had extra function bits associated with them, one of which indicated whether or not the instruction was valid.  Other bits indicated a variety of different conditions. These bits are represented in the HASE model by an additional (character) Type field. This Type field is used to represent the various types of instruction and address packets used throughout the model, as shown in Table 3.
 
-<center>
-<table border bgcolor=white>
- <tr><td> A </td><td> ACC instruction with named variable finding NEQ in PROP NS</td></tr>
- <tr><td> B </td><td> first phase of a Double ACC instruction finding NEQ in PROP NS</td></tr>
- <tr><td> C </td><td> Compare result </td></tr>
- <tr><td> D </td><td> first phase of a Double instruction </td></tr>
- <tr><td> F </td><td> "From address" for branch prediction </td></tr>
- <tr><td> I </td><td> Invalid instruction </td></tr>
- <tr><td> K </td><td> acKnowledge packet, e.g. B to Highway to PROP </td></tr>
- <tr><td> L </td><td> Load phase of a string-string order </td></tr>
- <tr><td> M </td><td> Modifier request to B-Arithmetic Unit </td></tr>
- <tr><td> N </td><td> PROP Name Store NEQ request </td></tr>
- <tr><td> O </td><td> Ordinary instruction request </td></tr>
- <tr><td> P </td><td> Priority instruction request (as a result of a branch) </td></tr>
- <tr><td> R </td><td> Read packet to memory </td></tr>
- <tr><td> S </td><td> Sequence bit - first instruction of a predicted sequence 
- <br> Store phase of a byte/string order in SEOP <br>SAC = source of NEQ data in PROP Name Store
-</td></tr>
- <tr><td> T </td><td> "To address", = new CO value, may be used for branch prediction</td></tr>
- <tr><td> U </td><td> version of V used in PROP Assemble stage to select an operand read from OBS Name Store </td></tr>
- <tr><td> V </td><td> Valid instruction </td></tr>
- <tr><td> W </td><td> Write packet (from B or Acc or to memory) </td></tr>
- <tr><td> Z </td><td> STOP packet from ACC to PROP </td></tr>
-</table>
-**Table 1 Packet Types**
-</center>
+| Type | Use|
+| :--- | :--------------------------------------------------------- |
+| A | ACC instruction with named variable finding NEQ in PROP NS |
+| B | first phase of a Double ACC instruction finding NEQ in PROP NS |
+| C | Compare result |
+| D | first phase of a Double instruction |
+| F | "From address" for branch prediction |
+| I | Invalid instruction |
+| K | acKnowledge packet, e.g. B to Highway to PROP |
+| L | Load phase of a string-string order |
+| M | Modifier request to B-Arithmetic Unit |
+| N | PROP Name Store NEQ request |
+| O | Ordinary instruction request |
+| P | Priority instruction request (as a result of a branch) |
+| R | Read packet to memory |
+| S | Sequence bit - first instruction of a predicted sequence  <br> Store phase of a byte/string order in SEOP <br>SAC = source of NEQ data in PROP Name Store |
+| T | "To address", = new CO value, may be used for branch prediction|
+| U | Version of V used in PROP Assemble stage to select an operand read from OBS Name Store |
+| V | Valid instruction |
+| W | Write packet (from B or Acc or to memory) |
+| Z | STOP packet from ACC to PROP |
+
+**Table 3. Packet Types**
+
 
 The influence of these Types on the various actions that occur in the processor as different instructions are executed is explained below with reference to the execution of the demonstration programs pre-loaded into the three different versions of the model.
 
@@ -255,7 +233,7 @@ The Local Store is modelled as four blocks of 256 words with blocks 0 and 2 bein
 
 ### Demonstration Program (Program 1)
 
-The demonstration program contained in the model is shown in Table 2. During its execution it demonstrates the way in which many of the MU5 instructions were implemented by the MU5 hardware, particularly the way in which the Name Store worked. Table 2 lists the instructions in the program, showing their virtual addresses (CO value), their actions and the results they produce. Below the table is a detailed explanation of what happens in the model as each instruction is executed.
+The demonstration program contained in the model is shown in Table 4. During its execution it demonstrates the way in which many of the MU5 instructions were implemented by the MU5 hardware, particularly the way in which the Name Store worked. Table 4 lists the instructions in the program, showing their virtual addresses (CO value), their actions and the results they produce. Below the table is a detailed explanation of what happens in the model as each instruction is executed.
 
 Variables used by B, Dr and PROP instructions are normally held in the PROP Name Store, while variables used by ACC instructions are normally held in the OBS Name Store. However, because Name Store lines hold 64-bit store words, a 32-bit variable used by a B instruction can sometimes be part of the same 64-bit store word as an adjacent 32-bit variable used by an ACC instruction, and because the Name Store protocol is copy-back rather than write-through, variables can sometimes be in the "*wrong*" Name store.  To avoid "*sloshing*", *i.e.* variables being transferred back and forth between Name Stores, a variable is only moved between Name Stores when it is the target of a write instruction. The demonstration program shows what happens in the Name Stores:
 
@@ -269,65 +247,61 @@ Variables used by B, Dr and PROP instructions are normally held in the PROP Name
 - when a B instruction reads a variable in the OBS Name Store
 - when a B instruction writes to a variable in the OBS Name Store
 
-<center>
-<table border bgcolor=white>
-<tr><td>**CO**</td><td>**Instruction**</td><td>**Action**</td><td>**NS line**</td><td>**Result**</td></tr>
-<tr><td>65536</td><td>Org NB_LD lit Z 16</td><td> NB = literal </td><td> </td><td>RNB = 16 </td></tr>
-<tr><td>65537</td><td>Org SFNB_PL lit Z 22</td><td> SF = NB + literal </td><td> </td><td> RSF = 38 </td></tr>
-<tr><td>65538</td><td>B LD V32 NB 0</td><td> B = [VA 8.0] </td><td> P0 </td><td> B = 528 </td></tr>
-<tr><td>65539</td><td>B ADD V32 NB 1</td><td> B = B + [VA 8.1]  </td><td> P0 </td><td> B = 1057 </td></tr>
-<tr><td>65540</td><td>B MUL V32 NB 2</td><td> B = B * [VA 9.0]  </td><td> P1 </td><td>B = 560210  </td></tr>
-<tr><td>65541</td><td>B ST V32 NB 3</td><td> B =&#62; [VA 9.1] </td><td> P1 </td><td> [VA 9.1] = 560210 </td></tr>
-<tr><td>65542</td><td>B SUB V32 NB 4</td><td> B = B - [VA 10.0] </td><td> P2 </td><td> B = 559678 </td></tr>
-<tr><td>65543</td><td>B DIV V32 NB 6</td><td> B = B (dummy order)</td><td> P3 </td><td> B = 559678 </td></tr>
-<tr><td>65544</td><td>B XOR V32 NB 8</td><td> B = B xor [VA 12.0] </td><td> P4 </td><td> B = 559142 </td></tr>
-<tr><td>65545</td><td>B OR V32 NB 10</td><td> B = B v [VA 13.0] </td><td> P5 </td><td> B = 559678 </td></tr>
-<tr><td>65546</td><td>B SHL lit Z 3</td><td> B = B &#60; literal 3 </td><td> </td><td> B = 4477424 </td></tr>
-<tr><td>65547</td><td>B AND V32 NB 12</td><td> B = B &amp; [VA 14.0] </td><td> P6 </td><td> B = 16 </td></tr>
-<tr><td>65548</td><td>B RDIV V32 NB 18</td><td> B = B (dummy order) </td><td> P7 </td><td> B = 16 </td></tr>
-<tr><td>65549</td><td>B RSUB V32 NB 17</td><td> B = [VA 16.1] - B </td><td> P0 </td><td> B = 529 </td></tr>
-<tr><td>65550</td><td>B ST V32 NB 11</td><td> B =&#62; [VA 13.1] </td><td> P5 </td><td> [VA 13.1] = 529 </td></tr>
-<tr><td>65551</td><td>B LD V32 NB 10</td><td> B = [VA 13.0] </td><td> P5 </td><td> B = 538 </td></tr>
-<tr><td>65552</td><td>B ADD V32 NB 20</td><td> B = B + [VA 18.0] </td><td> P1 </td><td> B = 1086 </td></tr>
-<tr><td>65553</td><td>B ST V32 NB 13</td><td>B =&#62; [VA 14.1] </td><td> P6 </td><td> [VA14.1] = 1086</td></tr>
-<tr><td>65554</td><td>B SLD V32 NB 9</td><td>SF = SF + 2 <br> B =&#62; [VA 20.1] <br> B = [VA 12.1]  </td>
-<td> <br> P2<br>P4 </td><td> RSF = 40 <br> [VA 20] = 0,1086 <br> B = 537 </td></tr>
-<tr><td>65555</td><td>STS STACK V32 NB 11</td><td> SF = SF + 2 <br>[VA 21] = 0,[VA 14.1] </td><td><br> P3 P5</td><td> RSF = 42 <br>[VA 21] = 0,529</td></tr>
-<tr><td>65556</td><td>Org NBSF_PL lit Z -2</td><td> NB = SF + literal </td> <td> </td><td>NB = 40</td></tr>
-<tr><td>65557</td><td>Org SFNB_PL lit Z 20</td><td> SF = NB + literal </td> <td> </td><td>SF = 60</td></tr>
-<tr><td>65558</td><td>ACC LD V32 NB 1</td><td> ACC = [VA 20.1]  </td> <td> P2</td><td> ACC = 1086</td></tr>
-<tr><td>65559</td><td>ACC ADD V32 NB 3</td><td> ACC = ACC + [VA 21.1] </td> <td> P3</td><td> ACC = 1615</td></tr>
-<tr><td>65560</td><td>ACC MUL V32 NB 4</td><td> ACC = ACC * [VA 22.0] </td> <td> O0</td><td> ACC = 897940</td></tr>
-<tr><td>65561</td><td>ACC ST V32 NB 0</td><td> ACC =&#62; [VA 20.0] </td> <td> P2 -&#62; O1 </td><td> [VA 20] = 897940,1086</td></tr>
-<tr><td>65562</td><td>ACC SUB V32 NB 6</td><td> ACC = ACC - [VA 23.0]  </td> <td> O2</td><td> ACC = 897382</td></tr>
-<tr><td>65563</td><td>ACC DIV V32 NB 8</td><td> ACC = ACC / [VA 24.0]  </td> <td> O3 </td><td> ACC = 1602 </td></tr>
-<tr><td>65564</td><td>ACC XOR V32 NB 11</td><td> ACC = ACC xor [VA 25.1]   </td> <td> O4</td><td> ACC = 1137</td></tr>
-<tr><td>65565</td><td>ACC OR V32 NB 12</td><td> ACC = ACC v [VA 26.0]  </td> <td> O5</td><td> ACC = 1653</td></tr>
-<tr><td>65566</td><td>ACC SHL lit Z 2</td><td> ACC = ACC &#60; literal 2  </td> <td> O5</td><td> ACC = 6612</td></tr>
-<tr><td>65567</td><td>ACC AND V32 NB 15</td><td> ACC = ACC &amp; [VA27.1]  </td> <td> O6</td><td> ACC = 20</td></tr>
-<tr><td>65568</td><td>ACC RDIV V32 NB 16</td><td> ACC = [VA 28.0] / ACC   </td> <td> O7</td><td> ACC = 28</td></tr>
-<tr><td>65569</td><td>ACC RSUB V32 NB 18</td><td> ACC = [VA 29.0] - ACC   </td> <td> O0</td><td> ACC = 542</td></tr>
-<tr><td>65570</td><td>ACC ST V32 NB 15</td><td> ACC =&#62; [VA 27.1] </td> <td> O6</td><td> [VA27.1] = 542</td></tr>
-<tr><td>65571</td><td>ACC LD V32 NB 14</td><td> ACC = [VA 27.0] </td> <td> O6</td><td> ACC = 566</td></tr>
-<tr><td>65572</td><td>ACC ADD V32 NB 20</td><td> ACC = ACC + [VA 30.0] </td> <td> O1</td><td> ACC = 1138</td></tr>
-<tr><td>65573</td><td>ACC ST V32 NB 13</td><td> ACC =&#62; [VA 26.1] </td> <td> O5</td><td> [VA 26.1] = 1138</td></tr>
-<tr><td>65574</td><td>ACC SLD V32 NB 9</td><td> SF = SF + 2 <br> ACC =&#62; [VA 31.1] <br> ACC = [VA 24.1]  </td> <td> <br> O2<br> O3</td><td> RSF = 62 <br> [VA 31] = 0,1138 <br> ACC = 561 </td></tr>
-<tr><td>65575</td><td>B LD stack Z 0</td><td> B = [VA 31.1] <br> SF = SF - 2</td> <td> O2 <br> -</td><td> B = 1138<br> SF = 60 </td></tr>
-<tr><td>65576</td><td>B ST V32 NB 10</td><td> B = [VA 25.0] </td> <td> O4 -&#62; P4</td><td> [VA25.0] = 1138</td></tr>
-<tr><td>65577</td><td>Org NB_LD V32 Z 0</td><td>NB = [VA 0.0] </td> <td>P5 </td><td>RNB = 8 </td></tr>
-<tr><td>65578</td><td>Org SFNB_PL lit Z 6</td><td>SF = NB + literal  </td> <td> </td><td>RSF = 14 </td></tr>
-<tr><td>65579</td><td>STS D_LD V64 NB 0</td><td>D = [VA 4]  </td> <td>P6 </td><td>DR_TSB = 1 3 10<br>DR_O = 524288  </td></tr>
-<tr><td>65580</td><td>STS XD_LD V64 NB 1</td><td>XD = [VA 5]  </td> <td>P7 </td><td>XDR_TSB = 1 3 10<br> XDR_O = 524328 </td></tr>
-<tr><td>65581</td><td>STS MOD lit Z 5</td><td>DB = DB - literal<br>DO = DO + literal  </td> <td> </td><td>DR_B = 5<br>DR_O = 524293</td></tr>
-<tr><td>65582</td><td>STS XMOD lit Z 3</td><td>XDB = XDB - literal<br>XDO = XDO + literal  </td> <td> </td><td>XDR_O = 7<br>XDR_O = 534331 </td></tr>
-<tr><td>65583</td><td>STS D_ST V64 NB 2</td><td>D => [VA 6] </td> <td>P0 </td><td>[VA 6] = 1476395013 <br>524293 </td></tr>
-<tr><td>65584</td><td>STS XD_ST V64 NB 3</td><td>XD => [VA 7]</td> <td>P1 </td><td>[VA 7] = 1476395015 <br>524331 </td></tr>
-<tr><td>65585</td><td>STS D_SLD V64 NB 1</td><td>SF = SF + 2<br>D => [VA 8]<br>D = [VA 5]</td> <td>P2 </td><td>RSF = 16<br> [VA 8] = 1476395013 <br>524293<br>DR_TSB = 1 3 10<br>DR_O = 524328 </td></tr>
-<tr><td>65586</td><td>ACC STOP lit Z 0</td><td> Stops simulation </td> <td> </td><td> </td></tr>
-</table>
+|**CO**|**Instruction**|**Action**|**NS line**|**Result**|
+| :--- | :------------ | :-------- | :---------- | :------|
+|65536|Org NB_LD lit Z 16| NB = literal | |RNB = 16 |
+|65537|Org SFNB_PL lit Z 22| SF = NB + literal | | RSF = 38 |
+|65538|B LD V32 NB 0| B = [VA 8.0] | P0 | B = 528 |
+|65539|B ADD V32 NB 1| B = B + [VA 8.1]  | P0 | B = 1057 |
+|65540|B MUL V32 NB 2| B = B * [VA 9.0]  | P1 |B = 560210  |
+|65541|B ST V32 NB 3| B =&#62; [VA 9.1] | P1 | [VA 9.1] = 560210 |
+|65542|B SUB V32 NB 4| B = B - [VA 10.0] | P2 | B = 559678 |
+|65543|B DIV V32 NB 6| B = B (dummy order)| P3 | B = 559678 |
+|65544|B XOR V32 NB 8| B = B xor [VA 12.0] | P4 | B = 559142 |
+|65545|B OR V32 NB 10| B = B v [VA 13.0] | P5 | B = 559678 |
+|65546|B SHL lit Z 3| B = B &#60; literal 3 | | B = 4477424 |
+|65547|B AND V32 NB 12| B = B &amp; [VA 14.0] | P6 | B = 16 |
+|65548|B RDIV V32 NB 18| B = B (dummy order) | P7 | B = 16 |
+|65549|B RSUB V32 NB 17| B = [VA 16.1] - B | P0 | B = 529 |
+|65550|B ST V32 NB 11| B =&#62; [VA 13.1] | P5 | [VA 13.1] = 529 |
+|65551|B LD V32 NB 10| B = [VA 13.0] | P5 | B = 538 |
+|65552|B ADD V32 NB 20| B = B + [VA 18.0] | P1 | B = 1086 |
+|65553|B ST V32 NB 13|B =&#62; [VA 14.1] | P6 | [VA14.1] = 1086|
+|65554|B SLD V32 NB 9|SF = SF + 2 <br> B =&#62; [VA 20.1] <br> B = [VA 12.1] |  <br> P2<br>P4 | RSF = 40 <br> [VA 20] = 0,1086 <br> B = 537 |
+|65555|STS STACK V32 NB 11| SF = SF + 2 <br>[VA 21] = 0,[VA 14.1] |<br> P3 P5| RSF = 42 <br>[VA 21] = 0,529|
+|65556|Org NBSF_PL lit Z -2| NB = SF + literal </td> <td> |NB = 40|
+|65557|Org SFNB_PL lit Z 20| SF = NB + literal </td> <td> |SF = 60|
+|65558|ACC LD V32 NB 1| ACC = [VA 20.1]  </td> <td> P2| ACC = 1086|
+|65559|ACC ADD V32 NB 3| ACC = ACC + [VA 21.1] </td> <td> P3| ACC = 1615|
+|65560|ACC MUL V32 NB 4| ACC = ACC * [VA 22.0] </td> <td> O0| ACC = 897940|
+|65561|ACC ST V32 NB 0| ACC =&#62; [VA 20.0] </td> <td> P2 -&#62; O1 | [VA 20] = 897940,1086|
+|65562|ACC SUB V32 NB 6| ACC = ACC - [VA 23.0]  </td> <td> O2| ACC = 897382|
+|65563|ACC DIV V32 NB 8| ACC = ACC / [VA 24.0]  </td> <td> O3 | ACC = 1602 |
+|65564|ACC XOR V32 NB 11| ACC = ACC xor [VA 25.1]   </td> <td> O4| ACC = 1137|
+|65565|ACC OR V32 NB 12| ACC = ACC v [VA 26.0]  </td> <td> O5| ACC = 1653|
+|65566|ACC SHL lit Z 2| ACC = ACC &#60; literal 2  </td> <td> O5| ACC = 6612|
+|65567|ACC AND V32 NB 15| ACC = ACC &amp; [VA27.1]  </td> <td> O6| ACC = 20|
+|65568|ACC RDIV V32 NB 16| ACC = [VA 28.0] / ACC   </td> <td> O7| ACC = 28|
+|65569|ACC RSUB V32 NB 18| ACC = [VA 29.0] - ACC   </td> <td> O0| ACC = 542|
+|65570|ACC ST V32 NB 15| ACC =&#62; [VA 27.1] </td> <td> O6| [VA27.1] = 542|
+|65571|ACC LD V32 NB 14| ACC = [VA 27.0] </td> <td> O6| ACC = 566|
+|65572|ACC ADD V32 NB 20| ACC = ACC + [VA 30.0] </td> <td> O1| ACC = 1138|
+|65573|ACC ST V32 NB 13| ACC =&#62; [VA 26.1] </td> <td> O5| [VA 26.1] = 1138|
+|65574|ACC SLD V32 NB 9| SF = SF + 2 <br> ACC =&#62; [VA 31.1] <br> ACC = [VA 24.1]  </td> <td> <br> O2<br> O3| RSF = 62 <br> [VA 31] = 0,1138 <br> ACC = 561 |
+|65575|B LD stack Z 0| B = [VA 31.1] <br> SF = SF - 2</td> <td> O2 <br> -| B = 1138<br> SF = 60 |
+|65576|B ST V32 NB 10| B = [VA 25.0] </td> <td> O4 -&#62; P4| [VA25.0] = 1138|
+|65577|Org NB_LD V32 Z 0|NB = [VA 0.0] </td> <td>P5 |RNB = 8 |
+|65578|Org SFNB_PL lit Z 6|SF = NB + literal  </td> <td> |RSF = 14 |
+|65579|STS D_LD V64 NB 0|D = [VA 4]  </td> <td>P6 |DR_TSB = 1 3 10<br>DR_O = 524288  |
+|65580|STS XD_LD V64 NB 1|XD = [VA 5]  </td> <td>P7 |XDR_TSB = 1 3 10<br> XDR_O = 524328 |
+|65581|STS MOD lit Z 5|DB = DB - literal<br>DO = DO + literal  </td> <td> |DR_B = 5<br>DR_O = 524293|
+|65582|STS XMOD lit Z 3|XDB = XDB - literal<br>XDO = XDO + literal  </td> <td> |XDR_O = 7<br>XDR_O = 534331 |
+|65583|STS D_ST V64 NB 2|D => [VA 6] </td> <td>P0 |[VA 6] = 1476395013 <br>524293 |
+|65584|STS XD_ST V64 NB 3|XD => [VA 7]</td> <td>P1 |[VA 7] = 1476395015 <br>524331 |
+|65585|STS D_SLD V64 NB 1|SF = SF + 2<br>D => [VA 8]<br>D = [VA 5]</td> <td>P2 |RSF = 16<br> [VA 8] = 1476395013 <br>524293<br>DR_TSB = 1 3 10<br>DR_O = 524328 |
+|65586|ACC STOP lit Z 0| Stops simulation </td> <td> | |
 
-**Table 2 Demonstration Program**
-</center>
+**Table 4. Demonstration Program**
 
 #### Org NBld lit Z 16
 
@@ -339,7 +313,7 @@ This non-overlapped base manipulation instruction adds the literal operand 22 to
 
 #### B LD V32 NB 0
 
-This instruction loads the B register with the value of the 32-bit word held at the virtual address formed by adding 0 to the value in RNB, *i.e.* address 16. Because Name Store lines hold 64-bit words, this address is shown as 8.0 in Table 2, *i.e.*  it is the 32-bit word held in the most significant half of 64-bit word 8. So address 8 is presented to the virtual address field of the Name Store in the Associate Stage of the PROP pipeline.  The virtual address field contains three subfields: the virtual address itself, a Valid bit and an Altered bit. Initially the Valid and Altered bits are all set to 0, so this first Name Store access does not find a match with any of the entries because they are all invalid. This is detected when the instruction reaches the Read stage where the content of the Line Register (LR) is tested. LR contains one bit per line, each showing the result of the match with that line.  Only one line, or none, will show a match for any one instruction, in this case none. This constitutes a Name Store Non-Equivalence (NSNE) which is dealt with as follows.
+This instruction loads the B register with the value of the 32-bit word held at the virtual address formed by adding 0 to the value in RNB, *i.e.* address 16. Because Name Store lines hold 64-bit words, this address is shown as 8.0 in Table 4, *i.e.*  it is the 32-bit word held in the most significant half of 64-bit word 8. So address 8 is presented to the virtual address field of the Name Store in the Associate Stage of the PROP pipeline.  The virtual address field contains three subfields: the virtual address itself, a Valid bit and an Altered bit. Initially the Valid and Altered bits are all set to 0, so this first Name Store access does not find a match with any of the entries because they are all invalid. This is detected when the instruction reaches the Read stage where the content of the Line Register (LR) is tested. LR contains one bit per line, each showing the result of the match with that line.  Only one line, or none, will show a match for any one instruction, in this case none. This constitutes a Name Store Non-Equivalence (NSNE) which is dealt with as follows.
 
 A hold-up is set (in the PROP entity) such that the Decode, Add, Associate and Read stages of the pipeline enter the Held state until the NSNE actions have been completed.  The failing address is carried through the PROP pipeline with the instruction marked as an N Type in the model. When this instruction reaches the Execute stage it is sent to the Descriptor Addressing Unit and thence to OBS. The OBS Name Store is meant to store values being used as variables in Accumulator instructions. However, names can sometimes be in the "*wrong*" Name Store, *e.g.* because a 32-bit name being used in a B instruction and a 32-bit name being used by an Accumulator instruction can be in the same 64-bit store word, so a check must always be made in the OBS Name Store. OBS sets a variable in PROP (not displayed in the model) to indicate the source of the required store word (OBS or the Store Access Control Unit (SAC)).  Since this is a B instruction, and since the OBS Name Store is empty at this point, the required store word will come from SAC, so OBS sends the address to SAC, which accesses the CPRs to translate the virtual address to a real address, and this is sent to the Local Store.
 
@@ -349,11 +323,11 @@ The value read from the Local Store is returned to SAC and thence to PROP, which
 
 #### B ADD V32 NB 1
 
-This instruction adds to the B register the value held at the virtual address formed by adding 1 to the value in RNB, *i.e.* address 17 (8.1 in Table 2).  This address does not cause an NSNE since the virtual address of the corresponding 64-bit quantity (8) is already in line 0 of the virtual address field of the Name Store. The value in line 0 is simply read from the Value Field and the Assemble stage selects the value in the l.s. half (529).  The result in B is 1057.
+This instruction adds to the B register the value held at the virtual address formed by adding 1 to the value in RNB, *i.e.* address 17 (8.1 in Table 4).  This address does not cause an NSNE since the virtual address of the corresponding 64-bit quantity (8) is already in line 0 of the virtual address field of the Name Store. The value in line 0 is simply read from the Value Field and the Assemble stage selects the value in the l.s. half (529).  The result in B is 1057.
 
 #### B MUL V32 NB 2
 
-This instruction multiplies the value in the B register by the value held in the m.s. half of the word at the virtual address formed by adding 2 to the value in RNB, *i.e.* address 18 (32-bit word 9.0 in Table 2). This address causes an NSNE that updates line 1 of the Name Store with virtual address 9 and values 530 and 531. The result in B is 560210.
+This instruction multiplies the value in the B register by the value held in the m.s. half of the word at the virtual address formed by adding 2 to the value in RNB, *i.e.* address 18 (32-bit word 9.0 in Table 4). This address causes an NSNE that updates line 1 of the Name Store with virtual address 9 and values 530 and 531. The result in B is 560210.
 
 #### B ST V32 NB 3
 
@@ -532,27 +506,23 @@ The scalar (or *dot*) product program (Program 2) forms the sum of the products 
 
 **Figure 5. Scalar Product example**
 
-Table 3 lists the program instructions, showing their virtual addresses (CO values) and their actions. The explanation below the table of what happens in the model as the program is executed assumes familiarity with the explanations given above of the actions of the instructions in the Name Store demonstration program.
+Table 5 lists the program instructions, showing their virtual addresses (CO values) and their actions. The explanation below the table of what happens in the model as the program is executed assumes familiarity with the explanations given above of the actions of the instructions in the Name Store demonstration program.
 
-<center>
-<table border bgcolor=white>
-<tr><td>**CO**</td> <td>**Instruction**</td> <td>**Action**</td></tr>
-<tr><td>65536</td> <td>Org NBld V32 Z 0</td><td>NB = [VA 0]</td></tr>
-<tr><td>65537</td> <td>Org SFNBpl lit Z 6</td><td>SF = NB + 6</td></tr>
-<tr><td>65538</td> <td>B LD lit Z 0</td><td>B = 0</td></tr>
-<tr><td>65539</td> <td>ACC LD lit Z 0</td><td> ACC = 0</td></tr>
-<tr><td>65540</td> <td>ACC SLD SB NB 0</td><td> SF = SF + 2<br>ACC =&#62; [VA 4] <br> DR = [VA 0] <br>ACC = [DR.origin + B] </td></tr>
-<tr><td>65541</td> <td>ACC MUL SB NB 1</td><td> DR = [VA 1]<br>ACC = ACC * [DR.origin + B] </td></tr>
-<tr><td>65542</td> <td>B CINC lit Z 9</td> <td>Set T1 & T2 according to
-B - 9 <br> B = B + 1 </td></tr>
-<tr><td>65543</td> <td>ACC ADD stack Z 0</td><td> ACC = ACC + [VA 4]<br> SF = SF - 2</td></tr>
-<tr><td>65544</td> <td>Org BRne lit Z -4</td> <td>If T1 /= 0, CO = CO - 4</td></tr>
-<tr><td>65545</td> <td>ACC ST V32 NB 4</td> <td>ACC =&#62; [VA 2.0]</td></tr>
-<tr><td>65546</td> <td>ACC STOP lit Z 0</td> <td> Stops simulation </td></tr>
-</table>
+|**CO**|**Instruction**|**Action**|
+|:-- |:----------- |:---------|
+|65536|Org NBld V32 Z 0|NB = [VA 0]|
+|65537|Org SFNBpl lit Z 6|SF = NB + 6|
+|65538|B LD lit Z 0|B = 0|
+|65539|ACC LD lit Z 0| ACC = 0|
+|65540|ACC SLD SB NB 0| SF = SF + 2<br>ACC =&#62; [VA 4] <br> DR = [VA 0] <br>ACC = [DR.origin + B] |
+|65541|ACC MUL SB NB 1| DR = [VA 1]<br>ACC = ACC * [DR.origin + B] |
+|65542|B CINC lit Z 9|Set T1 & T2 according to B - 9 <br> B = B + 1 |
+|65543|ACC ADD stack Z 0| ACC = ACC + [VA 4]<br> SF = SF - 2|
+|65544|Org BRne lit Z -4|If T1 /= 0, CO = CO - 4|
+|65545|ACC ST V32 NB 4|ACC =&#62; [VA 2.0]|
+|65546|ACC STOP lit Z 0| Stops simulation |
 
-**Table 3 Scalar Product Program**
-</center>
+**Table 5. Scalar Product Program**
 
 The first two instructions set up the base registers NB and SF. The first (<tt>Org NBld V32 Z 0</tt>) loads RNB with name 0 (= 16). This is an example of how, in compiled code in MU5, Name Base values for each of the procedures in a program were held in the name segment starting at location 0, and accessed using Base 0.  The second instruction (<tt>Org SFNBpl lit Z 6</tt>) adds the literal operand 6 to the value in NB and writes it into SF, thus setting the top-of-stack location to 22, above the named variables that are about to be used for the ACC instructions. It sets S6 invalid.  The next two instructions (<tt>B LD lit Z 0</tt> and <tt>ACC LD lit Z 0</tt>) initialises B and ACC to 0. B holds the index and loop count variable (*i*) and ACC the running total of the scalar product.
 
@@ -576,110 +546,40 @@ The strings are held in Block 3 of the Local Store. Each word in this block cont
 
 There are two types of string processing instruction: *byte-string* and *string-string*. Executing each of them involves the execution of a number of cycles of different types: *first cycle*, *load cycle*, *store cycle* and *compare cycle*. Each instruction starts with a *first cycle* which transfers the operand specified by the instruction to the MASK_BYTE register in Dop. The MASK is used in the BLGC and SLGC (logic) instructions (not yet implemented in this model).  BYTE is used as the source byte in a byte-string instruction and as a filler byte in some string-string instructions. A *load cycle* fetches a byte from the source string in a string-string order, while a *store cycle* writes a byte to the destination string. A *compare cycle* compares the source byte and destination byte (but does not write to the destination byte) and returns the result of the comparison (=, &#62; or &#60;) to Dr.
 
-Table 4 lists the program instructions and their actions.
+Table 6 lists the program instructions and their actions.
 
-<center>
-<table border bgcolor=white>
-<tr><td width='18%'>**Instruction**</td><td>**Action**</td></tr>
-<tr><td>**Org NB_LD V32 Z 0**</td>
-<td>Loads the value in virtual address 0 into the Name Store and thence into NB, so that NB points to VA 16.
-</td></tr>
+| Instruction | Action |
+|:----------- |:---------------------------------------- |
+|**Org&nbsp;NB_LD&nbsp;V32&nbsp;Z&nbsp;0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;** | Loads the value in virtual address 0 into the Name Store and thence into NB, so that NB points to VA 16. |
+|**STS D_LD V64 NB 3** | Loads the DR register with the descriptor held in VA 19. This is a Type 1 descriptor with size 8 (mandatory for a Type 1 descriptor), length 16 and an origin field that points to the starting byte location in Block 3 of the Local Store where the composite string will be stored. Since descriptors are stored in Block 0, they must be stored as pairs of 32-bit integers; the table below shows how the integer value of the most sigificant word, containing the Type, Size and Length, is constructed. <br>![DR table](images/DR_table.png) |
+|**STS XD_LD V64 NB 0** | Loads the XDR register with the descriptor held in VA 16; the origin of this descriptor points to the first source string which contains just one element, &#168;. |
+|**STS SMVB lit Z 32** | SMVB moves (strictly speaking, *copies*) one byte from the source string to the destination string. The Origin fields of DR and XDR are each incremented by 1 and the Length fields are decremented by one. The destination string initially contains 16 bytes, held as two sequential words in the Local Store, each containing the string '-------'. At the end of the SMVB instruction the first word, *i.e.* the word currently in FRc, contains '&#168;-------'. |
+|**STS XD_LD V64 NB 1** | Loads the XDR register with the descriptor held in VA 17; the origin of this descriptor points to the second source string; this contains the word *hello*.|
+|**STS SMVE lit Z 32**|SMVE moves (*i.e.* copies) the source string to the destination string using an alternating sequence of *load cycles* and *store cycles*; at the end the first word of the destination string contains '&#168;hello--'. |
+|**STS BMVB lit Z 32**| During its *first cycle*, BMVB load the operand (32, the ASCII decimal value of the 'space' character) into the MASK_BYTE register and then moves one copy of BYTE to the destination string; the first word of the destination string now contains '&#168;hello&nbsp;-'. |
+|**STS XD_LD V64 NB 2** | Loads the XDR register with the descriptor held in VA 18; the origin of this descriptor points to the third source string; this contains the word *world*.|
+|**STS SMVE lit Z 34** | At the end of this SMVE instruction the first destination word contains '&#168;hello w' while the second, the word currently shown in FRc, contains 'orld----'.|
+|**STS XD_LD V64 NB 0** | Re-loads the XDR register with the descriptor of the first source string. |
+|**STS SMVF lit Z 32** | This SMVF (String MoVe and Fill) instruction moves the single byte (&#168;) in the source string to the destination string. The destination string is not yet full, however, so at the end of the first *store cycle*, instead of a second *load cycle*, further *store cycles* are sent through OBS to Dop with the function field changed to BMVB. This causes the remainder of the 16-byte destination string to be filled with copies of BYTE, in this case with spaces. |
+|**STS D_LD V64 NB 3** | Re-loads the descriptor that points to the start of the destination string.|
+|**STS BSCN lit Z 104** | Scans the destination string looking for ASCII character 104 (h); the order terminates when if finds the 'h' in 'hello'. |
+|**STS BMVB lit Z 72** | Moves (replaces) the 'h' in hello with 'H'. |
+|**STS D_LD V64 NB 4** | Loads the descriptor held in VA20; this descriptor points to a string of digits '00083576' held in Block 3 of the Local Store. |
+|**STS BCMP lit Z 48** | This Byte Compare instruction tests each character in turn for equality with ASCII character 48 (*i.e.* 0); it terminates when it finds the first non-zero digit, *i.e.* 8 and leaves the descriptor in DR pointing to this digit. |
+|**B LD S0 D 0** | Loads the character to which DR is now pointing into the B register; on completion, the value in B is the ASCII decimal code for '8', *i.e.* 56. |
+|**B LD lit Z 0** | Resets B to 0. |
+|**STS XD_LD V64 NB 5** | Loads XDR with the descriptor in VA21; this descriptor points to the start of the string 'Let&#95;there&#95;be&#95;light.' |
+|**STS D_LD V64 NB 6** | Loads DR with the descriptor in VA22; this descriptor points to the start of the string 'light.' |
+|**STS SCMP lit Z 46** | Following the *first cycle*, the String Compare instruction is executed as a sequence of *load cycles* and *compare cycles* in which it compares corresponding bytes of the source and destination strings; it terminates when they differ or when it reaches the end of the destination string; if it reaches the end of the source string before finding an inequality, it uses BYTE as further source bytes. In this case BYTE is the full stop character, so that if the word being sought is at the end of the sentence, as it is here, it will actually be found. |
+|**Org BReq lit Z 6** | If/when the SCMP instruction finds equality (*i.e.* the test bits T1 and T2 are set to =0), this instruction causes a branch to the ACC STOP instruction. |
+|**STS BSCN lit Z 95** | Scans the destination string looking for the &#95; character *i.e.*  the SCMP instruction terminated before the end of the current word was reached, so the descriptor now needs to be moved forward to the start of the next word. This BSCN order leaves DR pointing to the (underscore) separator, so the next instruction: |
+|**STS MOD lit Z 1** | moves DR forwards by 1 to point to the start of the next word. |
+|**STS&nbsp;XD_LD&nbsp;V64&nbsp;NB&nbsp;5 &nbsp;** | Re-loads XDR to point to the start of 'light'. |
+|**B ADD lit Z 1** | Increments the B register, so that when the loop terminates, B indicates which word in the destination string is the one being sought. |
+|**Org BR lit Z -6** | Branches back to the SCMP order at the start of the loop. |
+|**ACC STOP lit Z 0** | Stops the simulation but, before it reaches the accumulator, causes the contents of those Name Store words and OBS buffers that have been updated to be written back to Local Store. |
 
-<tr><td>**STS D_LD V64 NB 3**</td>
-
-<td>Loads the DR register with the descriptor held in VA 19. This is a Type 1 descriptor with size 8 (mandatory for a Type 1 descriptor), length 16 and an origin field that points to the starting byte location in Block 3 of the Local Store where the composite string will be stored. Since descriptors are stored in Block 0, they must be stored as pairs of 32-bit integers; the table below shows how the integer value of the most sigificant word, containing the Type, Size and Length, is constructed.
-
-<center>
-<table border>
-<tr><td> Field</td> <td>Bits</td> <td> Value</td><td> Decimal Value</td></tr>
-<tr><td align=center>Type</td> <td align=center> 0<br>1 </td> <td align=right> 0<br> 1 </td> <td align=right>0 <br>10737418824</td></tr>
-<tr><td align=center>Size</td> <td align=center>2<br>3<br>4</td> <td align=right> 0<br>1<br>1</td> <td align=right>0<br>268435456 <br>134217728</td></tr>
-<tr><td align=center>Length</td> <td>8-23</td> <td align=right></td> <td align=right>16</td></tr>
-<tr><td colspan=3>32-bit word value </td><td align=right> 1476395024</td></tr>
-</table>
-</center></td></tr>
-
-<tr><td>**STS XD_LD V64 NB 0**</td>
-<td> Loads the XDR register with the descriptor held in VA 16; the origin of this descriptor points to the first source string which contains just one element, &#168;.
-</td></tr>
-<tr><td>**STS SMVB lit Z 32**</td>
-<td>SMVB moves (strictly speaking, *copies*) one byte from the source string to the destination string. The Origin fields of DR and XDR are each incremented by 1 and the Length fields are decremented by one. The destination string initially contains 16 bytes, held as two sequential words in the Local Store, each containing the string '-------'. At the end of the SMVB instruction the first word, *i.e.* the word currently in FRc, contains '&#168;-------'.
-</td></tr>
-<tr><td>**STS XD_LD V64 NB 1**</td>
-<td>Loads the XDR register with the descriptor held in VA 17; the origin of this descriptor points to the second source string; this contains the word *hello*.
-</td></tr>
-<tr><td>**STS SMVE lit Z 32**</td>
-<td>SMVE moves (*i.e.* copies) the source string to the destination string using an alternating sequence of *load cycles* and *store cycles*; at the end the first word of the destination string contains '&#168;hello--'.
-</td></tr>
-<tr><td>**STS BMVB lit Z 32**</td>
-<td> During its *first cycle*, BMVB load the operand (32, the ASCII decimal value of the 'space' character) into the MASK_BYTE register and then moves one copy of BYTE to the destination string; the first word of the destination string now contains '&#168;hello&nbsp;-'.
-</td></tr>
-<tr><td>**STS XD_LD V64 NB 2**</td>
-<td>Loads the XDR register with the descriptor held in VA 18; the origin of this descriptor points to the third source string; this contains the word *world*. </td></tr>
-<tr><td>**STS SMVE lit Z 34**</td>
-<td>At the end of this SMVE instruction the first destination word contains '&#168;hello w' while the second, the word currently shown in FRc, contains 'orld----'.
-</td></tr>
-<tr><td>**STS XD_LD V64 NB 0**</td>
-<td>Re-loads the XDR register with the descriptor of the first source string.
- </td></tr>
-<tr><td>**STS SMVF lit Z 32**</td>
-<td>This SMVF (String MoVe and Fill) instruction moves the single byte (&#168;) in the source string to the destination string. The destination string is not yet full, however, so at the end of the first *store cycle*, instead of a second *load cycle*, further *store cycles* are sent through OBS to Dop with the function field changed to BMVB. This causes the remainder of the 16-byte destination string to be filled with copies of BYTE, in this case with spaces.
- </td></tr>
-<tr><td>**STS D_LD V64 NB 3**</td>
-<td> Re-loads the descriptor that points to the start of the destination string.
-</td></tr>
-<tr><td>**STS BSCN lit Z 104**</td>
-<td> Scans the destination string looking for ASCII character 104 (h); the order terminates when if finds the 'h' in 'hello'.
- </td></tr>
-<tr><td>**STS BMVB lit Z 72**</td>
-<td>Moves (replaces) the 'h' in hello with 'H'.
- </td></tr>
-<tr><td>**STS D_LD V64 NB 4**</td>
-<td>Loads the descriptor held in VA20; this descriptor points to a string of digits '00083576' held in Block 3 of the Local Store.
- </td></tr>
-<tr><td>**STS BCMP lit Z 48**</td>
-<td> This Byte Compare instruction tests each character in turn for equality with ASCII character 48 (*i.e.* 0); it terminates when it finds the first non-zero digit, *i.e.* 8 and leaves the descriptor in DR pointing to this digit.
- </td></tr>
-<tr><td>**B LD S0 D 0**</td>
-<td>Loads the character to which DR is now pointing into the B register; on completion, the value in B is the ASCII decimal code for '8', *i.e.* 56.
- </td></tr>
-<tr><td>**B LD lit Z 0**</td>
-<td>Resets B to 0.
- </td></tr>
-<tr><td>**STS XD_LD V64 NB 5**</td>
-<td> Loads XDR with the descriptor in VA21; this descriptor points to the start of the string 'Let&#95;there&#95;be&#95;light.'  
-</td></tr>
-<tr><td>**STS D_LD V64 NB 6**</td>
-  <td> Loads DR with the descriptor in VA22; this descriptor points to the start of the string 'light.'
- </td></tr>
-<tr><td>**STS SCMP lit Z 46**</td>
-<td> Following the *first cycle*, the String Compare instruction is executed as a sequence of *load cycles* and *compare cycles* in which it compares corresponding bytes of the source and destination strings; it terminates when they differ or when it reaches the end of the destination string; if it reaches the end of the source string before finding an inequality, it uses BYTE as further source bytes. In this case BYTE is the full stop character, so that if the word being sought is at the end of the sentence, as it is here, it will actually be found.
-</td></tr>
-<tr><td>**Org BReq lit Z 6**</td>
-<td> If/when the SCMP instruction finds equality (*i.e.* the test bits T1 and T2 are set to =0), this instruction causes a branch to the ACC STOP instruction.
-</td></tr>
-<tr><td>**STS BSCN lit Z 95**</td>
-<td>Scans the destination string looking for the &#95; character *i.e.*  the SCMP instruction terminated before the end of the current word was reached, so the descriptor now needs to be moved forward to the start of the next word. This BSCN order leaves DR pointing to the (underscore) separator, so the next instruction:
- </td></tr>
-<tr><td>**STS MOD lit Z 1**</td>
-<td> moves DR forwards by 1 to point to the start of the next word.
- </td></tr>
-<tr><td>**STS XD_LD V64 NB 5**</td>
-<td>Re-loads XDR to point to the start of 'light'.
- </td></tr>
-<tr><td>**B ADD lit Z 1**</td>
-<td>Increments the B register, so that when the loop terminates, B indicates which word in the destination string is the one being sought.
- </td></tr>
-<tr><td>**Org BR lit Z -6**</td>
-<td>Branches back to the SCMP order at the start of the loop.
- </td></tr>
-<tr><td>**ACC STOP lit Z 0**</td>
-<td>Stops the simulation but, before it reaches the accumulator, causes the contents of those Name Store words and OBS buffers that have been updated to be written back to Local Store.
-</td></tr>
-</table>
-
-**Table 4 String Processing Program**
-</center>
+**Table 6 String Processing Program**
 
 
 ### Bibliography

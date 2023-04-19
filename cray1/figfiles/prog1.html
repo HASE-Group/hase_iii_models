@@ -1,0 +1,113 @@
+<html>
+<body>
+
+
+<table border bgcolor=white>
+<tr><td><b>P</b></td><td><b>IB Action</b></td><td><b>&nbsp;g &nbsp;h i j k </b></td><td><b>Instruction</b></td><td><b>Result</b></td></tr>
+<tr><td>00 </td><td bgcolor="#ffdfdf"> Fill Buffer 0 </td><td>02 2 0 0 0</td><td> Transmit jk to A0 </td><td> A0 = 0</td></tr>
+<tr><td>01 </td><td> </td><td>02 2 1 0 1</td><td> Transmit jk to A1 </td><td> A1 = 1</td></tr>
+<tr><td>02 </td><td> </td><td>02 2 2 0 0</td><td> Transmit jk to A2 </td><td> A2 = 0</td></tr>
+<tr><td>03 </td><td> </td><td>02 2 3 0 0</td><td> Transmit jk to A3 </td><td> A3 = 0</td></tr>
+<tr><td>04 </td><td> </td><td>01 1 0 0 0</td><td> Branch to ijkm if (A0) &#8800; 0 </td><td> </td></tr>
+<tr><td>05 </td><td> </td><td>00 0 0 1 5</td><td>  </td><td> Doesn't branch </td></tr>
+<tr><td>06 </td><td> </td><td>03 0 2 2 1</td><td> Integer sum of (A2) and (A1) to A2  </td><td> A2 = 1</td></tr>
+<tr><td>07 </td><td> </td><td>01 0 0 0 0</td><td> Branch to ijkm if (A0) = 0 </td><td> </td></tr>
+<tr><td>08 </td><td> </td><td>00 0 1 0 0</td><td>  </td><td bgcolor="#ff8f8f">  Branch to P = 000040 </td></tr>
+<tr><td>09 </td><td> </td><td>03 0 3 3 1</td><td> Integer sum of (A3) and (A1) to A3  </td><td> not executed </td></tr>
+<tr><td bgcolor="#ff00ff">0A </td><td bgcolor="#ff00ff">Same Buffer </td><td>00 4 0 0 1</td><td> Normal exit </td><td> Stop (1) </td></tr>
+<tr><td bgcolor="#aacccc">0B </td><td bgcolor="#aacccc">Switch to Buffer 0 </td><td>00 7 0 0 0</td><td> Return jump to ijkm; set B00 to (P) </td><td>  </td></tr>
+<tr><td>0C </td><td> </td><td>00 0 4 0 0</td><td>  </td><td bgcolor="#ffcfff"> Branch to P = 000100 </td></tr>
+<tr><td bgcolor="#00ffff">0D </td><td bgcolor="#00ffff">Overwrite Buffer 0 </td><td>00 6 0 0 0</td><td> Branch to ijkm </td><td> </td></tr>
+<tr><td>0E </td><td> </td><td>00 0 0 1 2</td><td>  </td><td bgcolor="#ff00ff"> Branch to 00000A</td></tr>
+<tr><td>0F </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+<tr><td> ... </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+
+<tr><td>3E </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+<tr><td bgcolor="#ff8f8f">40 </td><td bgcolor="#ff8f8f">Fill Buffer 1</td><td>03 0 2 2 1</td><td> Integer sum of (A2) and (A1) to A2  </td><td> A2 = 2 </td></tr>
+<tr><td>41 </td><td> </td><td>01 3 0 0 0</td><td> Branch to ijkm if (A0) negative </td><td> </td></tr>
+<tr><td>42 </td><td> </td><td>00 0 0 1 5</td><td>  </td><td> Doesn't branch </td></tr>
+<tr><td>43 </td><td> </td><td>03 0 2 2 1</td><td> Integer sum of (A2) and (A1) to A2  </td><td> A2 = 3 </td></tr>
+<tr><td>44 </td><td> </td><td>01 2 0 0 0</td><td> Branch to ijkm if (A0) positive </td><td> </td></tr>
+<tr><td>45 </td><td> </td><td>00 0 2 2 6</td><td>  </td><td bgcolor="#40ff40"> Branch to P = 000096 </td></tr>
+<tr><td>46 </td><td> </td><td>03 0 3 3 1</td><td> Integer sum of (A3) and (A1) to A3  </td><td> not executed </td></tr>
+<tr><td>47 </td><td> </td><td>00 4 0 0 2</td><td> Normal exit </td><td> Stop (2) </td></tr>
+<tr><td>48 </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+<tr><td> ... </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+
+<tr><td>95 </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+<tr><td bgcolor="#40ff40">96 </td><td bgcolor="#8fff8f">Fill Buffer 2</td><td>03 1 0 0 1</td><td> Integer difference of (A0) and (A1) to A0 </td><td> A0 = -1 </td></tr>
+<tr><td>97 </td><td> </td><td>03 0 2 2 1</td><td> Integer sum of (A2) and (A1) to A2  </td><td> A2 = 4 </td></tr>
+<tr><td>98 </td><td> </td><td>01 0 0 0 0</td><td> Branch to ijkm if (A0) = 0 </td><td> </td></tr>
+<tr><td>99 </td><td> </td><td>00 0 0 1 5</td><td>  </td><td> Doesn't branch </td></tr>
+<tr><td>9A </td><td> </td><td>03 0 2 2 1</td><td> Integer sum of (A2) and (A1) to A2 </td><td> A2 = 5 </td></tr>
+<tr><td>9B </td><td> </td><td>01 1 0 0 0</td><td> Branch to ijkm if (A0) &#8800; 0 </td><td> </td></tr>
+<tr><td>9C </td><td> </td><td>00 0 3 0 0</td><td>  </td><td bgcolor="#ffff00"> Branch to P = 0000C0 </td></tr>
+<tr><td>9D </td><td> </td><td>03 0 3 3 1</td><td> Integer sum of (A3) and (A1) to A3  </td><td> not executed </td></tr>
+<tr><td>9E </td><td> </td><td>00 4 0 0 3</td><td> Normal exit </td><td> Stop (3) </td></tr>
+<tr><td>9F </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+<tr><td> ... </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+
+<tr><td>BF </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+<tr><td bgcolor="#ffff00">C0 </td><td bgcolor="#ffff00">Fill Buffer 3 </td><td>03 0 2 2 1</td><td> Integer sum of (A2) and (A1) to A2 </td><td>  A2 = 6 </td></tr>
+<tr><td>C1 </td><td> </td><td>01 2 0 0 0</td><td> Branch to ijkm if (A0) positive </td><td> </td></tr>
+<tr><td>C2 </td><td> </td><td>00 0 0 1 5</td><td>  </td><td> Doesn't branch </td></tr>
+<tr><td>C3 </td><td> </td><td>03 0 2 2 1</td><td> Integer sum of (A2) and (A1) to A2 </td><td> A2 = 7 </td></tr>
+<tr><td>C4 </td><td> </td><td>01 3 0 0 0</td><td> Branch to ijkm if (A0) negative </td><td> </td></tr>
+<tr><td>C5 </td><td> </td><td>00 0 0 1 3</td><td>  </td><td bgcolor="#aacccc"> Branch to P = 00000B </td></tr>
+<tr><td>C6 </td><td> </td><td>03 0 3 3 1</td><td> Integer sum of (A3) and (A1) to A3  </td><td> not executed </td></tr>
+<tr><td>C7 </td><td> </td><td>00 4 0 0 4</td><td> Normal exit </td><td> Stop (4) </td></tr>
+<tr><td>C8 </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+<tr><td> ... </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+
+<tr><td>FF </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+<tr><td bgcolor="#ffcfff">100 </td><td bgcolor="#ffcfff">Overwrite Buffer 0</td><td>04 0 0 0 0</td><td> Transmit jkm to Si</td><td> </td></tr>
+<tr><td>101 </td><td> </td><td>00 0 0 0 0</td><td> </td><td> S0 = 0</td></tr>
+<tr><td>102 </td><td> </td><td>04 0 1 0 0</td><td> Transmit jkm to Si</td><td> </td></tr>
+<tr><td>103 </td><td> </td><td>00 0 0 0 1</td><td> </td><td> S1 = 1</td></tr>
+<tr><td>104 </td><td> </td><td>01 5 0 0 0</td><td> Branch to ijkm if (S0) &#8800; 0 </td><td> </td></tr>
+<tr><td>105 </td><td> </td><td>00 0 0 1 5</td><td>  </td><td> Doesn't branch </td></tr>
+<tr><td>106 </td><td> </td><td>03 0 2 2 1</td><td> Integer sum of (A2) and (A1) to A2  </td><td> A2 = 8</td></tr>
+<tr><td>107 </td><td> </td><td>01 6 0 0 0</td><td> Branch to ijkm if (S0) = 0 </td><td> </td></tr>
+<tr><td>108 </td><td> </td><td>00 0 5 0 0</td><td>  </td><td bgcolor="#ffffaf">  Branch to P = 000140 </td></tr>
+<tr><td>109 </td><td> </td><td>03 0 3 3 1</td><td> Integer sum of (A3) and (A1) to A3  </td><td> not executed </td></tr>
+<tr><td>10A </td><td> </td><td>00 4 0 0 5</td><td> Normal exit </td><td> Stop (5) </td></tr>
+<tr><td>10B </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+<tr><td> ... </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+
+<tr><td>13F </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+<tr><td bgcolor="#ffffaf">140 </td><td bgcolor="#ffffaf">Overwrite Buffer 1</td><td>03 0 2 2 1</td><td> Integer sum of (A2) and (A1) to A2  </td><td> A2 = 9 </td></tr>
+<tr><td>141 </td><td> </td><td>01 7 0 0 0</td><td> Branch to ijkm if (S0) negative </td><td> </td></tr>
+<tr><td>142 </td><td> </td><td>00 0 0 1 5</td><td>  </td><td> Doesn't branch </td></tr>
+<tr><td>143 </td><td> </td><td>03 0 2 2 1</td><td> Integer sum of (A2) and (A1) to A2  </td><td> A2 = 10 </td></tr>
+<tr><td>144 </td><td> </td><td>01 6 0 0 0</td><td> Branch to ijkm if (S0) positive </td><td> </td></tr>
+<tr><td>145 </td><td> </td><td>00 0 6 0 0</td><td>  </td><td bgcolor="#ff8f8f"> Branch to P = 000180 </td></tr>
+<tr><td>146 </td><td> </td><td>03 0 3 3 1</td><td> Integer sum of (A3) and (A1) to A3  </td><td> not executed </td></tr>
+<tr><td>147 </td><td> </td><td>00 4 0 0 6</td><td> Normal exit </td><td> Stop (6) </td></tr>
+<tr><td>148 </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+<tr><td> ... </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+
+<tr><td>17F </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+<tr><td bgcolor="#ff8f8f">180 </td><td bgcolor="#ff8f8f">Overwrite Buffer 2 </td><td>06 1 0 0 1</td><td> Integer difference of (Sj) and (Sk) to Si </td><td> S0 = -1 </td></tr>
+<tr><td>181 </td><td> </td><td>01 4 0 0 0</td><td> Branch to ijkm if (S0) = 0 </td><td> </td><td> </td></tr>
+<tr><td>182 </td><td> </td><td>00 0 0 1 5</td><td>  </td><td> Doesn't branch </td></tr>
+<tr><td>183 </td><td> </td><td>03 0 2 2 1</td><td> Integer sum of (A2) and (A1) to A2 </td><td> A2 = 11 </td></tr>
+<tr><td>184 </td><td> </td><td>01 5 0 0 0</td><td> Branch to ijkm if (A0) &#8800; 0 </td><td> </td></tr>
+<tr><td>185 </td><td> </td><td>00 0 7 0 0</td><td>  </td><td bgcolor="#8f8fff"> Branch to P = 0001C0 </td></tr>
+<tr><td>186 </td><td> </td><td>03 0 3 3 1</td><td> Integer sum of (A3) and (A1) to A3  </td><td> not executed </td></tr>
+<tr><td>187 </td><td> </td><td>00 4 0 0 7</td><td> Normal exit </td><td> Stop (7) </td></tr>
+<tr><td>188 </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+<tr><td> ... </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+
+<tr><td>1BF </td><td> </td><td>00 0 0 0 0</td><td>  </td><td> </td></tr>
+<tr><td bgcolor="#8f8fff">1C0 </td><td bgcolor="#8f8fff">Overwrite Buffer 3 </td><td>03 0 2 2 1</td><td> Integer sum of (A2) and (A1) to A2 </td><td> A2 = 12 </td></tr>
+<tr><td>1C1 </td><td> </td><td>01 6 0 0 0</td><td> Branch to ijkm if (S0) positive </td><td> </td></tr>
+<tr><td>1C2 </td><td> </td><td>00 0 0 1 5</td><td>  </td><td> Doesn't branch </td></tr>
+<tr><td>1C3 </td><td> </td><td>03 0 2 2 1</td><td> Integer sum of (A2) and (A1) to A2 </td><td> A2 = 13 </td></tr>
+<tr><td>1C4 </td><td> </td><td>01 7 0 0 0</td><td> Branch to ijkm if (S0) negative </td><td> </td></tr>
+<tr><td>1C5 </td><td> </td><td>00 0 7 0 7</td><td>  </td><td bgcolor="#afffaf"> Branch to P = 0001C7 </td></tr>
+<tr><td>1C6 </td><td> </td><td>03 0 3 3 1</td><td> Integer sum of (A3) and (A1) to A3  </td><td> not executed </td></tr>
+<tr><td bgcolor="#afffaf">1C7 </td><td bgcolor="#afffaf">Same Buffer</td><td>00 5 0 0 0</td><td> Branch to Bjk </td><td bgcolor="#00ffff"> Branch to P = 00000D </td></tr>
+</table>
+
+</body>
+</html>
