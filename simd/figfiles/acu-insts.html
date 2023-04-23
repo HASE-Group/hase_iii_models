@@ -1,0 +1,63 @@
+<html>
+<body>
+
+<center>
+<table
+<tr><td>
+ <table border bgcolor = white>
+<tr> <td><b>INSTRUCTION</b></td><td><b>ACTION</b></td></tr>
+<tr><td> JUMP I</td><td> PC = main/Immediate</td></tr>
+<tr><td> JREG RS</td><td> PC = main/(RS) </td></tr>
+<tr><td> SEQ  RS1 RS2 </td><td>  SET CC if RS1 = RS2 </td></tr>
+<tr><td> SNE  RS1 RS2 </td><td>  SET CC if RS1 != RS2 </td></tr>
+<tr><td> SGT  RS1 RS2 </td><td>  SET CC if RS1 > RS2 </td></tr>
+<tr><td> SLT  RS1 RS2 </td><td>  SET CC if RS1 < RS2 </td></tr>
+<tr><td> SGE  RS1 RS2 </td><td>  SET CC if RS1 >= RS2 </td></tr>
+<tr><td> SLE  RS1 RS2 </td><td>  SET CC if RS1 <= RS2 </td></tr>
+<tr><td> BRANCH Label</td><td> if CC = 1, PC = Label/0<br>if CC = 0 PC = PC + 1</td></tr>
+<tr><td> LDI RD I </td><td> RD = Immediate </td></tr>
+<tr><td> LDM RD Rx Address</td><td> RD = Memory[Address + (Rx)]</td></tr>
+<tr><td> STM RS Rx Address </td><td> RS => Memory[Address + (Rx)]</td></tr>
+<tr><td> LPEC I </td><td> PEC = Immediate </td></tr>
+<tr><td> IPEC </td><td> Invert PEC bits</td></tr>
+<tr><td> ALDR RS </td><td> PE ACC = RS </td></tr>
+<tr><td> MOV  RD RS </td><td>  RD = RS</td></tr>
+<tr><td> MOV  RD AS </td><td>  RD = AS </td></tr>
+<tr><td> MOV  AD RS </td><td>  AD = RS </td></tr>
+<tr><td> MOV  RD P  </td><td>  RD = PEC </td></tr>
+<tr><td> MOV  P  RS </td><td>  PEC = RS </td></tr>
+<tr><td> ADD RD RS1 RS2<br>
+<i>e.g.</i> <tt>ADD R1 R2 R3 </tt></td><td> RD = RS1 + RS2</td></tr>
+</table>
+</td><td>
+<table border bgcolor = white>
+<tr> <td><b>INSTRUCTION</b></td><td><b>ACTION</b></td></tr>
+<tr><td> ADDI RD RS1 I<br>
+<i>e.g.</i> <tt>ADD R1 R2 42 </tt></td><td> RD = RS1 + Immediate </td></tr>
+<tr><td> SUB  RD RS1 RS2 </td><td>  RD = RS1 - RS2</td></tr>
+<tr><td> SUBI RD RS1 I</td><td>  RD = RS1 - Immediate </td></tr>
+<tr><td> MUL  RD RS1 RS2 </td><td>  RD = RS1 * RS2</td></tr>
+<tr><td> MULI RD RS1 I</td><td>  RD = RS1 * Immediate </td></tr>
+<tr><td> DIV  RD RS1 RS2 </td><td>  RD = RS1 / RS2</td></tr>
+<tr><td> DIVI RD RS1 I</td><td>  RD = RS1 / Immediate </td></tr>
+<tr><td> AND  RD RS1 RS2 </td><td>  RD = RS1 & RS2</td></tr>
+<tr><td> ANDI RD RS1 I</td><td> RD = RS1 & Immediate </td></tr>
+<tr><td> OR  RD RS1 RS2 </td><td>  RD = RS1 | RS2</td></tr>
+<tr><td> ORI RD RS1 I</td><td> RD = RS1 | Immediate </td></tr>
+<tr><td> XOR  RD RS1 RS2 </td><td>  RD = RS1 ^ RS2</td></tr>
+<tr><td> XORI RD RS1 I</td><td> RD = RS1 ^ Immediate </td></tr>
+<tr><td> SLL  RD RS1 RS2 </td><td>  RD = RS1 << RS2</td></tr>
+<tr><td> SLLI RD RS1 I</td><td> RD = RS1 << Immediate </td></tr>
+<tr><td> SRL  RD RS1 RS2 </td><td>  RD = RS1 >> RS2</td></tr>
+<tr><td> SRLI RD RS1 I</td><td>  RD = RS1 >> Immediate</td></tr>
+<tr><td> SRA  RD RS1 RS2 </td><td>  RD = RS1 >> RS2</td></tr>
+<tr><td> SRAI RD RS1 I</td><td>  RD = RS1 >> Immediate</td></tr>
+<tr><td> NOP </td><td>No Operation </td></tr>
+<tr><td> STOP </td><td>Stops the simulation </td></tr>
+</table>
+</td></tr>
+</table>
+</center>
+
+</body>
+</html>
