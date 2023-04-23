@@ -78,3 +78,7 @@
 	path = dlx-pred/V4.3
 	url = git@github.com:HASE-Group/dlx-pred.git
 	branch = V4.3
+[submodule "simd/V1.4"]
+	path = simd/V1.4
+	url = git@github.com:HASE-Group/simd.git
+	branch = V1.4
