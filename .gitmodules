@@ -82,3 +82,7 @@
 	path = simd/V1.4
 	url = git@github.com:HASE-Group/simd.git
 	branch = V1.4
+[submodule "emma/V3.1"]
+	path = emma/V3.1
+	url = git@github.com:HASE-Group/emma.git
+	branch = V3.1
