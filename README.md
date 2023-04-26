@@ -20,19 +20,21 @@ To checkout the model collection please use the following commands:
 
 The following computer architecture models are currently available inside this collection:
 
-- atlas         Feranti/University of Manchester Atlas computer
-- cdc6600       CDC 6600 processor
-- cray1         Cray-1 processor
-- dashclus      Stanford DASH Cluster model
-- dashnode      Stanford DASH Node model
-- dir_cache     Directory-based Cache Coherence	models
-- dlx-pred      DLX processor with with Predication
-- dlx-scb       DLX processor with Scoreboard
-- emma  	    Edinburgh Microded Microprocessor Architecture
-- mu5   	    Manchester University MU5 computer
-- mu_baby       Manchester Small Scale Experimental Machine (the "Baby")
-- simd          SIMD Array Processors
-- snoopy-cache  Snoopy Cache Coherence models
-- tomasulo      Model of Tomasulo's Algorithm hardware
+| model name | Description|
+|:-------------|:------------|
+| atlas        |  Ferranti/University of Manchester Atlas computer |
+| cdc6600      |  CDC 6600 processor |
+| cray1        |  Cray-1 processor |
+| dashclus     |  Stanford DASH Cluster model |
+| dashnode     |  Stanford DASH Node model |
+| dir_cache    |  Directory-based Cache Coherence	models |
+| dlx-pred     |  DLX processor with with Predication |
+| dlx-scb      |  DLX processor with Scoreboard |
+| emma  	   |  Edinburgh Microded Microprocessor Architecture |
+| mu5   	   |  Manchester University MU5 computer |
+| mu_baby      |  Manchester Small Scale Experimental Machine (the "Baby") |
+| simd         |  SIMD Array Processors |
+| snoopy-cache | Snoopy Cache Coherence models |
+| tomasulo     | Model of Tomasulo's Algorithm hardware |
 
 
