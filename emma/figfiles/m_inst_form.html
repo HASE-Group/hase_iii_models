@@ -1,0 +1,101 @@
+<html>
+<body>
+<center>
+<table>
+<tr><td>
+<table border>
+<tr><td><b>Hex</b>&nbsp;<b>Digit</b>/<br><b>Unit</b></td><td><b>Bit</b></td><td> <b>Signal</b></td><td><b>Connection</b></td></tr>
+<tr><td rowspan=4>0<br><br>Mcode</td><td>00</td><td> +1</td><td>To BUS2</td></tr>
+<tr><td>          01 </td><td> IR Address/Literal</td><td>To BUS1 </td></tr>
+<tr><td>          02 </td><td> IR Address/Literal</td><td>To BUS2 </td></tr>
+<tr><td>          03 </td><td> Microcode&nbsp;Operand</td><td>To MPC </td></tr>
+<tr><td rowspan=4>1<br><br>Mcode</td><td>04</td><td>Select ~CC0</td><td></td></tr>
+<tr><td>           05</td><td>Select CC1</td><td> </td></tr>
+<tr><td>           06</td><td>Execute if true</td><td> </td></tr>
+<tr><td>           07</td><td>Execute if false </td><td> </tr>
+
+<tr><td rowspan=4>2<br><br>MPC</td><td>08</td><td> Input1</td><td>From MPC</td></tr>
+<tr><td>              09</td><td> Input2</td><td> +1 </td></tr>
+<tr><td>              10</td><td> Input3</td><td>From Mcode </td></tr>
+<tr><td>              11</td><td> Output2</td><td>To Mcode </td></tr>
+
+<tr><td rowspan=4>3<br><br>PC</td><td>12</td><td> Input1</td><td>From PC</td></tr>
+<tr><td>              13</td><td> Input2</td><td> +1 </td></tr>
+<tr><td>              14</td><td> Input3</td><td>From BUS2 </td></tr>
+<tr><td>              15</td><td> Output2</td><td>To&nbsp;I_Memory</td></tr>
+
+<tr><td rowspan=4>4<br><br>Registers</td><td>16</td><td>Swap:&nbsp;Input&nbsp;to&nbsp;RS1<br>
+&nbsp; &nbsp; Output2&nbsp;=&nbsp;(RD)</td><td> </td></tr>
+<tr><td>  17</td><td> Input [to RD]</td><td>From ALU </td></tr>
+<tr><td>  18</td><td> Output1 (RS1)</td><td>To BUS1 </td></tr>
+<tr><td>  19</td><td> Output2 (RS2)</td><td>To BUS2 </td></tr>
+
+<tr><td rowspan=4>5<br><br>Data<br>Memory</td><td>20</td><td> MAR Input</td><td>From BUS2</td></tr>
+<tr><td>              21</td><td> MBR Input</td><td>From BUS1</td></tr>
+<tr><td>              22</td><td> Read/Write</td><td></td></tr>
+<tr><td>              23</td><td> MBR Output</td><td>To BUS1</td></tr>
+
+<tr><td rowspan=4>6<br><br>ALU</td><td>24</td><td>Input1</td><td>From BUS1</td></tr>
+<tr><td>              25</td><td> Input2</td><td>From BUS2 </td></tr>
+<tr><td>              26</td><td> Output1</td><td>To Registers </td></tr>
+<tr><td>              27</td><td> Output2</td><td>To BUS2 </td></tr>
+<tr><td rowspan=4>7<br><br>ALU </td><td>28</td><td>Not used</td><td></td></tr>
+<tr><td>              29</td><td> Function</td><td></td></tr>
+<tr><td>              30</td><td> Function</td><td></td></tr>
+<tr><td>              31</td><td> Function</td><td></td></tr>
+</table>
+<br>
+<center>
+<b>M-Format</b>
+</center>
+</td><td>  &nbsp &nbsp </td><td>
+<table border bgcolor="#ffffff">
+<tr><td><b>Hex</b>&nbsp;<b>Digit</b>/<br><b>Unit</b></td><td><b>Bit</b></td><td> <b>Signal</b></td><td><b>Connection</b></td></tr>
+<tr><td rowspan=4>0<br><br>Mcode</td><td>00</td><td> +1</td><td>To BUS2</td></tr>
+<tr><td>          01 </td><td> IR Address/Literal</td><td>To BUS1 </td></tr>
+<tr><td>          02 </td><td> IR Address/Literal</td><td>To BUS2 </td></tr>
+<tr><td>          03 </td><td> Microcode&nbsp;Operand</td><td>To MPC </td></tr>
+<tr><td rowspan=4>1<br><br>Mcode</td><td>04</td><td>Select ~CC0</td><td></td></tr>
+<tr><td>           05</td><td>Select CC1</td><td> </td></tr>
+<tr><td>           06</td><td>Execute if true</td><td> </td></tr>
+<tr><td>           07</td><td>Execute if false </td><td> </tr>
+
+<tr><td rowspan=4>2<br><br>MPC</td><td>08</td><td> Input1</td><td>From MPC</td></tr>
+<tr><td>              09</td><td> Input2</td><td>+ 1 </td></tr>
+<tr><td>              10</td><td> Input3</td><td>From Mcode </td></tr>
+<tr><td>              11</td><td> Output2</td><td>To Mcode </td></tr>
+
+<tr><td rowspan=4>3<br><br>PC</td><td>12</td><td> Input1</td><td>From PC</td></tr>
+<tr><td>              13</td><td> Input2</td><td>+ 1 </td></tr>
+<tr><td>              14</td><td> Input3</td><td>From BUS2 </td></tr>
+<tr><td>              15</td><td> Output2</td><td>To&nbsp;I_Memory</td></tr>
+
+<tr><td rowspan=4>4<br><br>Registers</td><td>16</td><td>Swap:&nbsp;Input&nbsp;to&nbsp;RS1<br>
+ &nbsp; &nbsp; Output2&nbsp;=&nbsp;(RD)</td><td> </td></tr>
+<tr><td>  17</td><td> Input [to RD]</td><td>From ALU </td></tr>
+<tr><td>  18</td><td> Output1 (RS1)</td><td>To BUS1 </td></tr>
+<tr><td>  19</td><td> Output2 (RS2)</td><td>To BUS2 </td></tr>
+
+<tr><td rowspan=4>5<br><br>ALU</td><td>20</td><td> Inhibit A to alu </td><td>internal</td></tr>
+<tr><td>              21</td><td> Inhibit B to alu</td><td>internal</td></tr>
+<tr><td>              22</td><td> Enable ACC to alu</td><td>internal</td></tr>
+<tr><td>              23</td><td> Inhibit B to ALU if <br>INPUTA<31> = 0</td><td>internal</td></tr>
+
+<tr><td rowspan=4>6<br><br>ALU</td><td>24</td><td>Input1</td><td>From BUS1</td></tr>
+<tr><td>              25</td><td> Input2</td><td>From BUS2 </td></tr>
+<tr><td>              26</td><td> Output1</td><td>To Registers </td></tr>
+<tr><td>              27</td><td> Output2</td><td>To BUS2 </td></tr>
+<tr><td rowspan=4>7<br><br>ALU </td><td>28</td><td>Function</td><td></td></tr>
+<tr><td>              29</td><td> Function</td><td></td></tr>
+<tr><td>              30</td><td> Function</td><td></td></tr>
+<tr><td>              31</td><td> Function</td><td></td></tr>
+</table>
+<center>
+<br>
+<table>
+<b>A-Format</b>
+</center>
+</table>
+
+</body>
+</html>
