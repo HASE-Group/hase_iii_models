@@ -86,3 +86,7 @@
 	path = emma/V3.1
 	url = git@github.com:HASE-Group/emma.git
 	branch = V3.1
+[submodule "s-comp/V1.2"]
+	path = s-comp/V1.2
+	url = git@github.com:HASE-Group/s-comp.git
+	branch = V1.2
