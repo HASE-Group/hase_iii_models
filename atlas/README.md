@@ -6,7 +6,9 @@ This document describes the design of the Atlas computer and explains how the HA
 
 Program 1 demonstrates the operation of all the Atlas instructions implemented in the model. Program2 is a matrix multiplication program, designed to show in particular the operation of the scalar (dot) product calculation that forms the inner loop of matrix multiplication. Most early supercomputers were designed specifically to perform well on this problem, *e.g.* especially the Cray 1 in 1976. Program 3 is is an adaptation of a program that finds values for the lengths of the sides of Pythagorean right triangles, *i.e.* it computes values of a,b,c such that a^2 + b^2 = c^2 and a,b,c < k.
 
-The files for version 4.1 can be downloaded from https://github.com/HASE-Group/atlas/tree/V4.1
+The files for version 4.1 can be downloaded from https://github.com/HASE-Group/hase_iii_models/blob/main/atlas/atlas_v4.1.zip
+
+https://github.com/HASE-Group/atlas/tree/V4.1
 
 Instructions on how to use HASE models can be downloaded from https://github.com/HASE-Group/hase_iii_releases
 
