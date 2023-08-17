@@ -8,7 +8,7 @@ The Simple Computer model consists of a Processor and a Memory (Figure 1). The M
 
 Along with the Condition Code register, the Program Counter (PC) and Instruction Register (IR) are displayed in the Project View panel. The Program Counter has two fields, a label (**main** in the figure) and an offset (**0** in the figure), because the instruction array in the Memory is declared using the ARRAYI construct.
 
-The project is made up of the files listed below. These files illustrate many of the features of HASE described in the User Guide.
+The project is made up of the files listed below. These files illustrate many of the features of HASE described in the User Guide. The full set of files can be found at <https://github.com/HASE-Group/s-comp>
 
 #### Definition files
 
