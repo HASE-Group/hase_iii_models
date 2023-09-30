@@ -25,8 +25,8 @@ jobs:
     # Update references
     - name: Git Submodule Update
       run: |
-        git submodule foreach --recursive git pull
-        git submodule update --remote --recursive --ff-only
+        git submodule foreach --recursive git pull --ff-only
+        git submodule update --remote --recursive
 
     - name: Commit update
       run: |
