@@ -36,53 +36,53 @@
 	branch = V2.2
 [submodule "dashclus/V2.8"]
 	path = dashclus/V2.8
-	url = git@github.com:HASE-Group/dashclus.git
+	url = ../dashclus.git
 	branch = V2.8
 [submodule "mu5/V4.1"]
 	path = mu5/V4.1
-	url = git@github.com:HASE-Group/mu5.git
+	url = ../mu5.git
 	branch = V4.1
 [submodule "cray1/V2.1"]
 	path = cray1/V2.1
-	url = git@github.com:HASE-Group/cray1.git
+	url = ../cray1.git
 	branch = V2.1
 [submodule "atlas/V4.1"]
 	path = atlas/V4.1
-	url = git@github.com:HASE-Group/atlas.git
+	url = ../atlas.git
 	branch = V4.1
 [submodule "dlx-scb/V2.9"]
 	path = dlx-scb/V2.9
-	url = git@github.com:HASE-Group/dlx-scb.git
+	url = ../dlx-scb.git
 	branch = V2.9
 [submodule "dashnode/V1.5"]
 	path = dashnode/V1.5
-	url = git@github.com:HASE-Group/dashnode.git
+	url = ../dashnode.git
 	branch = V1.5
 [submodule "tomasulo/V1.8"]
 	path = tomasulo/V1.8
-	url = git@github.com:HASE-Group/tomasulo.git
+	url = ../tomasulo.git
 	branch = V1.8
 [submodule "snoopy_cache/V4.1"]
 	path = snoopy_cache/V4.1
-	url = git@github.com:HASE-Group/snoopy_cache.git
+	url = ../snoopy_cache.git
 	branch = V4.1
 [submodule "dir_cache/V1.3"]
 	path = dir_cache/V1.3
-	url = git@github.com:HASE-Group/dir_cache.git
+	url = ../dir_cache.git
 	branch = V1.3
 [submodule "dlx-pred/V4.3"]
 	path = dlx-pred/V4.3
-	url = git@github.com:HASE-Group/dlx-pred.git
+	url = ../dlx-pred.git
 	branch = V4.3
 [submodule "simd/V1.4"]
 	path = simd/V1.4
-	url = git@github.com:HASE-Group/simd.git
+	url = ../simd.git
 	branch = V1.4
 [submodule "emma/V3.1"]
 	path = emma/V3.1
-	url = git@github.com:HASE-Group/emma.git
+	url = ../emma.git
 	branch = V3.1
 [submodule "s-comp/V1.2"]
 	path = s-comp/V1.2
-	url = git@github.com:HASE-Group/s-comp.git
+	url = ../s-comp.git
 	branch = V1.2
