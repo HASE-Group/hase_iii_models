@@ -18,6 +18,8 @@ jobs:
     
     - name: Checkout
       uses: actions/checkout@v4
+      with:
+        repository: HASE-Group/hase_iii_models
         token: ${{ secrets.HASE_III_MODEL_UPDATE }}
         submodules: true
         fetch-depth: 0
@@ -26,8 +28,9 @@ jobs:
         
     - name: Checkout regression tests
       uses: actions/checkout@v4
+      with:
+        repository: HASE-Group/hase_iii_regression
         token: ${{ secrets.HASE_III_MODEL_UPDATE }}
-        with: HASE-Group/hase_iii_regression
         submodules: true
         fetch-depth: 0
         lfs: true        
