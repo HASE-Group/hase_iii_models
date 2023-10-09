@@ -38,8 +38,8 @@ jobs:
     # Update references
     - name: Git Submodule Update
       run: |
-        git pull --recurse-submodules
-        git submodule update --remote --recursive
+        git pull --recurse-submodules hase_iii_models
+        git submodule update --remote --recursive hase_iii_models
 
     - name: Regress
       run : |
