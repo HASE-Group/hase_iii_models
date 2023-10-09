@@ -36,15 +36,26 @@ jobs:
         lfs: true        
         path: hase_iii_regression
 
+    - name: Checkout HASE3
+      uses: actions/checkout@v4
+      with:
+        repository: HASE-Group/hase_iii_releases
+        token: ${{ secrets.HASE_III_MODEL_UPDATE }}
+        submodules: true
+        fetch-depth: 0
+        lfs: true        
+        path: hase_iii_releases
+
+
     # Update references
     - name: Git Submodule Update
       run: |
-        git pull --recurse-submodules hase_iii_models
-        git submodule update --remote --recursive hase_iii_models
+        cd $GITHUB_WORKSPACE/hase_iii_models && git pull --recurse-submodules
+        cd $GITHUB_WORKSPACE/hase_iii_models && git submodule update --remote --recursive
 
     - name: Regress
       run : |
-        java -jar hase_iii_regression/dist/com.dawdolman.hase.regression.jar $GITHUB_WORKSPACE/hase_iii_models
+        java -jar hase_iii_regression/dist/com.dawdolman.hase.regression.jar -hase $GITHUB_WORKSPACE/hase_iii_releases/latest/HASEIII_GUI.jar -models $GITHUB_WORKSPACE/hase_iii_models
 
     #- name: Commit update
     #  run: |
