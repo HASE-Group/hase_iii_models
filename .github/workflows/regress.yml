@@ -39,8 +39,8 @@ jobs:
     # Update references
     - name: Git Submodule Update
       run: |
-        cd $GITHUB_WORKSPACE/hase_iii_models && git pull --recurse-submodules hase_iii_models
-        cd $GITHUB_WORKSPACE/hase_iii_models && git submodule update --remote --recursive hase_iii_models
+        git pull --recurse-submodules hase_iii_models
+        git submodule update --remote --recursive hase_iii_models
 
     - name: Regress
       run : |
