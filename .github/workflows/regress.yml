@@ -8,6 +8,10 @@ jobs:
   sync:
     name: 'Submodules Sync'
     runs-on: windows-latest
+    
+    #ubuntu-latest 
+    #windows-latest
+    #macos-latest
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
