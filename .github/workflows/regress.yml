@@ -5,68 +5,64 @@ on:
   workflow_dispatch:
 
 jobs:
-  sync:
-    name: 'Regress Models on Windows'
-    runs-on: windows-latest
+  regress_matrix:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     
-    #ubuntu-latest 
-    #windows-latest
-    #macos-latest
-
-    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
-    defaults:
-      run:
-        shell: bash
-
     steps:
-    
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        repository: HASE-Group/hase_iii_models
-        token: ${{ secrets.HASE_III_MODEL_UPDATE }}
-        submodules: true
-        fetch-depth: 0
-        lfs: true
-        path: hase_iii_models
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}        
         
-    - name: Checkout regression tests
-      uses: actions/checkout@v4
-      with:
-        repository: HASE-Group/hase_iii_regression
-        token: ${{ secrets.HASE_III_MODEL_UPDATE }}
-        submodules: true
-        fetch-depth: 0
-        lfs: true        
-        path: hase_iii_regression
-
-    - name: Checkout HASE3
-      uses: actions/checkout@v4
-      with:
-        repository: HASE-Group/hase_iii_releases
-        token: ${{ secrets.HASE_III_MODEL_UPDATE }}
-        submodules: true
-        fetch-depth: 0
-        lfs: true     
-        path: hase_iii_releases
-
-    # Update references
-    - name: Git Submodule Update
-      run: |
-        cd $GITHUB_WORKSPACE/hase_iii_models && git pull --recurse-submodules
-        cd $GITHUB_WORKSPACE/hase_iii_models && git submodule update --remote --recursive
-
-    - name: Setup HASE3
-      run: |
-        cp -r $GITHUB_WORKSPACE/hase_iii_releases/latest $GITHUB_WORKSPACE/hase_iii
-
-    - name: Regress
-      run : |
-        java -jar hase_iii_regression/dist/com.dawdolman.hase.regression.jar -hase $GITHUB_WORKSPACE/hase_iii/bin/HASEIII_GUI.jar -models $GITHUB_WORKSPACE/hase_iii_models
-
-    #- name: Commit update
-    #  run: |
-    #    git config --global user.name 'github'
-    #    git config --global user.email 'bot@noreply.github.com'
-    #    git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-    #    git commit -am "Auto updated submodule references" && git push || echo "No changes to commit"
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: HASE-Group/hase_iii_models
+          token: ${{ secrets.HASE_III_MODEL_UPDATE }}
+          submodules: true
+          fetch-depth: 0
+          lfs: true
+          path: hase_iii_models
+          
+      - name: Checkout regression tests
+        uses: actions/checkout@v4
+        with:
+          repository: HASE-Group/hase_iii_regression
+          token: ${{ secrets.HASE_III_MODEL_UPDATE }}
+          submodules: true
+          fetch-depth: 0
+          lfs: true        
+          path: hase_iii_regression
+  
+      - name: Checkout HASE3
+        uses: actions/checkout@v4
+        with:
+          repository: HASE-Group/hase_iii_releases
+          token: ${{ secrets.HASE_III_MODEL_UPDATE }}
+          submodules: true
+          fetch-depth: 0
+          lfs: true     
+          path: hase_iii_releases
+  
+      # Update references
+      - name: Git Submodule Update
+        run: |
+          cd $GITHUB_WORKSPACE/hase_iii_models && git pull --recurse-submodules
+          cd $GITHUB_WORKSPACE/hase_iii_models && git submodule update --remote --recursive
+  
+      - name: Setup HASE3
+        run: |
+          cp -r $GITHUB_WORKSPACE/hase_iii_releases/latest $GITHUB_WORKSPACE/hase_iii
+  
+      - name: Regress
+        run : |
+          java -jar hase_iii_regression/dist/com.dawdolman.hase.regression.jar -hase $GITHUB_WORKSPACE/hase_iii/bin/HASEIII_GUI.jar -models $GITHUB_WORKSPACE/hase_iii_models
+  
+        #- name: Commit update
+        #  run: |
+        #    git config --global user.name 'github'
+        #    git config --global user.email 'bot@noreply.github.com'
+        #    git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+        #    git commit -am "Auto updated submodule references" && git push || echo "No changes to commit"
