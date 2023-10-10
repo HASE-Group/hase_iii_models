@@ -58,11 +58,11 @@ jobs:
 
     - name: Setup HASE3
       run: |
-        cp -r $GITHUB_WORKSPACE/hase_iii_releases/latest $GITHUB_WORKSPACE/hase3
+        cp -r $GITHUB_WORKSPACE/hase_iii_releases/latest $GITHUB_WORKSPACE/hase_iii
 
     - name: Regress
       run : |
-        java -jar hase_iii_regression/dist/com.dawdolman.hase.regression.jar -hase $GITHUB_WORKSPACE/hase_iii_releases/latest/HASEIII_GUI.jar -models $GITHUB_WORKSPACE/hase_iii_models
+        java -jar hase_iii_regression/dist/com.dawdolman.hase.regression.jar -hase $GITHUB_WORKSPACE/hase_iii/bin/HASEIII_GUI.jar -models $GITHUB_WORKSPACE/hase_iii_models
 
     #- name: Commit update
     #  run: |
