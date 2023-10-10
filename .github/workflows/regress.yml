@@ -6,7 +6,7 @@ on:
 
 jobs:
   sync:
-    name: 'Submodules Sync'
+    name: 'Regress Models on Windows'
     runs-on: windows-latest
     
     #ubuntu-latest 
