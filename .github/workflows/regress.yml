@@ -47,15 +47,18 @@ jobs:
         token: ${{ secrets.HASE_III_MODEL_UPDATE }}
         submodules: true
         fetch-depth: 0
-        lfs: true        
-        path: hase_iii_releases
-
+        lfs: true     
+        path: hase_iii/hase_iii_releases
 
     # Update references
     - name: Git Submodule Update
       run: |
         cd $GITHUB_WORKSPACE/hase_iii_models && git pull --recurse-submodules
         cd $GITHUB_WORKSPACE/hase_iii_models && git submodule update --remote --recursive
+
+    - name: Setup HASE3
+      run: |
+        cp -r $GITHUB_WORKSPACE/hase_iii_releases/latest $GITHUB_WORKSPACE/hase3
 
     - name: Regress
       run : |
