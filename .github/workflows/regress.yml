@@ -48,7 +48,7 @@ jobs:
         submodules: true
         fetch-depth: 0
         lfs: true     
-        path: hase_iii/hase_iii_releases
+        path: hase_iii_releases
 
     # Update references
     - name: Git Submodule Update
