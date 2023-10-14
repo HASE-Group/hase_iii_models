@@ -1,4 +1,4 @@
-## HASE Manchester "Baby" Simulation Model
+## HASE Manchester SSEM ("Baby") Simulation Model
 
 On 21<sup>st</sup> June 1948 the University of Manchester Small Scale Experimental Machine, affectionally known as the "Baby", became the first computer to execute a program stored in addressable read-write electronic memory.  This memory was a specially adapted cathode ray tube now known as a Williams-Kilburn Tube. The Baby demonstrated that the Williams-Kilburn Tube could be used as a random-access memory.  Subsequent developments led to the 1949 Manchester Mark I, which pioneered index registers, and, in February 1951, to Ferranti Ltd's commercial derivative, the Ferranti Mark I, becoming the first electronic computer marketed as a standard product and delivered to a customer.
 
