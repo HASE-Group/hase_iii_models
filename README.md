@@ -16,6 +16,11 @@ To checkout the model collection please use the following commands:
     
     git clone git@github.com:HASE-Group/hase_iii_models.git --recurse-submodules
 
+To update all the models in an already check out copy of the repositiory to the newest version:
+
+    git submodule update --recursive --remote
+
+
 ## Released Models
 
 The following computer architecture models are currently available inside this collection:
