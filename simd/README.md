@@ -12,7 +12,7 @@ Instructions on how to use HASE models can be downloaded from https://github.com
 
 Figure 1 shows the initial image seen when the SIMD-1 model is loaded into HASE. The array is opened for viewing by left clicking on its icon. Figure 2 shows an image taken during animation of a simulation.
 
-![Image of HASE SIMD-1 simulation](images/simd1-s.gif)
+![Image of HASE SIMD-1 simulation](images/simd1-s.png)
 
 **Figure 1. The SIMD-1 simulation model loaded into HASE**
 
@@ -24,7 +24,7 @@ Figure 1 shows the initial image seen when the SIMD-1 model is loaded into HASE.
 
 Figure 3 shows the initial image seen when the model is loaded into HASE. The array is opened for viewing by left clicking in its icon. Figure 4 shows an image taken during animation of a simulation.
 
-![Image of HASE SIMD-2 simulation](images/simd2-s.gif)
+![Image of HASE SIMD-2 simulation](images/simd2-s.png)
 
 **Figure 3. The SIMD-2 simulation model loaded into HASE**
 
