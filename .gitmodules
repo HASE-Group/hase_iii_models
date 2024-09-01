@@ -14,18 +14,10 @@
 	path = atlas/V3.5
 	url = ../atlas.git
 	branch = V3.5
-[submodule "mu_baby/V1.1"]
-	path = mu_baby/V1.1
+[submodule "mu_baby/V4.1"]
+	path = mu_baby/V4.1
 	url = ../mu_baby.git
-	branch = V1.1
-[submodule "mu_baby/V2.1"]
-	path = mu_baby/V2.1
-	url = ../mu_baby.git
-	branch = V2.1
-[submodule "mu_baby/V3.1"]
-	path = mu_baby/V3.1
-	url = ../mu_baby.git
-	branch = V3.1
+	branch = V4.1
 [submodule "cdc6600/V1.2"]
 	path = cdc6600/V1.2
 	url = ../cdc6600.git
