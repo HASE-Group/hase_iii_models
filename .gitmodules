@@ -16,7 +16,7 @@
 	branch = V3.5
 [submodule "mu_baby/V4.1"]
 	path = mu_baby/V4.1
-	url = ../mu_baby.git
+	url = git@github.com:HASE-Group/mu_baby
 	branch = V4.1
 [submodule "cdc6600/V1.2"]
 	path = cdc6600/V1.2
