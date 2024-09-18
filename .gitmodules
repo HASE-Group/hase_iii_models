@@ -78,3 +78,11 @@
 	path = s-comp/V1.2
 	url = ../s-comp.git
 	branch = V1.2
+[submodule "mips/V1.3"]
+	path = mips/V1.3
+	url = git@github.com:HASE-Group/mips1.git
+	branch = V1.3
+[submodule "mips/V2.3"]
+	path = mips/V2.3
+	url = git@github.com:HASE-Group/mips2.git
+	branch = V2.3
