@@ -2,14 +2,6 @@
 	path = atlas/V1.5
 	url = ../atlas.git
 	branch = V1.5
-[submodule "mips1/V1.3"]
-	path = mips1/V1.3
-	url = ../mips1.git
-	branch = V1.3
-[submodule "mips2/V2.3"]
-	path = mips2/V2.3
-	url = ../mips2.git
-	branch = V2.3
 [submodule "atlas/V3.5"]
 	path = atlas/V3.5
 	url = ../atlas.git
@@ -80,9 +72,9 @@
 	branch = V1.2
 [submodule "mips/V1.3"]
 	path = mips/V1.3
-	url = git@github.com:HASE-Group/mips1.git
+	url = ../mips1.git
 	branch = V1.3
 [submodule "mips/V2.3"]
 	path = mips/V2.3
-	url = git@github.com:HASE-Group/mips2.git
+	url = ../mips2.git
 	branch = V2.3
