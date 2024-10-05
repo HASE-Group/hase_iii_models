@@ -55,7 +55,7 @@ jobs:
   
       - name: Setup HASE3
         run: |
-          cp -r ${{ github.workspace }}/hase_iii_releases/latest ${{ github.workspace }}/hase_iii
+          cp -r ${{ github.workspace }}/hase_iii_releases/portable ${{ github.workspace }}/hase_iii
   
       - name: Regress
         run : |
