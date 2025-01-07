@@ -13,7 +13,6 @@ Instructions on how to use HASE models can be downloaded from https://github.com
 The HASE user interface window contains three panes.  Figure 1 shows an image of the HASE user interface with the simulation model of Atlas in the main (right hand) Project View pane and model parameters (*e.g.* register and store contents) in the (left hand) Project Inspector pane. The lower, Output pane shows information produced by HASE. The icons in the top row allow the user to load a model, compile it, run the simulation code thus created and to load the trace file produced by running a simulation back into the model for animation.
 
  ![Image of HASE Atlas simulation](images/HASE_Atlas_V4-1.png)
-)
  
 **Figure 1. The Atlas simulation model loaded into HASE**
 
