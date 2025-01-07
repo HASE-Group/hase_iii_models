@@ -16,6 +16,7 @@ Figure 1 shows a typical implementation of a simple pipelined MIPS architecture.
 The Integer Unit receives its operands from the Instruction Decode Unit, which is closely coupled to the Registers. These consist of 32 Integer Registers. The results from both arithmetic/logic and load instructions are returned to the Registers by the Write Back Unit.
 
  ![Image of Simple MIPS Pipeline simulation](images/mips.gif)
+ 
  **Figure 1. Typical Simple MIPS Pipeline**
 
 ### HASE MIPS1 Simulation Model
