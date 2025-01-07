@@ -9,6 +9,7 @@ The files for the Simple MIPS Pipeline model can be downloaded from
 *This MIPS model, based on an earlier model of the DLX architecture, was built by David Dolman during tenure of a University of Edinburgh College of Science &amp; Engineering Strachan Scholarship.*
 
 Instructions on how to use HASE models can be downloaded from
+
 <https://github.comHASE-Group/hase_iii_releases>
 
 Figure 1 shows a typical implementation of a simple pipelined MIPS architecture.  The Integer Unit is used for both data and address arithmetic, so load/store instructions are processed by the Integer Unit before being sent to the Memory Access Unit and thence to Memory. The Integer Unit also executes the additions required for integer test and relative branch instructions, so the Memory Access Unit also executes branches.
@@ -33,6 +34,7 @@ The HASE simulation of the simple pipeline version of the MIPS processor is one 
 
 
 ![Image of HASE MIPS model](images/HASE_MIPS1.gif)
+
 **Figure 2. The HASE MIPS1 Model**
 
 The Clock entity sends (untraced) clock signal packets to the other units and each Unit sends a DONE signal back to clock when it has completed its actions. Each clock signal is generated when all units are done, thus ensuring that the architecture acts as a synchronous system. There are two signals in each clock period (corresponding to rising and falling edges of a squarewave in hardare) denoting the start of phases 0 and 1 of the period. Entities compute in phase 0 and communicate in phase 1. During animation the Clock icon displays the current phase of the clock (P0 or P1) and the value of a clock cycle counter. The simulation ends when the Clock Counter value reaches a parameter value set in the Parameters box or when a BREAK instruction is executed.
@@ -129,7 +131,7 @@ The initial value of the label in the PPC and PC is 'main'; this is the starting
 
 **Table 1f. Other Instructions:**
 
-###P ipeline Units
+### Pipeline Units
 
 #### Instruction Fetch
 
@@ -155,8 +157,8 @@ The Write Back Unit receives packets from the Memory Access Unit. Whenever a val
 
 The contents of the memory and the registers are displayed in the HASE Project Inspector Panel via the Parameters tab. Sections of the Parameters display can be detached by clicking on the hashed area at the left of the section. Figure 3 shows examples of the detached memory and registers windows. Also shown is the Data Hazards display as seen in the Project pane when there is RAW hazard on register R5.
 
-|:-----------|:------------|:----------|
 | ![memory image](images/memory1.gif) | ![register image](images/registers1.gif) | ![hazards window image](images/haz-win.gif) |
+|:-----------|:------------|:----------|
 
 **Figure 3. Memory, Registers and Data Hazards Displays**
 
@@ -219,7 +221,7 @@ The CDC 6600 had ten parallel execution units but most modern systems have fewer
 
 The Execution Units receive their operands from the Instruction Decode Unit, which is closely coupled to the Registers. These consist of 32 Integer registers, 32 Floating-point registers and the Hi-Lo registers used by multiply instructions. The results from both arithmetic/logic and load instructions are returned to the Registers by the Write Back Unit.
 
-###H ASE MIPS2 Simulation Model
+### HASE MIPS2 Simulation Model
 
 The HASE MIPS2 simulation model (Figure 5) is an extension of the MIPS1 model. It contains entities representing each of the components in the MIPS architecture, the memory, the registers and the pipeline units, together with three other entities which aid visualisation of the activities in the system: the Clock, the Scoreboard and the Pipeline Display.
 
@@ -353,7 +355,7 @@ The instructions implemented in the MIPS2 model are shown in the following table
 | COLTS | Set FP condition code on less than | COLTS R3 R4 | Sets FP condition code true if R3 is less than R4 else set it false |
 | COLES | Set FP condition code on less than or equal to | COLES R4 R5 | Sets FP condition code true if R4 is less than or equal to R5 else set it false |
 
-** Table 2j. Floating point Compare Instructions**
+**Table 2j. Floating point Compare Instructions**
 
 
 ### Pipeline Units
