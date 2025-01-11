@@ -4,13 +4,13 @@ The MIPS architecture was first described in 1981 by John Hennessy and his colle
 
 The files for the Simple MIPS Pipeline model can be downloaded from
 
-<a href="https://github.com/HASE-Group/mips1/archive/refs/heads/V1.3.zip">mips_v1.3.zip</a><p>
+<a href="https://github.com/HASE-Group/mips1/archive/refs/heads/V1.3.zip">mips_v1.3.zip</a>
 
 *This MIPS model, based on an earlier model of the DLX architecture, was built by David Dolman during tenure of a University of Edinburgh College of Science &amp; Engineering Strachan Scholarship.*
 
 Instructions on how to use HASE models can be found here:
 
-<[https://github.comHASE-Group/hase_iii_releases](https://github.com/HASE-Group)>
+<a href="https://github.com/HASE-Group">Git Hub HASE site</a>
 
 Figure 1 shows a typical implementation of a simple pipelined MIPS architecture.  The Integer Unit is used for both data and address arithmetic, so load/store instructions are processed by the Integer Unit before being sent to the Memory Access Unit and thence to Memory. The Integer Unit also executes the additions required for integer test and relative branch instructions, so the Memory Access Unit also executes branches.
 
