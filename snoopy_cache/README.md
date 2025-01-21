@@ -2,11 +2,11 @@
 
 In a bus-based multiprocessor system, cache coherence can be ensured using a snoopy protocol in which each processor's cache monitors the traffic on the bus and takes appropriate action when it sees a write request being sent to memory for a variable at an address matching one that it holds. This document describes a number of models demonstrating different types of snoopy protocol.
 
-1. Write-Through / Write-Invalidate / No-Write-Allocate (WTWI-N) protocol, for which the model files can be downloaded from <https://github.com/HASE-Group/snoop-cache/tree/V4.1>  
-2. Write-Through / Write-Invalidate / Write-Allocate (WTWI-A) protocol, for which the model files can be downloaded from <https://github.com/HASE-Group/snoop-cache/tree/V5.1>  
-3. Write Through / Write Update (WTWU) protocol, for which the model files can be downloaded from <https://github.com/HASE-Group/snoop-cache/tree/V6.1>  
+1. Write-Through / Write-Invalidate / No-Write-Allocate (WTWI-N) protocol, for which the model files can be downloaded from <https://github.com/HASE-Group/snoopy-cache/tree/V4.1>  
+2. Write-Through / Write-Invalidate / Write-Allocate (WTWI-A) protocol, for which the model files can be downloaded from <https://github.com/HASE-Group/snoopy-cache/tree/V5.1>  
+3. Write Through / Write Update (WTWU) protocol, for which the model files can be downloaded from <https://github.com/HASE-Group/snoopy-cache/tree/V6.1>  
 
-4. Copyback / Write Invalidate (CBWI) protocol, for which the model files can be downloaded from <https://github.com/HASE-Group/snoop-cache/tree/V7.1>  
+4. Copyback / Write Invalidate (CBWI) protocol, for which the model files can be downloaded from <https://github.com/HASE-Group/snoopy-cache/tree/V7.1>  
 
 Instructions on how to use HASE models can be found at <https://github.com/HASE-Group/hase_iii_releases>
 
