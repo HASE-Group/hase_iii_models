@@ -1,4 +1,6 @@
-## The HASE MIPS1 Model - A Simple MIPS Pipeline
+## HASE MIPS Models
+
+## HASE MIPS1 - A Simple MIPS Pipeline
 
 The MIPS architecture was first described in 1981 by John Hennessy and his colleagues working at Stanford University. Since then it has become one of the most successful commercial RISC microprocessors and now exists in numerous versions.  The HASE MIPS1 model is a simple integer pipline version of the MIPS, based on the MIPS I instruction set.  It contains a program in its Instruction Memory that finds all prime numbers between 0 and 15. The Data Memory is initilised with the numbers 0 to 15. After the program has executed the remaining non-zero numbers in memory are prime numbers.
 
@@ -209,7 +211,7 @@ When first loaded, the model contains a program in its Instruction Memory which 
 | BREAK |  End the simulation  |
 | NOP |  No operation  |
 
-## The HASE MIPS2 Model - A Pipeline with Parallel Function Units
+## HASE MIPS2 - A Pipeline with Parallel Function Units
 
 Figure 4 shows an implementation of a MIPS architecture with parallel function units. Like all register-register load/store architectures with parallel function units, the MIPS derives from the CDC 6600. To make effective use of this parallelism, the instruction set must include multiple-address (minimally two but more typically three) register-register arithmetic and logic operations, together with instructions which move data between the registers and memory, and sequencing (test and branch) instructions.
 
