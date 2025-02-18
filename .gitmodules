@@ -66,3 +66,15 @@
 	path = cdc6600/V3.1
 	url = git@github.com:HASE-Group/cdc6600.git
 	branch = V3.1
+[submodule "snoopy_cache/V5.1"]
+	path = snoopy_cache/V5.1
+	url = git@github.com:HASE-Group/snoopy_cache.git
+	branch = V5.1
+[submodule "snoopy_cache/V6.1"]
+	path = snoopy_cache/V6.1
+	url = git@github.com:HASE-Group/snoopy_cache.git
+	branch = V6.1
+[submodule "snoopy_cache/V7.1"]
+	path = snoopy_cache/V7.1
+	url = git@github.com:HASE-Group/snoopy_cache.git
+	branch = V7.1
