@@ -1,11 +1,3 @@
-[submodule "atlas/V1.5"]
-	path = atlas/V1.5
-	url = ../atlas.git
-	branch = V1.5
-[submodule "atlas/V3.5"]
-	path = atlas/V3.5
-	url = ../atlas.git
-	branch = V3.5
 [submodule "mu_baby/V4.1"]
 	path = mu_baby/V4.1
 	url = ../mu_baby.git
