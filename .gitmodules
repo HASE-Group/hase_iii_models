@@ -2,14 +2,6 @@
 	path = mu_baby/V4.1
 	url = ../mu_baby.git
 	branch = V4.1
-[submodule "cdc6600/V1.2"]
-	path = cdc6600/V1.2
-	url = ../cdc6600.git
-	branch = V1.2
-[submodule "cdc6600/V2.2"]
-	path = cdc6600/V2.2
-	url = ../cdc6600.git
-	branch = V2.2
 [submodule "dashclus/V2.8"]
 	path = dashclus/V2.8
 	url = ../dashclus.git
@@ -70,3 +62,7 @@
 	path = mips/V2.3
 	url = ../mips2.git
 	branch = V2.3
+[submodule "cdc6600/V3.1"]
+	path = cdc6600/V3.1
+	url = git@github.com:HASE-Group/cdc6600.git
+	branch = V3.1
