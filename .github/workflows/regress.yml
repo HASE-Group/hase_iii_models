@@ -9,44 +9,47 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest, macos-13]
     runs-on: ${{ matrix.os }}
-    
+
     steps:
       - uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node }}        
-        
+          node-version: ${ matrix.node }        
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
           repository: HASE-Group/hase_iii_models
-          token: ${{ secrets.HASE_III_MODEL_UPDATE }}
           submodules: true
           fetch-depth: 0
           lfs: true
           path: hase_iii_models
-          
+
       - name: Checkout regression tests
         uses: actions/checkout@v4
         with:
           repository: HASE-Group/hase_iii_regression
-          token: ${{ secrets.HASE_III_MODEL_UPDATE }}
           submodules: true
           fetch-depth: 0
           lfs: true        
           path: hase_iii_regression
-  
+
       - name: Checkout HASE3
         uses: actions/checkout@v4
         with:
           repository: HASE-Group/hase_iii_releases
-          token: ${{ secrets.HASE_III_MODEL_UPDATE }}
           submodules: true
           fetch-depth: 0
           lfs: true     
           path: hase_iii_releases
 
+      # Update references
+      - name: Git Submodule Update
+        run: |
+          cd ${{ github.workspace }}/hase_iii_models && git pull --recurse-submodules
+          cd ${{ github.workspace }}/hase_iii_models && git submodule update --remote --recursive
+  
       - name: Setup HASE3
         run: |
           cp -r ${{ github.workspace }}/hase_iii_releases/portable ${{ github.workspace }}/hase_iii
