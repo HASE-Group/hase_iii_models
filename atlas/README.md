@@ -254,6 +254,7 @@ The value of k in the model is set at 15, so the model produces the results:
 5, 12, 13  
 6, 8, 10  
 9, 12, 15  
+At the end of the simulation these results will be found in the Subsidiary Store in locations 1-3, 5-7, 9-11 and 13-15.
 
 ### Reference
 
